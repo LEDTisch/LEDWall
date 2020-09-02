@@ -1,33 +1,68 @@
-#include <Arduino.h>
-#include <Wire.h>
+#include <ESP8266WiFi.h>
+#include <SoftwareSerial.h>
+SoftwareSerial softwareserial(13,15,false);
+ 
+#define SendKey 0  //Button to send data Flash BTN on NodeMCU
+ 
+int port = 8888;  //Port number
+WiFiServer server(port);
+ 
+const char *ssid = "lap";  //Enter your wifi SSID
+const char *password = "##Pilatus.b4##pi!?";  //Enter your wifi Password
+ 
+
+void setup() 
+{
+
+  softwareserial.begin(9600);
 
 
- void receiveEvent(int howMany) {
- while (0 <Wire.available()) {
-    char c = Wire.read();      /* receive byte as a character */
-    Serial.print(c);           /* print the character */
+  Serial.begin(115200);
+  Serial.println();
+ 
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password); //Connect to wifi
+ 
+  // Wait for connection  
+  Serial.println("Connecting to Wifi");
+  while (WiFi.status() != WL_CONNECTED) {   
+    delay(500);
+    Serial.print(".");
+    delay(500);
   }
- Serial.println("received");             /* to newline */
-
+ 
+  Serial.println("");
+  Serial.print("Connected to ");
+  Serial.println(ssid);
+ 
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());  
+  server.begin();
+  Serial.print("Open Telnet and connect to IP:");
+  Serial.print(WiFi.localIP());
+  Serial.print(" on port ");
+  Serial.println(port);
 }
 
-// function that executes whenever data is requested from master
-void requestEvent() {
-  Serial.println("request");
- Wire.write("Hello NodeMCU");  /*send string on request */
-}
+ 
+void loop() 
+{
+  WiFiClient client = server.available();
+  
+  if (client) {
+    if(client.connected())
+    {
+      Serial.println("Client Connected");
+    }
+    
+    while(client.connected()){      
+      while(client.available()>0){
+        // read data from the connected client
+        softwareserial.write(client.read()); 
+      }
 
-
-void setup() {
- Wire.begin(8); 
- Wire.pins(D1, D2);              
- Wire.onReceive(receiveEvent); 
- Wire.onRequest(requestEvent);
- Serial.begin(9600);          
- }
-
-
-
-void loop() {
-delay(100);
+    }
+    client.stop();
+    Serial.println("Client disconnected");    
+  }
 }

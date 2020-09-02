@@ -3,14 +3,12 @@
 #include "Applications/Licht/Licht.h"
 #include "Applications/Dunkel/Dunkel.h"
 #include "utils/LED-Tisch.h"
-#include "Communication/i2c.h"
 
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
 
 int currentApp=0;
 
 Application* applications[10]={new Licht(), new Dunkel()};
-i2c connection = i2c();
 
 
 void switchApp(int id) {
@@ -21,8 +19,7 @@ void switchApp(int id) {
 
 }
 void setup(){
-  connection.init();
-
+  Serial2.begin(9600);
   Serial.begin(9600);
   ledtisch->init(10);
   ledtisch->setcolor(20,20,0);
@@ -34,7 +31,8 @@ applications[currentApp]->onCreate(ledtisch);
 
 void loop(){
   applications[currentApp]->onRun(ledtisch);
-  connection.send("hallo ESP");
-delay(1000);
+  if(Serial2.available()){
+    Serial.write(Serial2.read());
+  }
 }
 
