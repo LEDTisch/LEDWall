@@ -7,11 +7,7 @@ class i2c
 public:
     i2c();
    void init();
+   void send(char s[]);
 };
 
-
 #endif
-
-
-
-
