@@ -29,10 +29,48 @@ void setup(){
 applications[currentApp]->onCreate(ledtisch);
 }
 
-void loop(){
-  applications[currentApp]->onRun(ledtisch);
-  if(Serial2.available()){
-    Serial.write(Serial2.read());
+int iindex=0;
+char incommingbyte;
+const int MaxLength=100;
+char message[MaxLength];
+
+void serialreadupdate(){
+  if(Serial2.available()) {
+      incommingbyte=Serial2.read();
+      //Serial.println(incommingbyte,BIN);
+      if(iindex < MaxLength-1){
+      message[iindex++] = incommingbyte;
+
+      }else{
+        Serial.println("Error: BufferOverflow");
+      }
+      if(incommingbyte == '\n'){
+        for(int i=0;i<iindex;i++){
+          if(message[i]=='\n'){
+            message[i]='\0';
+          }
+        }
+        iindex=0;
+        //Serial.println(message);
+        
+        //Verarbeitung///////////////////////////
+        Serial.println();
+        Serial.println(message);
+
+
+
+        }
+
   }
+}
+
+
+void loop(){
+  // if(Serial2.available()) {
+//Serial.write(Serial2.read());
+ //  }
+  serialreadupdate();
+  applications[currentApp]->onRun(ledtisch);
+
 }
 

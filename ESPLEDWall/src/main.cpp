@@ -17,7 +17,7 @@ void setup()
   softwareserial.begin(9600);
 
 
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.println();
  
   WiFi.mode(WIFI_STA);
@@ -58,7 +58,10 @@ void loop()
     while(client.connected()){      
       while(client.available()>0){
         // read data from the connected client
-        softwareserial.write(client.read()); 
+        byte t=client.read();
+        softwareserial.write(t); 
+                //Serial.write(t); 
+
       }
 
     }
