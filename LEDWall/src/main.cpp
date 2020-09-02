@@ -1,9 +1,34 @@
 #include <Arduino.h>
+#include "Application.h"
+#include "Applications/Licht/Licht.h"
+#include "Applications/Dunkel/Dunkel.h"
+#include "utils/LED-Tisch.h"
 
-void setup() {
-  // put your setup code here, to run once:
+LEDTisch* ledtisch=new LEDTisch(10,15,1);
+
+int currentApp=0;
+
+Application* applications[10]={new Licht(), new Dunkel()};
+
+
+void switchApp(int id) {
+
+  applications[currentApp]->onStop();
+  currentApp = id;
+  applications[currentApp]->onCreate(ledtisch);
+
+}
+void setup(){
+  Serial.begin(9600);
+  ledtisch->init(10);
+  ledtisch->setcolor(20,20,20);
+
+
+applications[currentApp]->onCreate(ledtisch);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop(){
+  applications[currentApp]->onRun(ledtisch);
+
 }
+
