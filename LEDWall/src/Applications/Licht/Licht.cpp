@@ -16,6 +16,9 @@ Serial.println("TestApplication1");
 void Licht::onRun(LEDTisch* ledtisch){
 
 }
+void Licht::onDataReceive(String data){
+  
+}
 void Licht::onStop(){
 
 }

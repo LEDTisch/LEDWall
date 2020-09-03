@@ -6,6 +6,7 @@ public:
 Licht();
 void onCreate(LEDTisch* ledtisch);
 void onRun(LEDTisch* ledtisch);
+void onDataReceive(String data);
 void onStop();
 
 

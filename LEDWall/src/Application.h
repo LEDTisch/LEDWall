@@ -8,6 +8,7 @@ public:
 
   virtual void onCreate(LEDTisch* ledtisch)=0;
   virtual void onRun(LEDTisch* ledtisch)=0;
+  virtual void onDataReceive(String data)=0;
   virtual void onStop()=0;
 
 

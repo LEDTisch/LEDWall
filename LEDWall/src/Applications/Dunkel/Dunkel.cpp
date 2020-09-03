@@ -16,3 +16,6 @@ void Dunkel::onRun(LEDTisch* ledtisch){
 void Dunkel::onStop(){
 
 }
+void Dunkel::onDataReceive(String data){
+    
+}
