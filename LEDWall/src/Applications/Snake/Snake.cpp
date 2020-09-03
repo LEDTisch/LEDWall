@@ -27,7 +27,7 @@ Serial.println("Snake");
         snake.createSnake(5,7);
         snake.createRandomFood(1);
         ledtisch->clear();
-        ledtisch->setcolor(0,255,0);
+       ledtisch->setcolor(0,255,0);
 }
 void Snake::onRun(LEDTisch* ledtisch){
 if(millis()>takt){
