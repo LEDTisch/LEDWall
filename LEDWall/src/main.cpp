@@ -13,7 +13,7 @@ Application* applications[size]={new Licht(), new Dunkel()};
 
 
 void switchApp(int id) {
-  applications[currentApp]->onStop();
+  applications[currentApp]->onStop(ledtisch);
   currentApp = id;
   applications[currentApp]->onCreate(ledtisch);
 }
@@ -24,7 +24,7 @@ void switchApp(String s) {
       id=i;
     }
   }
-  applications[currentApp]->onStop();
+  applications[currentApp]->onStop(ledtisch);
   currentApp = id;
   applications[currentApp]->onCreate(ledtisch);
 }
@@ -88,7 +88,7 @@ void serialreadupdate(){
           Serial.println(mode);
           }
         if(!gleich){
-        applications[currentApp]->onDataReceive(message);
+        applications[currentApp]->onDataReceive(message, ledtisch);
         }
 
 

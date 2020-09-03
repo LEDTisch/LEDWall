@@ -6,9 +6,10 @@ public:
 Licht();
 void onCreate(LEDTisch* ledtisch);
 void onRun(LEDTisch* ledtisch);
-void onDataReceive(String data);
+void onDataReceive(String data,LEDTisch* ledtisch);
 String getName();
-void onStop();
-
+void onStop(LEDTisch* ledtisch);
+private:
+bool lightstatus=false;
 
 };
