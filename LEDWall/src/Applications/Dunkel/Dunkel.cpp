@@ -17,5 +17,9 @@ void Dunkel::onStop(){
 
 }
 void Dunkel::onDataReceive(String data){
-    
+
+}
+
+String Dunkel::getName(){
+    return "Home";
 }

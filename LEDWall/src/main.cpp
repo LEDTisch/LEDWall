@@ -7,17 +7,30 @@
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
 
 int currentApp=0;
-
-Application* applications[10]={new Licht(), new Dunkel()};
+const int size=2;
+int appanzahl=size;
+Application* applications[size]={new Licht(), new Dunkel()};
 
 
 void switchApp(int id) {
-
   applications[currentApp]->onStop();
   currentApp = id;
   applications[currentApp]->onCreate(ledtisch);
-
 }
+void switchApp(String s) {
+  int id=0;
+  for(int i=0;i<appanzahl;i++){
+    if(s==applications[i]->getName()){
+      id=i;
+    }
+  }
+  applications[currentApp]->onStop();
+  currentApp = id;
+  applications[currentApp]->onCreate(ledtisch);
+}
+
+
+
 void setup(){
   Serial2.begin(9600);
   Serial.begin(9600);
@@ -63,6 +76,17 @@ void serialreadupdate(){
             gleich=false;
           }
         }
+        if(gleich){
+          int i=9;
+          char mode[30];
+          for (int j=0; j<30; ++j) {mode[j] = 0; }
+          while(message[i]!='#'){
+              mode[i-9]=message[i];
+                        i++;
+          }
+          switchApp(mode);
+          Serial.println(mode);
+          }
         if(!gleich){
         applications[currentApp]->onDataReceive(message);
         }

@@ -22,3 +22,7 @@ void Licht::onDataReceive(String data){
 void Licht::onStop(){
 
 }
+
+String Licht::getName(){
+  return "Licht";
+}

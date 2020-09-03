@@ -7,6 +7,7 @@ Dunkel();
 void onCreate(LEDTisch* ledtisch);
 void onRun(LEDTisch* ledtisch);
 void onDataReceive(String data);
+String getName();
 void onStop();
 
 
