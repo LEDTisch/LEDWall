@@ -1,15 +1,16 @@
 #include <Arduino.h>
 #include "Application.h"
 #include "Applications/Licht/Licht.h"
-#include "Applications/Dunkel/Dunkel.h"
+#include "Applications/Home/Home.h"
 #include "utils/LED-Tisch.h"
+#include "Applications/Snake/Snake.h"
 
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
 
 int currentApp=0;
-const int size=2;
+const int size=3;
 int appanzahl=size;
-Application* applications[size]={new Licht(), new Dunkel()};
+Application* applications[size]={new Licht(), new Home(), new Snake()};
 
 
 void switchApp(int id) {
@@ -40,6 +41,8 @@ void setup(){
 
 
 applications[currentApp]->onCreate(ledtisch);
+
+
 }
 
 int iindex=0;
