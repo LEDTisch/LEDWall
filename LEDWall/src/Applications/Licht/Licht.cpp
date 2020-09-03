@@ -9,8 +9,10 @@ Licht::Licht(){
 
 void Licht::onCreate(LEDTisch* ledtisch){
 Serial.println("TestApplication1");
-  ledtisch->setcolor(255,0,0);
-  ledtisch->gerade(0,0,10,15,1);
+  ledtisch->clear();
+  ledtisch->show();
+  ledtisch->setcolor(255,255,255);
+    ledtisch->zahl(3,3,1);
   ledtisch->show();
 }
 void Licht::onRun(LEDTisch* ledtisch){
