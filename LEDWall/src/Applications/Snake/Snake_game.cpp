@@ -19,6 +19,7 @@ void Snake_game::draw(long verlauf,int u,LEDTisch* ledtisch){
     ledtisch->drawkoordinatensystem(snake[length-1][0],snake[length-1][1]);
 
     ledtisch->show();
+
 }
 
 void Snake_game::moveSnake(){
@@ -152,7 +153,10 @@ void Snake_game::drawFood(LEDTisch* ledtisch){
     for(int i=0;i<foodanzahl;i++){
         ledtisch->drawkoordinatensystem(food[i][0],food[i][1],0xff0000);
     }
+
+    
     ledtisch->show();
+    
 }
 
 void Snake_game::clearFood(){

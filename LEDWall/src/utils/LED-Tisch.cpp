@@ -19,7 +19,9 @@ for(int wx=0;wx<w;wx++){
   i++;
 }
 }
+if(!Serial2.available()) {
 pixels.show();
+}
 Serial.print("image gedrawec");
 }
 
@@ -39,7 +41,9 @@ while(x<x2-x1){
 drawkoordinatensystem(x+x1,m*x+y1);
 x=x+g;
 }
+if(!Serial2.available()) {
 pixels.show();
+}
 
 }
 
@@ -258,7 +262,9 @@ int PO;
 
 void LEDTisch::show(){
   pixels.begin();
+  if(!Serial2.available()) {
   pixels.show();
+  }
 }
 
 
@@ -506,7 +512,9 @@ int y;
       }
       counter_y++;
     }//
+    if(!Serial2.available()) {
     pixels.show();
+    }
     zeichen_counter = zeichen_counter + 1;
     zeichenabstand = zeichenabstand + 4;
   }
