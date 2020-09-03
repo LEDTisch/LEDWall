@@ -105,6 +105,7 @@ void loop(){
   // if(Serial2.available()) {
 //Serial.write(Serial2.read());
  //  }
+ 
   serialreadupdate();
   applications[currentApp]->onRun(ledtisch);
 

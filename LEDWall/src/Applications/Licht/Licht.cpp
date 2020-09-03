@@ -18,8 +18,9 @@ void Licht::onRun(LEDTisch* ledtisch){
 
 }
 void Licht::onDataReceive(String data,LEDTisch* ledtisch){
+        Serial.println(data);
+
   if(data == "LichtSchalter"){
-      Serial.println(data);
 
     if(lightstatus==false){
     ledtisch->setcolor(255,0,0);
