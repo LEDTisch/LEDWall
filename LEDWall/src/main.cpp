@@ -56,7 +56,16 @@ void serialreadupdate(){
         //Verarbeitung///////////////////////////
         Serial.println();
         Serial.println(message);
-
+        char vergleich[9]= "switchTo:";
+        bool gleich=true;
+        for(int i=0;i<9;i++){
+          if(vergleich[i] != message[i]){
+            gleich=false;
+          }
+        }
+        if(!gleich){
+        applications[currentApp]->onDataReceive(message);
+        }
 
 
         }

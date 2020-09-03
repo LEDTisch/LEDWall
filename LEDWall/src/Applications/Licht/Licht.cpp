@@ -17,7 +17,7 @@ void Licht::onRun(LEDTisch* ledtisch){
 
 }
 void Licht::onDataReceive(String data){
-  
+  Serial.println(data);
 }
 void Licht::onStop(){
 
