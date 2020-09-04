@@ -4,6 +4,7 @@
 #include "Applications/Home/Home.h"
 #include "utils/LED-Tisch.h"
 #include "Applications/Snake/Snake.h"
+#include <Wire.h>
 
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
 
@@ -33,6 +34,8 @@ void switchApp(String s) {
 
 
 void setup(){
+    Wire.begin();        // join i2c bus (address optional for master)
+
   Serial2.begin(9600);
   Serial.begin(9600);
   ledtisch->init(10);
@@ -99,13 +102,20 @@ void serialreadupdate(){
 
   }
 }
+void requestData(){
+   Wire.requestFrom(8, 6);    
 
+  while (Wire.available()) {
+    char c = Wire.read();
+    Serial.print(c);      
+  }
+}
 
 void loop(){
   // if(Serial2.available()) {
 //Serial.write(Serial2.read());
  //  }
- 
+  requestData();
   serialreadupdate();
       applications[currentApp]->onRun(ledtisch);
 
