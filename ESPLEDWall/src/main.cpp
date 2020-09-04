@@ -90,36 +90,8 @@ void loop()
         //Verarbeitung///////////////////////////
         Serial.println();
         Serial.println(message);
-        char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
-        bool gleich=true;
-        for(int i=0;i<9;i++){
-          if(vergleich[i] != message[i]){
-            gleich=false;
-          }
-        }
-        if(gleich){
-          int i=9;
-          char mode[30];
-          for (int j=0; j<30; ++j) {mode[j] = 0; }
-          while(message[i]!='#'){
-              mode[i-9]=message[i];
-                        i++;
-          }
-
-          if(chanchstatus){
-          digitalWrite(chanchepin, HIGH);
-          chanchstatus=false;
-          }else{
-          digitalWrite(chanchepin, LOW);
-          chanchstatus=true;
-          }
-          softwareserial.println(message); 
-          Serial.println(mode);
-          }
-        if(!gleich){
         softwareserial.println(message); 
-                }
-                          for (int j=0; j<MaxLength; ++j) {message[j] = 0; }
+        for (int j=0; j<MaxLength; ++j) {message[j] = 0; }
 
         }
 
