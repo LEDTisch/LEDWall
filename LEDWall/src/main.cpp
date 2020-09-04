@@ -97,8 +97,6 @@ void serialreadupdate(){
 
         }
 
-  }else{
-     applications[currentApp]->onRun(ledtisch);
   }
 }
 
@@ -109,7 +107,8 @@ void loop(){
  //  }
  
   serialreadupdate();
- 
+      applications[currentApp]->onRun(ledtisch);
+
 
 }
 
