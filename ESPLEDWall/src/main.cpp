@@ -1,6 +1,5 @@
 #include <ESP8266WiFi.h>
 #include <SoftwareSerial.h>
-#include <StackArray.h>
 #include <queue>
 
 SoftwareSerial softwareserial(13,15,false);
