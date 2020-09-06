@@ -50,6 +50,13 @@ char incommingbyte;
 const int MaxLength=100;
 char message[MaxLength];
 
+
+
+void sentRequest(){
+Serial2.write(0x0F);
+}
+
+
 void serialreadupdate(){
   if(Serial2.available()) {
       incommingbyte=Serial2.read();
@@ -88,6 +95,8 @@ void serialreadupdate(){
                         i++;
           }
           switchApp(mode);
+            sentRequest();
+
           Serial.println(mode);
           }
         if(!gleich){
@@ -101,11 +110,12 @@ void serialreadupdate(){
 }
 
 
+
+
 void loop(){
   // if(Serial2.available()) {
 //Serial.write(Serial2.read());
  //  }
- 
   serialreadupdate();
       applications[currentApp]->onRun(ledtisch);
 

@@ -50,22 +50,29 @@ char incommingbyte;
 const int MaxLength=100;
 char message[MaxLength];
 
+WiFiClient client;
 
-void loop() 
-{
-  
-  WiFiClient client = server.available();
+
+void connectClient(){
+  client = server.available();
   
   if (client) {
     if(client.connected())
     {
       Serial.println("Client Connected");
-    }                 
-  
+    }   
+}
+}
 
-    while(client.connected()){     
+void loop() 
+{
+    if(!client.connected()){
+    client.stop();
+    Serial.println("Client disconnected");  
+    connectClient();  
+    }else{     
  
-      while(client.available()>0){
+      if(client.available()>0){
 
 
 
@@ -109,7 +116,7 @@ void loop()
       }
 
     }
-    client.stop();
-    Serial.println("Client disconnected");    
+
+    
+  
   }
-}
