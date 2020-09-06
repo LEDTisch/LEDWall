@@ -1,7 +1,13 @@
 #include <ESP8266WiFi.h>
 #include <SoftwareSerial.h>
+#include <StackArray.h>
+#include <queue>
+
 SoftwareSerial softwareserial(13,15,false);
  
+ std::queue<String> ReceiveData;
+
+
 #define SendKey 0  //Button to send data Flash BTN on NodeMCU
  
 int port = 8888;  //Port number
@@ -14,6 +20,9 @@ int chanchepin=12;
 bool chanchstatus=false;
 void setup() 
 {
+
+
+
   pinMode(chanchepin, OUTPUT);
   digitalWrite(chanchepin, LOW);
   softwareserial.begin(9600);
@@ -44,6 +53,12 @@ void setup()
   Serial.print(WiFi.localIP());
   Serial.print(" on port ");
   Serial.println(port);
+
+
+
+
+
+
 }
 int iindex=0;
 char incommingbyte;
