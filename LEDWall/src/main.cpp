@@ -33,7 +33,7 @@ void switchApp(String s) {
 
 
 void setup(){
-  Serial2.begin(9600);
+  Serial2.begin(74880);
   Serial.begin(9600);
   ledtisch->init(10);
   ledtisch->setcolor(20,20,0);

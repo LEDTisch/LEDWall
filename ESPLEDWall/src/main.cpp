@@ -24,7 +24,7 @@ void setup()
 
   pinMode(chanchepin, OUTPUT);
   digitalWrite(chanchepin, LOW);
-  softwareserial.begin(9600);
+  softwareserial.begin(74880);
 
 
   Serial.begin(9600);
