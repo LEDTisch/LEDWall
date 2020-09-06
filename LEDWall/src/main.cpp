@@ -77,6 +77,8 @@ void serialreadupdate(){
         //Serial.println(message);
         
         //Verarbeitung///////////////////////////
+
+        if(message[0]!='e' && message[1]!='m' && message[2]!='t' && message[3]!='y'){
         Serial.println();
         Serial.println(message);
         char vergleich[9]= "switchTo:";
@@ -102,6 +104,13 @@ void serialreadupdate(){
         applications[currentApp]->onDataReceive(message, ledtisch);
         }
         isReceiving=false;
+        }else{
+          isReceiving=false;
+        }
+
+
+
+
         }
 
         

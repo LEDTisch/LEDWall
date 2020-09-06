@@ -85,7 +85,7 @@ void checkforRequest(){
                      softwareserial.println(ReceiveData.front());
                      ReceiveData.pop();
                   }else{
-                    softwareserial.println(0xFF);
+                    softwareserial.println("empty");
                   }
         }
       }
