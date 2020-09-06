@@ -12,7 +12,7 @@ const int size=3;
 int appanzahl=size;
 Application* applications[size]={new Licht(), new Home(), new Snake()};
 
-
+bool isReceiving=false;
 void switchApp(int id) {
   applications[currentApp]->onStop(ledtisch);
   currentApp = id;
@@ -95,16 +95,16 @@ void serialreadupdate(){
                         i++;
           }
           switchApp(mode);
-            sentRequest();
 
           Serial.println(mode);
           }
         if(!gleich){
         applications[currentApp]->onDataReceive(message, ledtisch);
         }
-
-
+        isReceiving=false;
         }
+
+        
 
   }
 }
@@ -116,7 +116,11 @@ void loop(){
   // if(Serial2.available()) {
 //Serial.write(Serial2.read());
  //  }
-  serialreadupdate();
+      sentRequest();
+      isReceiving=true;
+      while(isReceiving){
+      serialreadupdate();
+      }
       applications[currentApp]->onRun(ledtisch);
 
 

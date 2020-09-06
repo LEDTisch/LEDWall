@@ -77,9 +77,24 @@ void connectClient(){
     }   
 }
 }
-
+void checkforRequest(){
+      if(softwareserial.available()){
+        if(softwareserial.read()==15){
+                  Serial.println("anfrageerhalten");
+                  if(!ReceiveData.empty()){
+                     softwareserial.println(ReceiveData.front());
+                     ReceiveData.pop();
+                  }else{
+                    softwareserial.println(0xFF);
+                  }
+        }
+      }
+}
 void loop() 
 {
+
+    checkforRequest();
+
     if(!client.connected()){
     client.stop();
     Serial.println("Client disconnected");  
@@ -111,8 +126,8 @@ void loop()
         //Verarbeitung///////////////////////////
         Serial.println();
         Serial.println(message);
-        softwareserial.println(message); 
-        for (int j=0; j<MaxLength; ++j) {message[j] = 0; }
+        ReceiveData.push(message);
+        for (int j=0; j<MaxLength; ++j) {message[j] = 0; }////message clearen
 
         }
 
