@@ -130,6 +130,8 @@ void loop(){
       while(isReceiving){
       serialreadupdate();
       }
+
+      
       applications[currentApp]->onRun(ledtisch);
 
 

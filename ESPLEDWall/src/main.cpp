@@ -80,7 +80,7 @@ void connectClient(){
 void checkforRequest(){
       if(softwareserial.available()){
         if(softwareserial.read()==15){
-                  Serial.println("anfrageerhalten");
+                  //Serial.println("anfrageerhalten");
                   if(!ReceiveData.empty()){
                      softwareserial.println(ReceiveData.front());
                      ReceiveData.pop();
