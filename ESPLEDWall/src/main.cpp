@@ -16,8 +16,6 @@ const char *ssid = "lap";  //Enter your wifi SSID
 const char *password = "##Pilatus.b4##pi!?";  //Enter your wifi Password
  
 int DataAvailiblePin=12;
-bool chanchstatus=false;
-bool abe=false;
 
 
 void setup() 
@@ -85,7 +83,6 @@ void checkforRequest(){
       if(softwareserial.available()){
         if(softwareserial.read()==15){
                   //Serial.println("anfrageerhalten");
-                  abe=true;
                   if(!ReceiveData.empty()){
                      softwareserial.println(ReceiveData.front());
                      ReceiveData.pop();
@@ -99,10 +96,7 @@ void checkforRequest(){
 void loop() 
 {
     if(ReceiveData.empty()){
-      if(abe){
-      abe=false;
       digitalWrite(DataAvailiblePin, LOW);
-      }
     }else{
       digitalWrite(DataAvailiblePin, HIGH);
     }
