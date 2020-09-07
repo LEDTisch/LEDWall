@@ -15,15 +15,19 @@ WiFiServer server(port);
 const char *ssid = "lap";  //Enter your wifi SSID
 const char *password = "##Pilatus.b4##pi!?";  //Enter your wifi Password
  
-int chanchepin=12;
+int DataAvailiblePin=12;
 bool chanchstatus=false;
+bool abe=false;
+
+
 void setup() 
 {
 
 
 
-  pinMode(chanchepin, OUTPUT);
-  digitalWrite(chanchepin, LOW);
+  pinMode(DataAvailiblePin, OUTPUT);
+  digitalWrite(DataAvailiblePin, LOW);
+
   softwareserial.begin(74880);
 
 
@@ -81,18 +85,27 @@ void checkforRequest(){
       if(softwareserial.available()){
         if(softwareserial.read()==15){
                   //Serial.println("anfrageerhalten");
+                  abe=true;
                   if(!ReceiveData.empty()){
                      softwareserial.println(ReceiveData.front());
                      ReceiveData.pop();
                   }else{
                     softwareserial.println("empty");
                   }
+                
         }
       }
 }
 void loop() 
 {
-
+    if(ReceiveData.empty()){
+      if(abe){
+      abe=false;
+      digitalWrite(DataAvailiblePin, LOW);
+      }
+    }else{
+      digitalWrite(DataAvailiblePin, HIGH);
+    }
     checkforRequest();
 
     if(!client.connected()){

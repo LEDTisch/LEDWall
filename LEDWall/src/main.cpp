@@ -7,6 +7,9 @@
 
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
 
+int DataAvailablePin=8;
+bool dataavailablechanche=false;
+
 int currentApp=0;
 const int size=3;
 int appanzahl=size;
@@ -33,6 +36,7 @@ void switchApp(String s) {
 
 
 void setup(){
+  pinMode(DataAvailablePin, INPUT);
   Serial2.begin(74880);
   Serial.begin(9600);
   ledtisch->init(10);
@@ -107,6 +111,8 @@ void serialreadupdate(){
         }else{
           isReceiving=false;
         }
+        for (int j=0; j<MaxLength; ++j) {message[j] = 0; }////message clearen
+
 
 
 
@@ -125,10 +131,12 @@ void loop(){
   // if(Serial2.available()) {
 //Serial.write(Serial2.read());
  //  }
+      if(digitalRead(DataAvailablePin)){
       sentRequest();
       isReceiving=true;
       while(isReceiving){
       serialreadupdate();
+      }
       }
 
       
