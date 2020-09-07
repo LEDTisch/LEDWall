@@ -37,7 +37,7 @@ void switchApp(String s) {
 
 void setup(){
   pinMode(DataAvailablePin, INPUT);
-  Serial2.begin(74880);
+  Serial2.begin(9600);
   Serial.begin(9600);
   ledtisch->init(10);
   ledtisch->setcolor(20,20,0);

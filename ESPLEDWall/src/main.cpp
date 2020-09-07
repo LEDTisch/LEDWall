@@ -26,7 +26,7 @@ void setup()
   pinMode(DataAvailiblePin, OUTPUT);
   digitalWrite(DataAvailiblePin, LOW);
 
-  softwareserial.begin(74880);
+  softwareserial.begin(9600);
 
 
   Serial.begin(9600);
