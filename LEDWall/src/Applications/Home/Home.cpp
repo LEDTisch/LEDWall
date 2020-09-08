@@ -7,20 +7,20 @@ Home::Home(){
 
 }
 
-void Home::onCreate(LEDTisch* ledtisch){
+void Home::onCreate(ShowPort* showport){
 Serial.println("TestApplication2");
-  ledtisch->clear();
-  ledtisch->setcolor(255,255,255);
-    ledtisch->drawImage(image,10,15);
-  ledtisch->show();
+  showport->ledtisch->clear();
+  showport->ledtisch->setcolor(255,255,255);
+    showport->ledtisch->drawImage(image,10,15);
+  showport->ledtisch->show();
 }
-void Home::onRun(LEDTisch* ledtisch){
+void Home::onRun(ShowPort* showport){
 
 }
-void Home::onStop(LEDTisch* ledtisch){
+void Home::onStop(ShowPort* showport){
 
 }
-void Home::onDataReceive(String data,LEDTisch* ledtisch){
+void Home::onDataReceive(String data,ShowPort* showport){
 
 }
 

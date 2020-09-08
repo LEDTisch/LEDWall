@@ -7,9 +7,9 @@ Snake::Snake(){
 
 }
 
-void Snake::GameOver(LEDTisch* ledtisch){
+void Snake::GameOver(ShowPort* showport){
         snake.clearFood();
-        ledtisch->clear();
+        showport->ledtisch->clear();
         snake.direction=0;
         snake.createRandomFood(1);
         snake.setLength(2);
@@ -20,26 +20,26 @@ snake.createSnake(5,7);
 
 
 
-void Snake::onCreate(LEDTisch* ledtisch){
+void Snake::onCreate(ShowPort* showport){
 Serial.println("Snake");
 
         randomSeed(analogRead(0));
         snake.createSnake(5,7);
         snake.createRandomFood(1);
-        ledtisch->clear();
-       ledtisch->setcolor(0,255,0);
+        showport->ledtisch->clear();
+       showport->ledtisch->setcolor(0,255,0);
 }
-void Snake::onRun(LEDTisch* ledtisch){
+void Snake::onRun(ShowPort* showport){
 if(millis()>takt){
         if(schritt>255/u){
-    snake.move(ledtisch);
+    snake.move(showport->ledtisch);
     if(snake.WandKontrolle()!=-1 || snake.SnakeKontrolle()!=-1){
-            GameOver(ledtisch);
+            GameOver(showport);
     }
     schritt=0;
 }
-            snake.draw(schritt,u,ledtisch);
-            snake.drawFood(ledtisch);
+            snake.draw(schritt,u,showport->ledtisch);
+            snake.drawFood(showport->ledtisch);
 
 
         if(verlauf>=254){
@@ -61,7 +61,7 @@ if(snake.foodCheck()!=-1){
         
 }
 }
-void Snake::onDataReceive(String data,LEDTisch* ledtisch){
+void Snake::onDataReceive(String data,ShowPort* showport){
   
 if(data=="h" && snake.direction!=3){//drehen
 snake.direction=2;
@@ -84,7 +84,7 @@ snake.direction=3;
 
    
 }
-void Snake::onStop(LEDTisch* ledtisch){
+void Snake::onStop(ShowPort* showport){
 
 }
 

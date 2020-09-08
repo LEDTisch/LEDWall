@@ -7,14 +7,14 @@
 class Snake: public Application{
 public:
 Snake();
-void onCreate(LEDTisch* ledtisch);
-void onRun(LEDTisch* ledtisch);
-void onDataReceive(String data,LEDTisch* ledtisch);
+void onCreate(ShowPort* showport);
+void onRun(ShowPort* showport);
+void onDataReceive(String data,ShowPort* showport);
 String getName();
-void onStop(LEDTisch* ledtisch);
+void onStop(ShowPort* showport);
 
 void steuerung();
-void GameOver(LEDTisch* ledtisch);
+void GameOver(ShowPort* showport);
 
 private:
 Snake_game snake=Snake_game();

@@ -4,11 +4,11 @@
 class Home: public Application{
 public:
 Home();
-void onCreate(LEDTisch* ledtisch);
-void onRun(LEDTisch* ledtisch);
-void onDataReceive(String data,LEDTisch* ledtisch);
+void onCreate(ShowPort* showport);
+void onRun(ShowPort* showport);
+void onDataReceive(String data,ShowPort* showport);
 String getName();
-void onStop(LEDTisch* ledtisch);
+void onStop(ShowPort* showport);
 private:
 uint32_t image[150]{
 0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,

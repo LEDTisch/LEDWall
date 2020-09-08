@@ -5,7 +5,9 @@
 #include "utils//Device/LED-Tisch/LED-Tisch.h"
 #include "Applications/Snake/Snake.h"
 
-LEDTisch* ledtisch=new LEDTisch(10,15,1);
+#include "utils/ShowPort.h"
+ShowPort* showport=new ShowPort();
+
 
 int DataAvailablePin=8;
 bool dataavailablechanche=false;
@@ -17,9 +19,9 @@ Application* applications[size]={new Licht(), new Home(), new Snake()};
 
 bool isReceiving=false;
 void switchApp(int id) {
-  applications[currentApp]->onStop(ledtisch);
+  applications[currentApp]->onStop(showport);
   currentApp = id;
-  applications[currentApp]->onCreate(ledtisch);
+  applications[currentApp]->onCreate(showport);
 }
 void switchApp(String s) {
   int id=0;
@@ -28,9 +30,9 @@ void switchApp(String s) {
       id=i;
     }
   }
-  applications[currentApp]->onStop(ledtisch);
+  applications[currentApp]->onStop(showport);
   currentApp = id;
-  applications[currentApp]->onCreate(ledtisch);
+  applications[currentApp]->onCreate(showport);
 }
 
 
@@ -39,12 +41,12 @@ void setup(){
   pinMode(DataAvailablePin, INPUT);
   Serial2.begin(9600);
   Serial.begin(9600);
-  ledtisch->init(10);
-  ledtisch->setcolor(20,20,0);
-  ledtisch->clear();
+  showport->ledtisch->init(10);
+  showport->ledtisch->setcolor(20,20,0);
+  showport->ledtisch->clear();
 
 
-applications[currentApp]->onCreate(ledtisch);
+applications[currentApp]->onCreate(showport);
 
 
 }
@@ -105,7 +107,7 @@ void serialreadupdate(){
           Serial.println(mode);
           }
         if(!gleich){
-        applications[currentApp]->onDataReceive(message, ledtisch);
+        applications[currentApp]->onDataReceive(message, showport);
         }
         isReceiving=false;
         }else{
@@ -140,7 +142,7 @@ void loop(){
       }
 
       
-      applications[currentApp]->onRun(ledtisch);
+      applications[currentApp]->onRun(showport);
 
 
 }

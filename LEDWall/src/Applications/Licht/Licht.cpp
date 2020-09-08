@@ -7,34 +7,34 @@ Licht::Licht(){
 
 }
 
-void Licht::onCreate(LEDTisch* ledtisch){
+void Licht::onCreate(ShowPort* showport){
 Serial.println("TestApplication1");
-  ledtisch->clear();
-  ledtisch->setcolor(255,255,255);
-    ledtisch->zahl(3,3,1);
-  ledtisch->show();
+  showport->ledtisch->clear();
+  showport->ledtisch->setcolor(255,255,255);
+    showport->ledtisch->zahl(3,3,1);
+  showport->ledtisch->show();
 }
-void Licht::onRun(LEDTisch* ledtisch){
+void Licht::onRun(ShowPort* showport){
 
 }
-void Licht::onDataReceive(String data,LEDTisch* ledtisch){
+void Licht::onDataReceive(String data,ShowPort* showport){
         Serial.println(data);
 
   if(data == "LichtSchalter"){
 
     if(lightstatus==false){
-    ledtisch->setcolor(255,0,0);
-    ledtisch->rect(0,6,10,7);
+    showport->ledtisch->setcolor(255,0,0);
+    showport->ledtisch->rect(0,6,10,7);
     lightstatus=true;
     }else{
       lightstatus=false;
-          ledtisch->setcolor(0,0,0);
-    ledtisch->rect(0,6,10,7);
+          showport->ledtisch->setcolor(0,0,0);
+    showport->ledtisch->rect(0,6,10,7);
     }
-    ledtisch->show();
+    showport->ledtisch->show();
   }
 }
-void Licht::onStop(LEDTisch* ledtisch){
+void Licht::onStop(ShowPort* showport){
 
 }
 
