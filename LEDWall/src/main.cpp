@@ -41,9 +41,8 @@ void setup(){
   pinMode(DataAvailablePin, INPUT);
   Serial2.begin(9600);
   Serial.begin(9600);
-  showport->ledtisch->init(10);
-  showport->ledtisch->setcolor(20,20,0);
-  showport->ledtisch->clear();
+
+  showport->init();
 
 
 applications[currentApp]->onCreate(showport);

@@ -6,7 +6,15 @@ class ShowPort{
 
 public:
 ~ShowPort() {}
+
+
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
+LEDTisch* ledFeld=new LEDTisch(10,10,0);
+
+
+
+void init();
+
 
 private:
 
