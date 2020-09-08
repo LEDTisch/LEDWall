@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Applications/Licht/Licht.h"
 #include "Applications/Home/Home.h"
-#include "utils/LED-Tisch.h"
+#include "utils//Device/LED-Tisch/LED-Tisch.h"
 #include "Applications/Snake/Snake.h"
 
 LEDTisch* ledtisch=new LEDTisch(10,15,1);
