@@ -12,4 +12,7 @@ void ShowPort::init(){
   ledFeld->clear();
   ledFeld->setcolor(20,20,0);
   ledFeld->show();
+
+  lightring->clear();
+  lightring->show();
 }

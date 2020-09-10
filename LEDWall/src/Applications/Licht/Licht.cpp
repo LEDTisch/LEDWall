@@ -28,6 +28,8 @@ void Licht::onDataReceive(String data,ShowPort* showport){
 
     showport->ledFeld->setcolor(0,255,0);
     showport->ledFeld->rect(1,1,3,3);
+
+    showport->lightring->light(6,255,255,0);
     
     lightstatus=true;
     }else{
@@ -37,10 +39,15 @@ void Licht::onDataReceive(String data,ShowPort* showport){
 
         showport->ledFeld->setcolor(0,0,0);
     showport->ledFeld->rect(1,1,3,3);
+
+        showport->lightring->light(6,0,0,0);
+
     }
     showport->ledtisch->show();
     
     showport->ledFeld->show();
+
+    showport->lightring->show();
   }
 }
 void Licht::onStop(ShowPort* showport){
