@@ -33,15 +33,17 @@ void Fibonacci::draw(){
 
     ledtisch->show();
 }
-void Fibonacci::zahl(){
-    int zahl=11;
+bool* Fibonacci::zahl(int zahl){
+    bool e[5]={false,false,false,false,false};
     int a=0;
     Serial.println();
     for(int i=0;i<5;i++){
         if(zahl>=fi[i]+a){
             a+=fi[i];
-            Serial.print(fi[i]);
+            Serial.print(4-i);
             Serial.print(" ");
+            e[4-i]=true;
         }
     }
+    return e;
 }

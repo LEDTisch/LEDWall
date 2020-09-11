@@ -8,7 +8,7 @@ public:
     void init(LEDTisch* ledtisch);
     void draw();
     void setPosition(int x,int y);
-    void zahl();
+    bool* zahl(int zahl);
 private:
     LEDTisch* ledtisch;
     int x=0;
