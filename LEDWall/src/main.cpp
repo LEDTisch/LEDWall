@@ -17,7 +17,7 @@ bool dataavailablechanche=false;
 int currentApp=0;
 const int size=3;
 int appanzahl=size;
-Application* applications[size]={new Licht(), new Home(), new Snake()};
+Application* applications[size]={new Home(),new Licht(),  new Snake()};
 
 bool isReceiving=false;
 void switchApp(int id) {

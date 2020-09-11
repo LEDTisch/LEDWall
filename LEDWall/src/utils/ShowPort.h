@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "Device/LED-Tisch/LED-Tisch.h"
-//#include "Device/Matrix/Matrix.h"
+#include "Device/Matrix/Matrix.h"
 #include "Device/LightRing/LightRing.h"
 #ifndef ShowPort_H
 #define ShowPort_H

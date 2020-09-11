@@ -8,14 +8,19 @@ Home::Home(){
 }
 
 void Home::onCreate(ShowPort* showport){
-Serial.println("TestApplication2");
+  fibonacci.init(showport->ledtisch);
+
+Serial.println("HOME-Application");
   showport->ledtisch->clear();
   showport->ledtisch->setcolor(255,255,255);
-    showport->ledtisch->drawImage(image,10,15);
   showport->ledtisch->show();
+    //showport->ledtisch->drawImage(image,10,15);
+  //showport->ledtisch->show();
 }
 void Home::onRun(ShowPort* showport){
-
+  fibonacci.setPosition(1,9);
+  fibonacci.zahl();
+  fibonacci.draw();
 }
 void Home::onStop(ShowPort* showport){
 

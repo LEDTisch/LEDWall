@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "Application.h"
+#include "Fibonacci.h"
 
 class Home: public Application{
 public:
@@ -10,6 +11,7 @@ void onDataReceive(String data,ShowPort* showport);
 String getName();
 void onStop(ShowPort* showport);
 private:
+Fibonacci fibonacci=Fibonacci();
 uint32_t image[150]{
 0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,
 0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,
