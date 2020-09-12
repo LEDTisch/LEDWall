@@ -19,7 +19,7 @@ Serial.println("HOME-Application");
 }
 void Home::onRun(ShowPort* showport){
   fibonacci.setPosition(1,9);
-  fibonacci.zahl(3);
+  fibonacci.drawZahl(fibonacci.zahlasbyte(7),fibonacci.zahlasbyte(3));
   fibonacci.draw();
 }
 void Home::onStop(ShowPort* showport){
