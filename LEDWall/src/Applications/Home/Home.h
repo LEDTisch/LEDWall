@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "Application.h"
 #include "Fibonacci.h"
+#include "../../utils/ClockTime.h"
 
 class Home: public Application{
 public:
@@ -12,6 +13,8 @@ String getName();
 void onStop(ShowPort* showport);
 private:
 Fibonacci fibonacci=Fibonacci();
+ClockTime clocktime=ClockTime();
+unsigned long time=0;
 uint32_t image[150]{
 0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,
 0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,

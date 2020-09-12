@@ -552,11 +552,12 @@ long led = 0;
   //y = 5;
  // PO = ((ymax-1)-y) + 15 * ((xmax-1)-x);
  if(drehung==0){
-PO= x + ymax * (xmax - y);
+PO= x + ymax * (xmax - y-1);
  }
  if(drehung==1){
    PO = ((ymax-1)-y) + ymax * ((xmax-1)-x);
  }
+
   led = PO;
 
 
