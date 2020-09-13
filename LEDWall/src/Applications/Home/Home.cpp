@@ -18,18 +18,19 @@ Serial.println("HOME-Application");
   //showport->ledtisch->show();
     fibonacci.setPosition(1,9);
   showport->ledtisch->setRotation(1);
-    clocktime.setTime(9,10,11);
+    clocktime.setTime(10,35,0);
 
 }
 void Home::onRun(ShowPort* showport){
  // clocktime.setTime(9,10,11);
   if(millis()>time){
     clocktime.count();
-    time=millis()+10;
+      fibonacci.drawZahl(fibonacci.zahlasbyte(clocktime.getHour()),fibonacci.zahlasbyte(clocktime.getMinute()/5));
+  fibonacci.draw();
+    time=millis()+1000;
     Serial.println(clocktime.getMinute());
   }
-  fibonacci.drawZahl(fibonacci.zahlasbyte(clocktime.getHour()),fibonacci.zahlasbyte(clocktime.getMinute()/5));
-  fibonacci.draw();
+
 }
 void Home::onStop(ShowPort* showport){
 
