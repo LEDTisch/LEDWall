@@ -81,26 +81,30 @@ void connectClient(){
 }
 void checkforRequest(){
       if(softwareserial.available()){
-        if(softwareserial.read()==15){
-                  //Serial.println("anfrageerhalten");
+        if(softwareserial.read()==0x10){
+                  Serial.print("anfrageerhalten ");
+                  Serial.print(ReceiveData.size());
                   if(!ReceiveData.empty()){
                      softwareserial.println(ReceiveData.front());
                      ReceiveData.pop();
+                     Serial.println(" (beantwortet)");
                   }else{
                     softwareserial.println("empty");
+                    Serial.println(" (empty arduino verschwendet Zeit)");
                   }
-                
+                       if(ReceiveData.empty()){
+                        digitalWrite(DataAvailiblePin, LOW);
+                        }else{
+                          digitalWrite(DataAvailiblePin, HIGH);
+                        }
         }
       }
 }
 void loop() 
 {
-    if(ReceiveData.empty()){
-      digitalWrite(DataAvailiblePin, LOW);
-    }else{
-      digitalWrite(DataAvailiblePin, HIGH);
-    }
+
     checkforRequest();
+
 
     if(!client.connected()){
     client.stop();
@@ -134,6 +138,11 @@ void loop()
         Serial.println();
         Serial.println(message);
         ReceiveData.push(message);
+                          if(ReceiveData.empty()){
+                        digitalWrite(DataAvailiblePin, LOW);
+                        }else{
+                          digitalWrite(DataAvailiblePin, HIGH);
+                        }
         for (int j=0; j<MaxLength; ++j) {message[j] = 0; }////message clearen
 
         }

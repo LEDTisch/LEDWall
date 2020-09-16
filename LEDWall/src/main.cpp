@@ -60,7 +60,7 @@ char message[MaxLength];
 
 
 void sentRequest(){
-Serial2.write(0x0F);
+Serial2.write(0x10);
 }
 
 
@@ -88,7 +88,7 @@ void serialreadupdate(){
         if(message[0]!='e' && message[1]!='m' && message[2]!='t' && message[3]!='y'){
         Serial.println();
         Serial.println(message);
-        char vergleich[9]= "switchTo:";
+        char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
         bool gleich=true;
         for(int i=0;i<9;i++){
           if(vergleich[i] != message[i]){
