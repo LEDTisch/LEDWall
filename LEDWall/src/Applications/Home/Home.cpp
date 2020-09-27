@@ -28,7 +28,7 @@ void Home::onRun(ShowPort* showport){
       fibonacci.drawZahl(fibonacci.zahlasbyte(clocktime.getHour()),fibonacci.zahlasbyte(clocktime.getMinute()/5));
   fibonacci.draw();
     time=millis()+1000;
-    Serial.println(clocktime.getMinute());
+    //Serial.println(clocktime.getMinute());
   }
 
 }
