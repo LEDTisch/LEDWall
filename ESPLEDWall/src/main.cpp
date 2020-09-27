@@ -85,14 +85,9 @@ void checkforRequest(){
                   Serial.print("anfrageerhalten ");
                   Serial.print(ReceiveData.size());
                   if(!ReceiveData.empty()){
-                    String s=ReceiveData.front();
-                     softwareserial.println(s);
-                     Serial.print(" (beantwortet)");
-                     Serial.print(" mit: ");
-                     Serial.print(s);
-                     Serial.println();
+                     softwareserial.println(ReceiveData.front());
                      ReceiveData.pop();
-
+                     Serial.println(" (beantwortet)");
                   }else{
                     softwareserial.println("empty");
                     Serial.println(" (empty arduino verschwendet Zeit)");
@@ -140,7 +135,8 @@ void loop()
         //Serial.println(message);
         
         //Verarbeitung///////////////////////////
-
+        Serial.println();
+        Serial.println(message);
         ReceiveData.push(message);
                           if(ReceiveData.empty()){
                         digitalWrite(DataAvailiblePin, LOW);

@@ -67,7 +67,7 @@ Serial2.write(0x10);
 void serialreadupdate(){
   if(Serial2.available()) {
       incommingbyte=Serial2.read();
-      Serial.println(incommingbyte,BIN);
+      //Serial.println(incommingbyte,BIN);
       if(iindex < MaxLength-1){
       message[iindex++] = incommingbyte;
 
@@ -84,12 +84,9 @@ void serialreadupdate(){
         //Serial.println(message);
         
         //Verarbeitung///////////////////////////
-        Serial.println("-------------------------------------------------------------");
-        Serial.print("empfangen: ");
-        Serial.println(message);
-        if(true){
+
+        if(message[0]!='e' && message[1]!='m' && message[2]!='t' && message[3]!='y'){
         Serial.println();
-        Serial.print("verarbeiten: ");
         Serial.println(message);
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
         bool gleich=true;
@@ -107,6 +104,8 @@ void serialreadupdate(){
                         i++;
           }
           switchApp(mode);
+
+          Serial.println(mode);
           }
         if(!gleich){
         applications[currentApp]->onDataReceive(message, showport);
@@ -138,7 +137,7 @@ void loop(){
       if(digitalRead(DataAvailablePin)){
       sentRequest();
       isReceiving=true;
-      while(isReceiving || Serial.available()){
+      while(isReceiving){
       serialreadupdate();
       }
       }
