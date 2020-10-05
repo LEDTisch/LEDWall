@@ -84,13 +84,13 @@ void serialreadupdate(){
         //Serial.println(message);
         
         //Verarbeitung///////////////////////////
-        Serial.println("-------------------------------------------------------------");
-        Serial.print("empfangen: ");
-        Serial.println(message);
+        //Serial.println("-------------------------------------------------------------");
+        //Serial.print("empfangen: ");
+       // Serial.println(message);
         if(true){
-        Serial.println();
-        Serial.print("verarbeiten: ");
-        Serial.println(message);
+        //Serial.println();
+        //Serial.print("verarbeiten: ");
+        //Serial.println(message);
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
         bool gleich=true;
         for(int i=0;i<9;i++){

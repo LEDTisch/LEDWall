@@ -18,6 +18,16 @@ const char *password = "##Pilatus.b4##pi!?";  //Enter your wifi Password
 int DataAvailiblePin=12;
 
 
+
+// Set your Static IP address
+IPAddress local_IP(192, 168, 137, 111);
+// Set your Gateway IP address
+IPAddress gateway(192, 168, 137, 1);
+
+IPAddress subnet(255, 255, 0, 0);
+IPAddress primaryDNS(8, 8, 8, 8);   //optional
+IPAddress secondaryDNS(8, 8, 4, 4); //optional
+
 void setup() 
 {
 
@@ -31,6 +41,12 @@ void setup()
 
   Serial.begin(9600);
   Serial.println();
+
+
+    // Configures static IP address
+  if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
+    Serial.println("STA Failed to configure");
+  }
  
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password); //Connect to wifi
