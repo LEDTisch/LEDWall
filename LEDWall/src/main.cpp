@@ -15,6 +15,7 @@ ShowPort* showport=new ShowPort();
 
 #define RunApps true
 
+enum DEBUG_LEVEL{ESP_ARDUINO_CONNECTION_INFO=true, ESP_ARDUINO_CONNECTION_DEBUG=false};
 
 
 int DataAvailablePin=8;
@@ -71,7 +72,7 @@ char message[MaxLength];
 
 
 void sentRequest(){
-  Log::println("info","sentRequest");
+  Log::println(ESP_ARDUINO_CONNECTION_INFO,"info","sentRequest");
 Serial2.write(0x10);
 }
 
@@ -79,7 +80,7 @@ Serial2.write(0x10);
 void serialreadupdate(){
   if(Serial2.available()) {
       incommingbyte=Serial2.read();
-      //Serial.println(incommingbyte);
+      Log::println(ESP_ARDUINO_CONNECTION_DEBUG, "incommingbyte", incommingbyte);
       if(iindex < MaxLength-1){
       message[iindex++] = incommingbyte;
 
@@ -93,17 +94,11 @@ void serialreadupdate(){
           }
         }
         iindex=0;
-        //Serial.println(message);
         
         //Verarbeitung///////////////////////////
-        //Serial.println("-------------------------------------------------------------");
-        //Serial.print("empfangen: ");
-        //Serial.println(message);
         if(true){
-        //Serial.println();
-        //Serial.print("verarbeiten: ");
-       // Serial.println(message);
-       Log::println("message",message);
+
+       Log::println(ESP_ARDUINO_CONNECTION_INFO,"message",message);
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
         bool gleich=true;
         for(int i=0;i<9;i++){
