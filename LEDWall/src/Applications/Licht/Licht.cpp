@@ -8,7 +8,6 @@ Licht::Licht(){
 }
 
 void Licht::onCreate(ShowPort* showport){
-Serial.println("TestApplication1");
   showport->ledtisch->clear();
   showport->ledtisch->setcolor(255,255,255);
     showport->ledtisch->zahl(3,3,1);
@@ -18,7 +17,6 @@ void Licht::onRun(ShowPort* showport){
 
 }
 void Licht::onDataReceive(String data,ShowPort* showport){
-        Serial.println(data);
 
   if(data == "LichtSchalter"){
 

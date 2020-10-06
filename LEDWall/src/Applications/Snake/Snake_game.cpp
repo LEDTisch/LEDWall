@@ -180,7 +180,7 @@ void Snake_game::deleteFood(int stelle){
     for(int i=stelle;i<foodanzahl;i++){
         food[i][0]=food[i+1][0];
         food[i][1]=food[i+1][1];
-        Serial.println(foodanzahl);
+        Log::println(Log::SNAKE_GAME_DEBUG, "foodanzahl", foodanzahl);
 
     }
     foodanzahl-=1;

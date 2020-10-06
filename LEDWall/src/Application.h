@@ -1,6 +1,7 @@
 #ifndef Application_H
 #define Application_H
 #include "utils/ShowPort.h"
+#include "utils/Log.h"
 
 class Application{
 public:

@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "../../utils//Device/LED-Tisch/LED-Tisch.h"
+#include "../../utils/Log.h"
 
 class Snake_game{
     private:
