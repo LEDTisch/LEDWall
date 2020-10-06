@@ -13,7 +13,7 @@ ShowPort* showport=new ShowPort();
 
 
 
-#define RunApps false
+#define RunApps true
 
 
 

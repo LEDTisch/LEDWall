@@ -102,7 +102,7 @@ void checkforRequest(){
                   Serial.print(ReceiveData.size());
                   if(!ReceiveData.empty()){
                     String s=ReceiveData.front();
-                     softwareserial.println(s);
+                     softwareserial.print(s);
                      Serial.print(" (beantwortet)");
                      Serial.print(" mit: ");
                      Serial.print(s);
