@@ -98,7 +98,7 @@ void connectClient(){
 void checkforRequest(){
       if(softwareserial.available()){
         if(softwareserial.read()==0x10){
-                  Serial.print("anfrageerhalten ");
+                  Serial.print("anfrageerhalten incommingbuffersize: ");
                   Serial.print(ReceiveData.size());
                   if(!ReceiveData.empty()){
                     String s=ReceiveData.front();
@@ -111,7 +111,8 @@ void checkforRequest(){
 
                   }else{
                     softwareserial.println("empty");
-                    Serial.println(" (empty arduino verschwendet Zeit)");
+                    Serial.print(" (empty arduino verschwendet Zeit)");
+                    Serial.println();
                   }
                        if(ReceiveData.empty()){
                         digitalWrite(DataAvailiblePin, LOW);

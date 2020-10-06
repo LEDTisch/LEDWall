@@ -22,7 +22,7 @@ for(int wx=0;wx<w;wx++){
 
 pixels.show();
 
-Serial.print("image gedrawec");
+//Serial.print("image gedrawec");
 }
 
 
@@ -34,7 +34,7 @@ y2++;
   float m=0;
 
   m=(y2-y1)/(x2-x1);
-  Serial.println(m);
+  //Serial.println(m);
 
   float x=0;
 while(x<x2-x1){
@@ -54,9 +54,9 @@ void LEDTisch::brightness(int brightness){
 
 void LEDTisch::init(int _pin){
   pin=_pin;
-  Serial.println("pin:");
+  //Serial.println("pin:");
 pixels.setPin(_pin);
-Serial.println(pixels.getPin());
+//Serial.println(pixels.getPin());
 }
 
 void LEDTisch::drehung_set(int d){

@@ -4,11 +4,17 @@
 #include "Applications/Home/Home.h"
 #include "utils//Device/LED-Tisch/LED-Tisch.h"
 #include "Applications/Snake/Snake.h"
-
+#include "utils/Log.h"
 
 
 #include "utils/ShowPort.h"
 ShowPort* showport=new ShowPort();
+
+
+
+
+#define RunApps false
+
 
 
 int DataAvailablePin=8;
@@ -20,6 +26,11 @@ int appanzahl=size;
 Application* applications[size]={new Home(),new Licht(),  new Snake()};
 
 bool isReceiving=false;
+
+
+
+
+
 void switchApp(int id) {
   applications[currentApp]->onStop(showport);
   currentApp = id;
@@ -46,9 +57,9 @@ void setup(){
 
   showport->init();
 
-
+if(RunApps){
 applications[currentApp]->onCreate(showport);
-
+}
 
 }
 
@@ -60,6 +71,7 @@ char message[MaxLength];
 
 
 void sentRequest(){
+  Log::println("info","sentRequest");
 Serial2.write(0x10);
 }
 
@@ -67,7 +79,7 @@ Serial2.write(0x10);
 void serialreadupdate(){
   if(Serial2.available()) {
       incommingbyte=Serial2.read();
-      Serial.println(incommingbyte,BIN);
+      //Serial.println(incommingbyte);
       if(iindex < MaxLength-1){
       message[iindex++] = incommingbyte;
 
@@ -86,11 +98,12 @@ void serialreadupdate(){
         //Verarbeitung///////////////////////////
         //Serial.println("-------------------------------------------------------------");
         //Serial.print("empfangen: ");
-       // Serial.println(message);
+        //Serial.println(message);
         if(true){
         //Serial.println();
         //Serial.print("verarbeiten: ");
-        //Serial.println(message);
+       // Serial.println(message);
+       Log::println("message",message);
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
         bool gleich=true;
         for(int i=0;i<9;i++){
@@ -106,10 +119,14 @@ void serialreadupdate(){
               mode[i-9]=message[i];
                         i++;
           }
+          if(RunApps){
           switchApp(mode);
           }
+          }
         if(!gleich){
-        applications[currentApp]->onDataReceive(message, showport);
+          if(RunApps){
+             applications[currentApp]->onDataReceive(message, showport);
+          }
         }
         isReceiving=false;
         }else{
@@ -138,13 +155,14 @@ void loop(){
       if(digitalRead(DataAvailablePin)){
       sentRequest();
       isReceiving=true;
-      while(isReceiving || Serial.available()){
-      serialreadupdate();
       }
+      while(isReceiving || Serial.available()){
+          serialreadupdate();
       }
 
-      
-      applications[currentApp]->onRun(showport);
+      if(RunApps){
+        applications[currentApp]->onRun(showport);
+      }
 
 
 }
