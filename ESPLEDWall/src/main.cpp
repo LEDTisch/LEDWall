@@ -95,10 +95,10 @@ void connectClient(){
     }   
 }
 }
-void checkforRequest(){
-      if(softwareserial.available()){
-        if(softwareserial.read()==0x10){
-                  Serial.print("anfrageerhalten incommingbuffersize: ");
+
+
+void sentAppData(){
+                  Serial.print("appdataanfrageerhalten incommingbuffersize: ");
                   Serial.print(ReceiveData.size());
                   if(!ReceiveData.empty()){
                     String s=ReceiveData.front();
@@ -119,9 +119,35 @@ void checkforRequest(){
                         }else{
                           digitalWrite(DataAvailiblePin, HIGH);
                         }
+}
+        byte query=0x00;
+        byte subquery=0x00;
+void ProcessRequest(byte query, byte subquery){
+  switch(query){
+    case 0x00:{
+      switch(subquery){
+        case 0x00:{
+            sentAppData();
+          break;
+        }
+      }
+      break;
+    }
+  }
+}
+void checkforRequest(){
+      if(softwareserial.available()){
+        byte ib=softwareserial.read();
+        if((ib & 0x80)==1){
+          query=ib & 0x7F;
+        }else{
+          subquery=ib;
+          ProcessRequest(query, subquery);
         }
       }
 }
+
+
 void loop() 
 {
 

@@ -86,10 +86,27 @@ const int MaxLength=100;
 char message[MaxLength];
 
 
+//query
+  #define transfere 0x00
+  #define Time 0x01
+  #define Weather 0x02
+//subquery
+  //transfere
+    #define line 0x00
+  //Time
+    #define day 0x00
+    #define month 0x01
+    #define year 0x02
+    #define houre 0x03
+    #define minute 0x04
+    #define second 0x05
+  //Weather
 
-void sentRequest(){
+
+void sentRequest(byte query, byte subquery){
   Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"info","sentRequest");
-Serial2.write(0x10);
+Serial2.write(byte(query | 0x80));
+Serial2.write(subquery);
 }
 
 
@@ -161,7 +178,7 @@ void serialreadupdate(){
 void loop(){
 
       if(digitalRead(DataAvailablePin)){
-      sentRequest();
+      sentRequest(transfere, line);
       isReceiving=true;
       }
       while(isReceiving){
