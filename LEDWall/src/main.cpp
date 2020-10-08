@@ -110,51 +110,7 @@ Serial2.write(byte(subquery | 0x80));
 }
 
 
-
-void ProcessTransfer(byte query, byte subquery){
-switch(query){
-  case transfere:{
-    switch(subquery){
-      case line:{
-
-        break;
-      }
-    }
-    break;
-  }
-}
-}
-
-byte query;
-byte subquery;
-void serialreadupdate(){
-  if(Serial2.available()) {
-      incommingbyte=Serial2.read();
-      Log::println(Log::ESP_ARDUINO_CONNECTION_DEBUG, "incommingbyte", incommingbyte);
-      if(iindex < MaxLength-1){
-        if(iindex>=2){
-          message[iindex-2] = incommingbyte;
-        }else{
-          query=message[0];
-          subquery=message[1];         
-        }
-        iindex++;
-
-      }else{
-        Log::println(Log::ESP_ARDUINO_CONNECTION_ERROR, "ERROR:", "BufferOverflow");
-      }
-      if(incommingbyte == '\n'){
-        for(int i=0;i<iindex;i++){
-          if(message[i]=='\n'){
-            message[i]='\0';
-          }
-        }
-        iindex=0;
-        
-        //Verarbeitung///////////////////////////
-        if(true){
-
-       Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"message",message);
+void apptData(){
 
 
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
@@ -181,6 +137,57 @@ void serialreadupdate(){
           }
         }
 
+}
+void ProcessTransfer(byte query, byte subquery){
+switch(query){
+  case transfere:{
+    switch(subquery){
+      case line:{
+          apptData();
+        break;
+      }
+    }
+    break;
+  }
+}
+}
+
+byte query;
+byte subquery;
+void serialreadupdate(){
+  if(Serial2.available()) {
+      incommingbyte=Serial2.read();
+      Log::println(Log::ESP_ARDUINO_CONNECTION_DEBUG, "incommingbyte", incommingbyte);
+
+      if(iindex < MaxLength-1){
+        if(iindex>=2){
+          message[iindex-2] = incommingbyte;
+        }
+        if(iindex==0){
+          query=incommingbyte;
+        }
+        if(iindex==1){
+            subquery=incommingbyte;         
+        }
+        iindex++;
+
+      }else{
+        Log::println(Log::ESP_ARDUINO_CONNECTION_ERROR, "ERROR:", "BufferOverflow");
+      }
+      if(incommingbyte == '\n'){
+        for(int i=0;i<iindex;i++){
+          if(message[i]=='\n'){
+            message[i]='\0';
+          }
+        }
+        iindex=0;
+        
+        //Verarbeitung///////////////////////////
+        if(true){
+          Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"message",message);
+          Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"request",query);
+          Log::print(Log::ESP_ARDUINO_CONNECTION_INFO,subquery);
+          ProcessTransfer(query,subquery);
         
         }
 
