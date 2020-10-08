@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <SoftwareSerial.h>
 #include <queue>
+#include "Log.h"
 
 SoftwareSerial softwareserial(13,15,false);
  
@@ -77,9 +78,9 @@ void setup()
 
 
 }
-int iindex=0;
+int iindex=2;
 char incommingbyte;
-const int MaxLength=100;
+const int MaxLength=100+2;
 char message[MaxLength];
 
 WiFiClient client;
@@ -95,24 +96,36 @@ void connectClient(){
     }   
 }
 }
-
+//query
+  #define transfere 0x01
+  #define Time 0x02
+  #define Weather 0x03
+//subquery
+  //transfere
+    #define line 0x01
+  //Time
+    #define day 0x00
+    #define month 0x01
+    #define year 0x02
+    #define houre 0x03
+    #define minute 0x04
+    #define second 0x05
+  //Weather
 
 void sentAppData(){
-                  Serial.print("appdataanfrageerhalten incommingbuffersize: ");
-                  Serial.print(ReceiveData.size());
+                  Log::println(Log::ARDUINO_INFO,"Info","appdataanfrageerhalten incommingbuffersize: ");
+                  Log::print(Log::ARDUINO_INFO,ReceiveData.size());
                   if(!ReceiveData.empty()){
                     String s=ReceiveData.front();
                      softwareserial.print(s);
-                     Serial.print(" (beantwortet)");
-                     Serial.print(" mit: ");
-                     Serial.print(s);
-                     Serial.println();
+                     Log::print(Log::ARDUINO_INFO," (beantwortet)");
+                     Log::print(Log::ARDUINO_INFO," mit: ");
+                     Log::print(Log::ARDUINO_INFO,s);
                      ReceiveData.pop();
 
                   }else{
                     softwareserial.println("empty");
-                    Serial.print(" (empty arduino verschwendet Zeit)");
-                    Serial.println();
+                    Log::print(Log::ARDUINO_INFO," (empty arduino verschwendet Zeit)");
                   }
                        if(ReceiveData.empty()){
                         digitalWrite(DataAvailiblePin, LOW);
@@ -124,9 +137,9 @@ void sentAppData(){
         byte subquery=0x00;
 void ProcessRequest(byte query, byte subquery){
   switch(query){
-    case 0x00:{
+    case transfere:{
       switch(subquery){
-        case 0x00:{
+        case line:{
             sentAppData();
           break;
         }
@@ -138,10 +151,11 @@ void ProcessRequest(byte query, byte subquery){
 void checkforRequest(){
       if(softwareserial.available()){
         byte ib=softwareserial.read();
-        if((ib & 0x80)==1){
-          query=ib & 0x7F;
+        if((ib & 0x80)==0){
+          query=ib;
         }else{
-          subquery=ib;
+          subquery=ib & 0x7F;
+
           ProcessRequest(query, subquery);
         }
       }
@@ -176,14 +190,13 @@ void loop()
         Serial.println("Error: BufferOverflow");
       }
       if(incommingbyte == '\n'){
-        for(int i=0;i<iindex;i++){
 
-        }
-        iindex=0;
+        iindex=2;
         //Serial.println(message);
         
         //Verarbeitung///////////////////////////
-
+message[0]=0x01;
+message[1]=0x01;
         ReceiveData.push(message);
                           if(ReceiveData.empty()){
                         digitalWrite(DataAvailiblePin, LOW);

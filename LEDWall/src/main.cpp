@@ -87,12 +87,12 @@ char message[MaxLength];
 
 
 //query
-  #define transfere 0x00
-  #define Time 0x01
-  #define Weather 0x02
+  #define transfere 0x01
+  #define Time 0x02
+  #define Weather 0x03
 //subquery
   //transfere
-    #define line 0x00
+    #define line 0x01
   //Time
     #define day 0x00
     #define month 0x01
@@ -105,17 +105,40 @@ char message[MaxLength];
 
 void sentRequest(byte query, byte subquery){
   Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"info","sentRequest");
-Serial2.write(byte(query | 0x80));
-Serial2.write(subquery);
+Serial2.write(query);
+Serial2.write(byte(subquery | 0x80));
 }
 
 
+
+void ProcessTransfer(byte query, byte subquery){
+switch(query){
+  case transfere:{
+    switch(subquery){
+      case line:{
+
+        break;
+      }
+    }
+    break;
+  }
+}
+}
+
+byte query;
+byte subquery;
 void serialreadupdate(){
   if(Serial2.available()) {
       incommingbyte=Serial2.read();
       Log::println(Log::ESP_ARDUINO_CONNECTION_DEBUG, "incommingbyte", incommingbyte);
       if(iindex < MaxLength-1){
-      message[iindex++] = incommingbyte;
+        if(iindex>=2){
+          message[iindex-2] = incommingbyte;
+        }else{
+          query=message[0];
+          subquery=message[1];         
+        }
+        iindex++;
 
       }else{
         Log::println(Log::ESP_ARDUINO_CONNECTION_ERROR, "ERROR:", "BufferOverflow");
@@ -132,6 +155,8 @@ void serialreadupdate(){
         if(true){
 
        Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"message",message);
+
+
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
         bool gleich=true;
         for(int i=0;i<9;i++){
@@ -155,10 +180,12 @@ void serialreadupdate(){
               OnDataReceive_Application(currentApp, message);
           }
         }
-        isReceiving=false;
-        }else{
-          isReceiving=false;
+
+        
         }
+
+        isReceiving=false;
+
         for (int j=0; j<MaxLength; ++j) {message[j] = 0; }////message clearen
 
 
