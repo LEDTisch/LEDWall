@@ -2,6 +2,8 @@
 #include <SoftwareSerial.h>
 #include <queue>
 #include "Log.h"
+#include "WiFiUdp.h"
+#include "NTPClient.h"
 
 SoftwareSerial softwareserial(13,15,false);
  
@@ -29,10 +31,17 @@ IPAddress subnet(255, 255, 0, 0);
 IPAddress primaryDNS(8, 8, 8, 8);   //optional
 IPAddress secondaryDNS(8, 8, 4, 4); //optional
 
+
+
+const long utcOffsetInSeconds=3600;
+
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
+
 void setup() 
 {
 
-
+  timeClient.begin();
 
   pinMode(DataAvailiblePin, OUTPUT);
   digitalWrite(DataAvailiblePin, LOW);
@@ -112,8 +121,8 @@ void connectClient(){
     #define second 0x05
   //Weather
 
-void sentAppData(){
-                  Log::println(Log::ARDUINO_INFO,"Info","appdataanfrageerhalten incommingbuffersize: ");
+void sentData(){
+                  Log::println(Log::ARDUINO_INFO,"Info","DataSentanfrageerhalten incommingbuffersize: ");
                   Log::print(Log::ARDUINO_INFO,ReceiveData.size());
                   if(!ReceiveData.empty()){
                     String s=ReceiveData.front();
@@ -140,11 +149,41 @@ void ProcessRequest(byte query, byte subquery){
     case transfere:{
       switch(subquery){
         case line:{
-            sentAppData();
+            sentData();
           break;
         }
       }
       break;
+    }
+    case Time:{
+      timeClient.update();
+      switch(subquery){
+        case day:{
+
+          break;
+        }
+        case month:{
+
+          break;
+        }
+        case year:{
+
+          break;
+        }
+        case houre:{
+
+          break;
+        }
+        case minute:{
+
+          break;
+        }
+        case second:{
+
+          break;
+        }
+        
+      }
     }
   }
 }

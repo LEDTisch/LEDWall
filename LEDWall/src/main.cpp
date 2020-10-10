@@ -65,27 +65,6 @@ void switchApp(String s) {
   OnCreate_Application(currentApp);
 }
 
-
-
-void setup(){
-  pinMode(DataAvailablePin, INPUT);
-  Serial2.begin(9600);
-  Serial.begin(9600);
-
-  showport->init();
-
-if(RunApps){
-  OnCreate_Application(currentApp);
-}
-
-}
-
-int iindex=0;
-char incommingbyte;
-const int MaxLength=100;
-char message[MaxLength];
-
-
 //query
   #define transfere 0x01
   #define Time 0x02
@@ -103,6 +82,7 @@ char message[MaxLength];
   //Weather
 
 
+
 void sentRequest(byte query, byte subquery){
   Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"info","sentRequest");
 Serial2.write(query);
@@ -110,7 +90,31 @@ Serial2.write(byte(subquery | 0x80));
 }
 
 
-void apptData(){
+void setup(){
+  pinMode(DataAvailablePin, INPUT);
+  Serial2.begin(9600);
+  Serial.begin(9600);
+
+  showport->init();
+
+if(RunApps){
+  OnCreate_Application(currentApp);
+}
+//sentRequest(Time,houre);
+}
+
+int iindex=0;
+char incommingbyte;
+const int MaxLength=100;
+char message[MaxLength];
+
+
+
+
+
+
+
+void receiveAppData(){
 
 
         char vergleich[9]= {'s','w','i','t','c','h','T','o',':'};
@@ -143,7 +147,16 @@ switch(query){
   case transfere:{
     switch(subquery){
       case line:{
-          apptData();
+          receiveAppData();
+        break;
+      }
+    }
+    break;
+  }
+  case Time:{
+    switch(subquery){
+      case houre:{
+
         break;
       }
     }
