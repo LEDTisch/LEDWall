@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #ifndef Log_H
 #define Log_H
+#define ARRAY_LENGTH(array) (sizeof(array)/sizeof((array)[0]))
 class Log{
 public:
 
@@ -25,6 +26,15 @@ static void println(bool active, String g, float s){
       Serial.println();
   Serial.print("["+g+"]"+" ");
   Serial.print(s);
+  }
+};
+static void println(bool active, String g, byte s[]){
+        if(active){
+      Serial.println();
+  Serial.print("["+g+"]"+" ");
+  for(int i=0;i<ARRAY_LENGTH(s);i++){
+  Serial.print(s[i]);
+  }
   }
 };
 static void println(bool active, String g, byte s){

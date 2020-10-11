@@ -61,21 +61,21 @@ if(snake.foodCheck()!=-1){
         
 }
 }
-void Snake::onDataReceive(String data,ShowPort* showport){
+void Snake::onDataReceive(byte data[],ShowPort* showport){
   
-if(data=="h" && snake.direction!=3){//drehen
+if(data[0]==0x00 && snake.direction!=3){//drehen
 snake.direction=2;
 }
 
-if(data=="r" && snake.direction!=1){//rechts
+if(data[0]==0x01 && snake.direction!=1){//rechts
 snake.direction=0;
 }
 
-if(data=="l" && snake.direction!=0){//links
+if(data[0]==0x02 && snake.direction!=0){//links
  snake.direction=1;
 }
 
-if(data=="d" && snake.direction!=2){//runter
+if(data[0]==0x03 && snake.direction!=2){//runter
 snake.direction=3;
 
 

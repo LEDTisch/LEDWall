@@ -33,7 +33,7 @@ void Home::onRun(ShowPort* showport){
 void Home::onStop(ShowPort* showport){
 
 }
-void Home::onDataReceive(String data,ShowPort* showport){
+void Home::onDataReceive(byte data[],ShowPort* showport){
 
 }
 

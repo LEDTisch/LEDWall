@@ -37,7 +37,7 @@ void OnCreate_Application(int id){
 void OnRun_Application(int id){
   applications[id]->onRun(showport);
 }
-void OnDataReceive_Application(int id, String m){
+void OnDataReceive_Application(int id, byte m[]){
     applications[id]->onDataReceive(m, showport);
       Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","DataReceiv app: ");
   Log::print(Log::APPLICATION_MANAGE_INFO, applications[id]->getName());
@@ -106,7 +106,7 @@ if(RunApps){
 int iindex=0;
 char incommingbyte;
 const int MaxLength=100;
-char message[MaxLength];
+byte message[MaxLength];
 
 
 

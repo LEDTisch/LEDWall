@@ -16,9 +16,9 @@ void Licht::onCreate(ShowPort* showport){
 void Licht::onRun(ShowPort* showport){
 
 }
-void Licht::onDataReceive(String data,ShowPort* showport){
+void Licht::onDataReceive(byte data[],ShowPort* showport){
 
-  if(data == "LichtSchalter"){
+  if(data[0] == 0x00){
 
     if(lightstatus==false){
     showport->ledtisch->setcolor(255,0,0);
