@@ -9,7 +9,7 @@ public:
 
   virtual void onCreate(ShowPort* showport)=0;
   virtual void onRun(ShowPort* showport)=0;
-  virtual void onDataReceive(byte data[], ShowPort* showport)=0;
+  virtual void onDataReceive(String data, ShowPort* showport)=0;
   virtual String getName()=0;
   virtual void onStop(ShowPort* showport)=0;
 

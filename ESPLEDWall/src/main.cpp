@@ -7,8 +7,7 @@
 
 SoftwareSerial softwareserial(13,15,false);
  
- std::queue<byte[]> ReceiveData;
-
+ std::queue<String> ReceiveData;
 
 
 #define SendKey 0  //Button to send data Flash BTN on NodeMCU
@@ -126,8 +125,8 @@ void sentData(){
                   Log::println(Log::ARDUINO_INFO,"Info","DataSentanfrageerhalten incommingbuffersize: ");
                   Log::print(Log::ARDUINO_INFO,ReceiveData.size());
                   if(!ReceiveData.empty()){
-                    byte* s=ReceiveData.front();
-                     softwareserial.write(s[5]);
+                    String s=ReceiveData.front();
+                     softwareserial.print(s);
                      Log::print(Log::ARDUINO_INFO," (beantwortet)");
                      Log::print(Log::ARDUINO_INFO," mit: ");
                      Log::print(Log::ARDUINO_INFO,s);
