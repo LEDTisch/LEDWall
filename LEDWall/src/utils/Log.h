@@ -46,7 +46,7 @@ static void println(bool active, String g, char s){
         if(active){
       Serial.println();
   Serial.print("["+g+"]"+" ");
-  Serial.print(s,BIN);
+  Serial.print(s);
         }
 };
 

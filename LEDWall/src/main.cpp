@@ -4,6 +4,7 @@
 #include "Applications/Home/Home.h"
 #include "utils//Device/LED-Tisch/LED-Tisch.h"
 #include "Applications/Snake/Snake.h"
+#include "Applications/Tetris/Tetris.h"
 #include "utils/Log.h"
 
 
@@ -21,9 +22,9 @@ int DataAvailablePin=8;
 bool dataavailablechanche=false;
 
 int currentApp=0;
-const int size=3;
+const int size=4;
 int appanzahl=size;
-Application* applications[size]={new Home(),new Licht(),  new Snake()};
+Application* applications[size]={new Home(),new Licht(), new Tetris(),  new Snake()};
 
 bool isReceiving=false;
 
@@ -127,9 +128,13 @@ void receiveAppData(){
         if(gleich){
           int i=9;
           char mode[30];
+          for(int i=0;i<30;i++){
+            mode[i]=0x00;
+          }
           while(message[i]!='#'){
               mode[i-9]=message[i];
-                        i++;
+              i++;
+
           }
           if(RunApps){
           switchApp(mode);
