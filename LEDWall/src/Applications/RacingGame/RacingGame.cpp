@@ -51,6 +51,7 @@ void reset(ShowPort* showport) {
     keepstate = 0;
     gameend = 0;
     fasttickdelay = 100;
+    fasttickercounter =1;
 
 }
 
@@ -163,34 +164,16 @@ if ((millis() - lastfasttick) >= fasttickdelay)
     for(int i=0;i<15;i++) {
       ison[i] = false;
 
-    if(i==0+fasttickercounter) {
-
-        ison[i] =true;
-
-    }
-
-    if(i==3+fasttickercounter) {
-        ison[i] = true;
-    }
-
-    if(i==6+fasttickercounter) {
-
-        ison[i] = true;
-
-    }
-
-  if(i==9+fasttickercounter) {
-
-        ison[i] = true;
-
-    }
-
+     if((i+fasttickercounter)%3==0) {
+         ison[i] =true;
+     }
+/*
     if(i==12+fasttickercounter) {
 
         ison[i] = true;
 
     }
-
+*/
 
     }
 
