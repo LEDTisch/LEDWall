@@ -10,7 +10,6 @@ Licht::Licht(){
 void Licht::onCreate(ShowPort* showport){
   showport->ledtisch->clear();
   showport->ledtisch->setcolor(255,255,255);
-    showport->ledtisch->zahl(3,3,1);
   showport->ledtisch->show();
 }
 void Licht::onRun(ShowPort* showport){

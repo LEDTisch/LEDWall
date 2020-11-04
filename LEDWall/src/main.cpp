@@ -6,6 +6,8 @@
 #include "Applications/Snake/Snake.h"
 #include "Applications/Tetris/Tetris.h"
 #include "Applications/RacingGame/RacingGame.h"
+#include "Applications/FlappyBird/FlappyBird.h"
+
 
 #include "utils/Log.h"
 
@@ -75,6 +77,10 @@ if(s=="Snake"){
 }
 if(s=="Racing Game"){
     applications = new RacingGame();
+}
+
+if(s=="Flappy Bird") {
+  applications = new FlappyBird();
 }
 
 

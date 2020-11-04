@@ -113,12 +113,10 @@ void RacingGame::onRun(ShowPort* showport){
 
  if(gameend ==0) {
 
-     Serial.println("playing");
 
 if ((millis() - lastfasttick) >= fasttickdelay)
   {
       tick();
-    Serial.println("ticking");
 
      if(fasttickercounter==3) {
       fasttickercounter=0;
