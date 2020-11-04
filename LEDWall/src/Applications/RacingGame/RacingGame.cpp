@@ -3,8 +3,8 @@
 
 int counter = 0;
 int row_x[10];
-int tickdelay = 75;
-int fasttickdelay = 75;
+const int tickdelay = 75;
+const int fasttickdelay = 75;
 boolean ison[15];
 int fasttickercounter =0;
 
@@ -15,17 +15,39 @@ int ledtofade[10][15];
 boolean roadpieces[10][16];
 unsigned long lasttick;
 unsigned long lastfasttick;
-boolean gameover = false;
+int gameend = 0;
 
 RacingGame::RacingGame() {
+
+}
+
+
+void reset(ShowPort* showport) {
+    showport->ledtisch->clear();
+    showport->ledtisch->show();
+
+   for(int x=0;x<10;x++) {
+     for(int y=0;y<15;y++) {
+       roadpieces[x][y] = false;
+     }
+
+   }
+
+   pixelposy = 5;
+   pixelposx = 5;
+
+gameend = 0;
 
 }
 
 void RacingGame::onCreate(ShowPort* showport){
     lasttick = millis();
     lastfasttick = millis();
-  showport->ledtisch->clear();
-  showport->ledtisch->show();
+
+    counter =0;
+
+
+  reset(showport);
 }
 
 
@@ -76,14 +98,16 @@ for(int i=0;i<10;i++) {
 }
 
 
-void RacingGame::onRun(ShowPort* showport){
+void RacingGame::onRun(ShowPort* showport){ 
 
 
- if(!gameover) {
+ if(true) {
+     Serial.println("playing");
+
 if ((millis() - lastfasttick) >= fasttickdelay)
   {
-
-
+      tick();
+    Serial.println("ticking");
     if(fasttickercounter==14) {
       fasttickercounter=0;
     }
@@ -147,13 +171,14 @@ if(counter>2) {
 }
 }
 
+  
 
 
 
 showport->ledtisch->setcolor(100,0,0);
 showport->ledtisch->drawkoordinatensystem(pixelposx,pixelposy);
 showport->ledtisch->drawkoordinatensystem(pixelposx,pixelposy+1);
-
+showport->ledtisch->show();
 
 if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
   for(int x=0;x<10;x++) {
@@ -165,7 +190,7 @@ if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
   }
   showport->ledtisch->show();
 
-    gameover = true;
+   // gameover = true;
 
 
  }
@@ -175,20 +200,7 @@ if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
 
 }
 
-void reset(ShowPort* showport) {
-    showport->ledtisch->clear();
-    showport->ledtisch->show();
 
-   for(int x=0;x<10;x++) {
-     for(int y=0;y<15;y++) {
-       roadpieces[x][y] = false;
-     }
-
-   }
-
-   pixelposy = 5;
-   pixelposx = 5;
-}
 
 void RacingGame::onDataReceive(String data,ShowPort* showport){
 
@@ -209,7 +221,7 @@ pixelposy--;
 }
 if(data=="n") {//new game
     reset(showport);
-    gameover = false;
+    
 }
  
 }
