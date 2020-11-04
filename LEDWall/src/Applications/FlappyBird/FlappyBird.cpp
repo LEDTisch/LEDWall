@@ -7,11 +7,15 @@ const int obstacleTickDelay = 350;
 const int startX = 5;
 const int startY = 7;
 
+unsigned long felixticker=0;
+
 boolean obstacles[11][15];
 boolean gameover = false;
 unsigned long lastTick = 0;
 unsigned long lastObstacleTick = 0;
 float fallingspeed = 0;
+float felixstandartfallingspeed=300;
+float felixfallingspeed=felixstandartfallingspeed;
 int x=5;
 int y=7;
 
@@ -47,28 +51,27 @@ void FlappyBird::onCreate(ShowPort* showport){
 }
 void FlappyBird::onRun(ShowPort* showport){
 
-    //Gravity Tick
-    if(millis()-lastTick>=tickdelay) {
-        
-        
-    if(fallingspeed<1) {
-        fallingspeed+=gravity;
-      }
-        
-        y-=fallingspeed;
+    if(millis()>=lastTick) {
+         Serial.println(felixfallingspeed);
 
-      
+        felixfallingspeed-=10;
+        if(felixfallingspeed<0){
+          felixfallingspeed=0;
+        }
 
-
-        lastTick = millis();
+        lastTick = millis()+tickdelay;
     }
 
-    //Obstange Tick
 
     if(millis()-lastObstacleTick>=obstacleTickDelay) {
 
         Serial.println("Ticking");
         lastObstacleTick = millis();
+    }
+
+    if(millis()>=felixticker){
+      y=y-1;
+      felixticker+=millis()+felixfallingspeed;
     }
 
 

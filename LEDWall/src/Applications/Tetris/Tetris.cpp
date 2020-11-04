@@ -77,7 +77,7 @@ if(beistartausfuhren==true){
 }
 
 if(stop==1){
-
+speed=1000;
 int rk= block.reihenkontrolle();
 reihen_gesamt=reihen_gesamt+rk;
 if(rk > 0){
