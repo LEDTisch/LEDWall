@@ -52,6 +52,6 @@ void Licht::onStop(ShowPort* showport){
 
 }
 
-String Licht::getName(){
+ String Licht::getName(){
   return "Licht";
 }

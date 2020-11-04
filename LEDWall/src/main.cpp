@@ -23,49 +23,65 @@ ShowPort* showport=new ShowPort();
 int DataAvailablePin=8;
 bool dataavailablechanche=false;
 
-int currentApp=0;
-const int size=4;
+const int size=5;
 int appanzahl=size;
-Application* applications[size]={new Home(),new Licht(), new Tetris(),  new Snake()};
+Application* applications=new Home();
 
 bool isReceiving=false;
 
 
 
-void OnCreate_Application(int id){
-  applications[id]->onCreate(showport);
+void OnCreate_Application(){
+  applications->onCreate(showport);
   Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","create app: ");
-  Log::print(Log::APPLICATION_MANAGE_INFO, applications[id]->getName());
+  Log::print(Log::APPLICATION_MANAGE_INFO, applications->getName());
 }
-void OnRun_Application(int id){
-  applications[id]->onRun(showport);
+void OnRun_Application(){
+  applications->onRun(showport);
 }
-void OnDataReceive_Application(int id, String m){
-    applications[id]->onDataReceive(m, showport);
+void OnDataReceive_Application(String m){
+    applications->onDataReceive(m, showport);
       Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","DataReceiv app: ");
-  Log::print(Log::APPLICATION_MANAGE_INFO, applications[id]->getName());
+  Log::print(Log::APPLICATION_MANAGE_INFO, applications->getName());
 }
-void OnStop_Application(int id){
-applications[id]->onStop(showport);
+void OnStop_Application(){
+applications->onStop(showport);
   Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","stop app: ");
-  Log::print(Log::APPLICATION_MANAGE_INFO, applications[id]->getName());
+  Log::print(Log::APPLICATION_MANAGE_INFO, applications->getName());
 }
 
-void switchApp(int id) {
+/*void switchApp(int id) {
   OnStop_Application(currentApp);
   currentApp = id;
   OnCreate_Application(currentApp);
-}
+}*/
 void switchApp(String s) {
-  int id=0;
-  for(int i=0;i<appanzahl;i++){
-    if(s==applications[i]->getName()){
-      id=i;
-    }
-  }
-  OnStop_Application(currentApp);
-  currentApp = id;
-  OnCreate_Application(currentApp);
+
+ OnStop_Application();
+delete applications;
+
+if(s=="Tetris"){
+  applications = new Tetris();
+
+}
+if(s=="Licht"){
+    applications = new Licht();
+}
+if(s=="Home"){
+    applications = new Home();
+}
+if(s=="Snake"){
+    applications = new Snake();
+}
+if(s=="Racing Game"){
+    applications = new RacingGame();
+}
+
+
+OnCreate_Application();
+
+
+
 }
 
 //query
@@ -101,7 +117,7 @@ void setup(){
   showport->init();
 
 if(RunApps){
-  OnCreate_Application(currentApp);
+  OnCreate_Application();
 }
 //sentRequest(Time,houre);
 }
@@ -144,7 +160,7 @@ void receiveAppData(){
           }
         if(!gleich){
           if(RunApps){
-              OnDataReceive_Application(currentApp, message);
+              OnDataReceive_Application(message);
           }
         }
 
@@ -240,7 +256,7 @@ void loop(){
       }
 
       if(RunApps){
-        OnRun_Application(currentApp);
+        OnRun_Application();
       }
 
 
