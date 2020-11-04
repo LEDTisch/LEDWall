@@ -1,21 +1,21 @@
 #include "FlappyBird.h"
 
 const int holesize = 4;
-const float gravity = 0.0000002f;
-const int tickdelay = 100;
+const float gravity = 0.01f;
+const int tickdelay = 30;
 const int obstacleTickDelay = 350;
 const int startX = 5;
 const int startY = 7;
 
-unsigned long felixticker=0;
+
 
 boolean obstacles[11][15];
 boolean gameover = false;
 unsigned long lastTick = 0;
 unsigned long lastObstacleTick = 0;
 float fallingspeed = 0;
-float felixstandartfallingspeed=300;
-float felixfallingspeed=felixstandartfallingspeed;
+int refpoint =15;
+
 int x=5;
 int y=7;
 int obstancleSpaceCounter =0;
@@ -56,12 +56,11 @@ void FlappyBird::onRun(ShowPort* showport){
 
 if(!gameover) {
     if(millis()>=lastTick) {
-        // Serial.println(felixfallingspeed);
 
-        felixfallingspeed-=10;
-        if(felixfallingspeed<0){
-          felixfallingspeed=0;
-        }
+      Serial.println(fallingspeed);
+        y-=fallingspeed;
+        if(fallingspeed<2)
+            fallingspeed+=gravity;
 
         lastTick = millis()+tickdelay;
     }
@@ -96,7 +95,12 @@ if(!gameover) {
 
             for(int y=0;y<15;y++) {
 
+                if(refpoint>y&&refpoint-5<y) {
+                 obstacles[10][y] = false;
+
+                }else{
                 obstacles[10][y] = true;
+                }
 
             }
 
@@ -112,17 +116,15 @@ if(!gameover) {
          }
         obstancleSpaceCounter++;
         lastObstacleTick = millis();
+        refpoint = random(4,15);
         }
         
 
-    if(millis()>=felixticker){
-          y=y-1;
-
-      felixticker+=millis()+felixfallingspeed;
-    }
 
 
-showport->ledtisch->setcolor(150,100,0);    
+
+
+showport->ledtisch->setcolor(0,150,0);    
     showport->ledtisch->clear();
     
   for(int x=0;x<10;x++) {
@@ -134,7 +136,7 @@ showport->ledtisch->setcolor(150,100,0);
             }
         }
 
-    
+    showport->ledtisch->setcolor(150,100,0);    
     showport->ledtisch->drawkoordinatensystem(x,y);
 
 
@@ -159,8 +161,16 @@ void FlappyBird::onDataReceive(String data,ShowPort* showport){
 
   if(data=="j") {
 
-    fallingspeed=-0.0000002;
-    y--;
+    fallingspeed=-0.02f;
+    y++;
+   
+
+  }
+
+  if(data=="n") {
+
+      reset();
+
 
   }
 
