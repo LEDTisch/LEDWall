@@ -148,6 +148,9 @@ void Block::clearallarray(){
    for(int x=0;x<10;x++){
       for(int y=0;y<15;y++){
          all[y][x]=0;
+         for(int f=0;f<2;f++){
+            allfarbe[y][x][f]=0;
+         }
       }
    }
 }

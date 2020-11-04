@@ -26,6 +26,7 @@ this->showport=showport;
 
     this->showport->ledFeld->setcolor(100,0,0);
 
+  block.clearallarray();
 
  //addonserial.begin(9600);
 
