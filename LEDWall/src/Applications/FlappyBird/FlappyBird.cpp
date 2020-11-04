@@ -111,14 +111,13 @@ if(!gameover) {
              
          }
         obstancleSpaceCounter++;
-
         lastObstacleTick = millis();
         }
         
-    
 
     if(millis()>=felixticker){
-      y=y-1;
+          y=y-1;
+
       felixticker+=millis()+felixfallingspeed;
     }
 
@@ -139,7 +138,7 @@ showport->ledtisch->setcolor(150,100,0);
     showport->ledtisch->drawkoordinatensystem(x,y);
 
 
-    if(obstacles[x][y]) {
+    if(obstacles[x][y]||y>14||y<0) {
         gameover =true;
 
     }
@@ -161,15 +160,11 @@ void FlappyBird::onDataReceive(String data,ShowPort* showport){
   if(data=="j") {
 
     fallingspeed=-0.0000002;
-    y++;
+    y--;
 
   }
 
-  if(data="n") {
 
-    reset();
-
-  }
   
 }
 void FlappyBird::onStop(ShowPort* showport){
