@@ -7,6 +7,7 @@ LEDTisch::LEDTisch(int _x,int _y,int _d)
 xmax=_x;
 ymax=_y;
 drehung=_d;
+this->brightness = 5;
 
 
 }
@@ -48,9 +49,7 @@ pixels.show();
 }
 
 
-void LEDTisch::brightness(int brightness){
-  pixels.setBrightness(brightness);
-}
+
 
 void LEDTisch::init(int _pin){
   pin=_pin;
@@ -67,9 +66,9 @@ void LEDTisch::setcolor(int r,int g, int b){
   if(r<0){r=0;}
   if(g<0){g=0;}
   if(b<0){b=0;}
-    rot=r;
-    gruen=g;
-    blau=b;
+    rot=r/(((float)(12-this->brightness))/(float)2);
+    gruen=g/(((float)(12-this->brightness))/(float)2);
+    blau=b/(((float)(12-this->brightness))/(float)2);
 }
 
 

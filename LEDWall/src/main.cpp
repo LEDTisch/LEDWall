@@ -163,12 +163,40 @@ void receiveAppData(){
           if(RunApps){
           switchApp(mode);
           }
+
+          }else  {
+        char vergleich_brightness[11]= {'b','r','i','g','h','t','n','e','s','s',':'};
+        bool gleich_brightness=true;
+        for(int i=0;i<11;i++){
+          if(vergleich_brightness[i] != message[i]){
+            gleich_brightness=false;
           }
-        if(!gleich){
+        }
+
+        if(gleich_brightness){
+          int i_b=11;
+          char mode[30];
+          for(int i=0;i<30;i++){
+            mode[i]=0x00;
+          }
+          while(message[i_b]!='#'){
+              mode[i_b-11]=message[i_b];
+              i_b++;
+
+          }
+         showport->ledtisch->brightness= atoi(mode);
+          return;
+          }
+      
+
+          }
+        
+
+          
           if(RunApps){
               OnDataReceive_Application(message);
           }
-        }
+        
 
 }
 void ProcessTransfer(byte query, byte subquery){

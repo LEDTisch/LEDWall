@@ -40,9 +40,9 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ80
       void rect(int x,int y,int w,int h);
       void setRotation(int r);
       void init(int _pin);
-      void brightness(int brightness);
       void gerade(float x1,float y1,float x2,float y2,float g);
       void drawImage(uint32_t image[],int w,int h);
+      int brightness;
     
     
 };
