@@ -124,23 +124,20 @@ if ((millis() - lastfasttick) >= fasttickdelay)
   {
       tick();
     Serial.println("ticking");
-    if(fasttickercounter==14) {
+    if(fasttickercounter==3) {
       fasttickercounter=0;
     }
 
     for(int i=0;i<15;i++) {
       ison[i] = false;
+
+    if(i%fasttickercounter==0) {
+      ison[i]=true;
     }
 
-   
-    
-      ison[14-fasttickercounter] = true;
+    }
 
-      
-    ison[14-fasttickercounter+4] = true;
-    ison[14-fasttickercounter+8] = true;
-    Serial.println(14-fasttickercounter+4);
-
+  
 
     fasttickercounter++;
     lastfasttick = millis();
