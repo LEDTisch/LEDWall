@@ -5,6 +5,8 @@
 #include "utils//Device/LED-Tisch/LED-Tisch.h"
 #include "Applications/Snake/Snake.h"
 #include "Applications/Tetris/Tetris.h"
+#include "Applications/RacingGame/RacingGame.h"
+
 #include "utils/Log.h"
 
 

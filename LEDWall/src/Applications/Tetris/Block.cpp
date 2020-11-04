@@ -71,7 +71,7 @@ for(int y=0;y<15;y=y+1){
   // Serial.println(k);
   // Serial.println();
    if(k==0){
-      Serial.println("reihe");
+     // Serial.println("reihe");
       reihenanzahl=reihenanzahl+1;
       for(int yy=y;yy<14;yy=yy+1){
          for(int xx=0;xx<10;xx=xx+1){
