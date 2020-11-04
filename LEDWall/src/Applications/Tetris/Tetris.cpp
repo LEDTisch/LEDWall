@@ -150,7 +150,7 @@ if(blockschneller==true){
 
   block.draw();
   if(block.kontrolle(2)==0 && block.kontrolle(5)==0){
-    
+    Serial.println("blockdown ");
   block.down();
   }else{
       if(block.writeblocktoall()){
@@ -204,7 +204,7 @@ speed=1000;
 
 
 
-
+/*
    if(Serial1.available()){
      
     
@@ -257,7 +257,7 @@ neuesspiel();
 
 
 
-   }
+   }*/
 
    
 //steuerung end
@@ -268,7 +268,38 @@ art=artnext;
 }
 }
 void Tetris::onDataReceive(String data,ShowPort* showport){
+if(data=="t"){
+  if(block.drehen()){
+//sound(sound_rotatefailed);
+  }else{
+   // sound(sound_drehen);
+  }
+  
+}
 
+if(data=="r"&&block.kontrolle(1)==0&&block.kontrolle(6)==0){
+  block.right();
+//  sound(sound_button);
+}
+
+if(data=="l"&&block.kontrolle(3)==0&&block.kontrolle(7)==0){
+  block.left();
+ // sound(sound_button);
+}
+
+if(data=="d"){
+  speed=50;
+blockschneller=true;
+}else{
+speed=1000;
+
+ blockschneller=false;
+}
+
+
+if(data=="n"){
+neuesspiel();
+}
    
 }
 void Tetris::onStop(ShowPort* showport){
