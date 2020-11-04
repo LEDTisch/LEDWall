@@ -3,18 +3,18 @@
 
 int counter = 0;
 int row_x[10];
-const int tickdelay = 75;
-const int fasttickdelay = 75;
+ float fasttickdelay = 100; //75
 boolean ison[15];
 int fasttickercounter =0;
 int gameend = 0;
-int referenzpoint =4;
+int referenzpoint =4; //Point where the left roadside is
 int pixelposx=referenzpoint+1;
 int pixelposy=5;
 boolean roadpieces[10][16];
 unsigned long lasttick=0;
 unsigned long lastfasttick=0;
-
+boolean firstone = true;
+int keepstate = 0; //Keep State meens a natural street 
 
 RacingGame::RacingGame() {
 
@@ -44,10 +44,13 @@ void reset(ShowPort* showport) {
 
    }
 
+   firstone = true;
+
    pixelposy = 5;
    pixelposx = 5;
-
-gameend = 0;
+    keepstate = 0;
+    gameend = 0;
+    fasttickdelay = 100;
 
 }
 
@@ -66,9 +69,13 @@ void tick()
 {
 
 
+
+if(keepstate==0) {
 if(random()%10>7) {
   if (random()%10 > 4)
   {
+      keepstate++;
+
     if (referenzpoint != 0)
     {
       referenzpoint--;
@@ -76,13 +83,39 @@ if(random()%10>7) {
   }
   else
   {
+      keepstate++;
+
     if (referenzpoint < 5)
     {
       referenzpoint++;
     }
   }
 
+}
+
 }else{
+    keepstate++;
+    if(keepstate==2) {
+        keepstate = 0;
+    }
+    
+}
+
+
+
+
+if(firstone) {
+    firstone = false;
+    for(int i=0;i<referenzpoint+1;i++) {
+
+        roadpieces[i][15] = true;
+
+    }
+
+    for(int i=referenzpoint+4;i<10;i++) {
+         roadpieces[i][15] = true;
+    }
+
 
 }
 
@@ -103,6 +136,7 @@ for(int i=0;i<10;i++) {
   roadpieces[i][15] = false;
 }
 
+
     roadpieces[referenzpoint][15] = true;
   roadpieces[referenzpoint+4][15] = true;
 
@@ -116,6 +150,10 @@ void RacingGame::onRun(ShowPort* showport){
 
 if ((millis() - lastfasttick) >= fasttickdelay)
   {
+
+
+      fasttickdelay-=0.13f;
+
       tick();
 
      if(fasttickercounter==3) {
@@ -156,7 +194,7 @@ if ((millis() - lastfasttick) >= fasttickdelay)
 
     }
 
- 
+    Serial.println(fasttickdelay);
 
     fasttickercounter++;
     lastfasttick = millis();
