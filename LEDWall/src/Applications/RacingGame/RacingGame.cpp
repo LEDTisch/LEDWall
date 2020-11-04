@@ -11,7 +11,6 @@ int gameend = 0;
 int referenzpoint =4;
 int pixelposx=referenzpoint+1;
 int pixelposy=5;
-int ledtofade[10][15];
 boolean roadpieces[10][16];
 unsigned long lasttick=0;
 unsigned long lastfasttick=0;
@@ -29,11 +28,7 @@ void reset(ShowPort* showport) {
   for(int i=0;i<15;i++){
     ison[i]=false;
   }
-  for(int x=0;x<10;x++){
-    for(int y=0;y<15;y++){
-      ledtofade[x][y]=0;
-    }
-  }
+ 
     for(int x=0;x<10;x++){
     for(int y=0;y<6;y++){
       roadpieces[x][y]=false;
@@ -124,20 +119,46 @@ if ((millis() - lastfasttick) >= fasttickdelay)
   {
       tick();
     Serial.println("ticking");
-    if(fasttickercounter==3) {
+
+     if(fasttickercounter==3) {
       fasttickercounter=0;
     }
 
     for(int i=0;i<15;i++) {
       ison[i] = false;
 
-    if(i%fasttickercounter==0) {
-      ison[i]=true;
-    }
+    if(i==0+fasttickercounter) {
+
+        ison[i] =true;
 
     }
 
-  
+    if(i==3+fasttickercounter) {
+        ison[i] = true;
+    }
+
+    if(i==6+fasttickercounter) {
+
+        ison[i] = true;
+
+    }
+
+  if(i==9+fasttickercounter) {
+
+        ison[i] = true;
+
+    }
+
+    if(i==12+fasttickercounter) {
+
+        ison[i] = true;
+
+    }
+
+
+    }
+
+ 
 
     fasttickercounter++;
     lastfasttick = millis();
@@ -158,13 +179,13 @@ for(int y=0;y<15;y++) {
         
 
         
-        showport->ledtisch->setcolor(0,50,0);
+        showport->ledtisch->setcolor(0,160,0);
         showport->ledtisch->drawkoordinatensystem(x,y);
 
       }else{
 
         
-        showport->ledtisch->setcolor(20,20,20);
+        showport->ledtisch->setcolor(100,100,100);
         showport->ledtisch->drawkoordinatensystem(x,y);
 
       
@@ -204,7 +225,7 @@ if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
   }
   showport->ledtisch->show();
 
-   // gameover = 1;
+   gameend = 1;
 
 
  }
