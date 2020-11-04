@@ -18,7 +18,6 @@ void GameOver(ShowPort* showport);
 
 private:
 Snake_game snake=Snake_game();
-char blue;
 long schritt=0;
 long takt=millis();
 long verlauf=0;

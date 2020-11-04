@@ -7,15 +7,15 @@ const int tickdelay = 75;
 const int fasttickdelay = 75;
 boolean ison[15];
 int fasttickercounter =0;
-
+int gameend = 0;
 int referenzpoint =4;
 int pixelposx=referenzpoint+1;
 int pixelposy=5;
 int ledtofade[10][15];
 boolean roadpieces[10][16];
-unsigned long lasttick;
-unsigned long lastfasttick;
-int gameend = 0;
+unsigned long lasttick=0;
+unsigned long lastfasttick=0;
+
 
 RacingGame::RacingGame() {
 
@@ -23,6 +23,22 @@ RacingGame::RacingGame() {
 
 
 void reset(ShowPort* showport) {
+  for(int i=0;i<10;i++){
+    row_x[i]=0;
+  }
+  for(int i=0;i<15;i++){
+    ison[i]=false;
+  }
+  for(int x=0;x<10;x++){
+    for(int y=0;y<15;y++){
+      ledtofade[x][y]=0;
+    }
+  }
+    for(int x=0;x<10;x++){
+    for(int y=0;y<6;y++){
+      roadpieces[x][y]=false;
+    }
+  }
     showport->ledtisch->clear();
     showport->ledtisch->show();
 
@@ -100,8 +116,8 @@ for(int i=0;i<10;i++) {
 
 void RacingGame::onRun(ShowPort* showport){ 
 
+ if(gameend ==0) {
 
- if(true) {
      Serial.println("playing");
 
 if ((millis() - lastfasttick) >= fasttickdelay)
@@ -123,6 +139,7 @@ if ((millis() - lastfasttick) >= fasttickdelay)
       
     ison[14-fasttickercounter+4] = true;
     ison[14-fasttickercounter+8] = true;
+    Serial.println(14-fasttickercounter+4);
 
 
     fasttickercounter++;
@@ -190,7 +207,7 @@ if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
   }
   showport->ledtisch->show();
 
-   // gameover = true;
+   // gameover = 1;
 
 
  }
