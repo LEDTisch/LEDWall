@@ -15,4 +15,7 @@ void SystemInterface::init(){
 
   lightring->clear();
   lightring->show();
+
+  clocktime->setTime(0,0,0);
+
 }

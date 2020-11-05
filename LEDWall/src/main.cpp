@@ -130,7 +130,7 @@ systeminterface->ledtisch->setBrightness(0.5);
 systeminterface->ledFeld->setBrightness(0.5);
 
 sentRequest(Time, minute);
-systeminterface->clocktime->setTime(0,0,0);
+
 }
 
 int iindex=0;
