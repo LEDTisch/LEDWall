@@ -7,47 +7,47 @@ Licht::Licht(){
 
 }
 
-void Licht::onCreate(ShowPort* showport){
-  showport->ledtisch->clear();
-  showport->ledtisch->setcolor(255,255,255);
-  showport->ledtisch->show();
+void Licht::onCreate(SystemInterface* systeminterface){
+  systeminterface->ledtisch->clear();
+  systeminterface->ledtisch->setcolor(255,255,255);
+  systeminterface->ledtisch->show();
 }
-void Licht::onRun(ShowPort* showport){
+void Licht::onRun(SystemInterface* systeminterface){
 
 }
-void Licht::onDataReceive(String data,ShowPort* showport){
+void Licht::onDataReceive(String data,SystemInterface* systeminterface){
 
   if(data == "LichtSchalter"){
 
     if(lightstatus==false){
-    showport->ledtisch->setcolor(255,0,0);
-    showport->ledtisch->rect(0,6,10,7);
+    systeminterface->ledtisch->setcolor(255,0,0);
+    systeminterface->ledtisch->rect(0,6,10,7);
 
-    showport->ledFeld->setcolor(0,255,0);
-    showport->ledFeld->rect(1,1,3,3);
+    systeminterface->ledFeld->setcolor(0,255,0);
+    systeminterface->ledFeld->rect(1,1,3,3);
 
-    showport->lightring->light(6,255,255,0);
+    systeminterface->lightring->light(6,255,255,0);
     
     lightstatus=true;
     }else{
       lightstatus=false;
-          showport->ledtisch->setcolor(0,0,0);
-    showport->ledtisch->rect(0,6,10,7);
+          systeminterface->ledtisch->setcolor(0,0,0);
+    systeminterface->ledtisch->rect(0,6,10,7);
 
-        showport->ledFeld->setcolor(0,0,0);
-    showport->ledFeld->rect(1,1,3,3);
+        systeminterface->ledFeld->setcolor(0,0,0);
+    systeminterface->ledFeld->rect(1,1,3,3);
 
-        showport->lightring->light(6,0,0,0);
+        systeminterface->lightring->light(6,0,0,0);
 
     }
-    showport->ledtisch->show();
+    systeminterface->ledtisch->show();
     
-    showport->ledFeld->show();
+    systeminterface->ledFeld->show();
 
-    showport->lightring->show();
+    systeminterface->lightring->show();
   }
 }
-void Licht::onStop(ShowPort* showport){
+void Licht::onStop(SystemInterface* systeminterface){
 
 }
 

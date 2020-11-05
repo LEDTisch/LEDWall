@@ -14,7 +14,8 @@ class Matrix
         int load_pin;
 
 
- 
+       LedControl* lc;
+
   
    public:
 
@@ -24,7 +25,6 @@ class Matrix
     void init(int brightness);
       void zahl(int zahl,int x,int a);
       void setkcolumn(int c,byte b);
-      LedControl lc=LedControl(2,4,3,4);
        
 
 };

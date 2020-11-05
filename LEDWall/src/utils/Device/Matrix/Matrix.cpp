@@ -10,43 +10,44 @@ datain_pin=_datain_pin;
 clk_pin=_clk_pin;
 load_pin=_load_pin;
 
-//lc=LedControl(datain_pin,clk_pin,load_pin,4);
+
+//lc=new LedControl(datain_pin,clk_pin,load_pin,4);
 }
 
 void Matrix::init(int brightness){
-    lc.shutdown(0,false);
-  lc.shutdown(1,false);
-  lc.shutdown(2,false);
-  lc.shutdown(3,false);
+    lc->shutdown(0,false);
+  lc->shutdown(1,false);
+  lc->shutdown(2,false);
+  lc->shutdown(3,false);
   /* Set the brightness to a medium values */
  
-  lc.setIntensity(0,brightness);
-  lc.setIntensity(1,brightness);
-  lc.setIntensity(2,brightness);
-  lc.setIntensity(3,brightness);
+  lc->setIntensity(0,brightness);
+  lc->setIntensity(1,brightness);
+  lc->setIntensity(2,brightness);
+  lc->setIntensity(3,brightness);
   /* and clear the display */
-  lc.clearDisplay(0);
-  lc.clearDisplay(1);
-  lc.clearDisplay(2);
-  lc.clearDisplay(3);
+  lc->clearDisplay(0);
+  lc->clearDisplay(1);
+  lc->clearDisplay(2);
+  lc->clearDisplay(3);
 }
 
 
 void Matrix::setkcolumn(int c,byte b){
   if(c < 8){
-    lc.setColumn(0,c,b);
+    lc->setColumn(0,c,b);
   }
   if(c >7 && c < 16){
     Serial.println("löjkö");
-    lc.setColumn(1,c-8,b);
+    lc->setColumn(1,c-8,b);
   }
     if(c >15 && c < 24){
     Serial.println("löjkö");
-    lc.setColumn(2,c-16,b);
+    lc->setColumn(2,c-16,b);
   }
       if(c >23 && c < 32){
     Serial.println("löjkö");
-    lc.setColumn(3,c-24,b);
+    lc->setColumn(3,c-24,b);
   }
 }
 

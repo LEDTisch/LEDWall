@@ -171,11 +171,43 @@ void ProcessRequest(byte query, byte subquery){
           break;
         }
         case houre:{
-
+          char houredata[5];
+          houredata[0]=Time;
+          houredata[1]=houre;
+          if(timeClient.getHours()<10){
+             houredata[2]=(char)(48+timeClient.getHours());
+             houredata[3]='\n';
+          }else if(timeClient.getHours()>9){
+            houredata[2]=(char)(48+1);
+            houredata[3]=(char)(48+(int)(timeClient.getHours()-10));
+            houredata[4]='\n';
+          }
+          ReceiveData.push(houredata);
+                                 if(ReceiveData.empty()){
+                        digitalWrite(DataAvailiblePin, LOW);
+                        }else{
+                          digitalWrite(DataAvailiblePin, HIGH);
+                        }
           break;
         }
         case minute:{
-
+          char minutedata[5];
+          minutedata[0]=Time;
+          minutedata[1]=minute;
+          if(timeClient.getMinutes()<10){
+             minutedata[2]=(char)(48+timeClient.getMinutes());
+             minutedata[3]='\n';
+          }else if(timeClient.getMinutes()>9){
+            minutedata[2]=(char)(48+(int)(timeClient.getMinutes()/10));
+            minutedata[3]=(char)(48+(int)(timeClient.getMinutes()-(int)(timeClient.getMinutes()/10)*10));
+            minutedata[4]='\n';
+          }
+          ReceiveData.push(minutedata);
+                                 if(ReceiveData.empty()){
+                        digitalWrite(DataAvailiblePin, LOW);
+                        }else{
+                          digitalWrite(DataAvailiblePin, HIGH);
+                        }
           break;
         }
         case second:{

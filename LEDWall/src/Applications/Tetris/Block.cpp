@@ -36,13 +36,13 @@ int Block::reihenkontrolle(){
 */
 
 
-void Block::init(ShowPort* ShowPort){
+void Block::init(SystemInterface* SystemInterface){
   // l.init(_pin);
-  this->showport=ShowPort;
+  this->systeminterface=SystemInterface;
 }
 
 void Block::show(){
-   this->showport->ledtisch->show();
+   this->systeminterface->ledtisch->show();
    
 }
 
@@ -124,7 +124,7 @@ void Block::setcolor(int r,int g,int b){
    rot=r;
    gruen=g;
    blau=b;
-   this->showport->ledtisch->setcolor(rot,gruen,blau);
+   this->systeminterface->ledtisch->setcolor(rot,gruen,blau);
 }
 
 
@@ -132,16 +132,16 @@ void Block::drawall(){
    for(int x=0;x<10;x=x+1){
       for(int y=0;y<15;y=y+1){
          if(all[y][x]==1){
-            this->showport->ledtisch->setcolor(allfarbe[y][x][0],allfarbe[y][x][1],allfarbe[y][x][2]);
-            this->showport->ledtisch->drawkoordinatensystem(x,y);
+            this->systeminterface->ledtisch->setcolor(allfarbe[y][x][0],allfarbe[y][x][1],allfarbe[y][x][2]);
+            this->systeminterface->ledtisch->drawkoordinatensystem(x,y);
          }
       }
    }
-   this->showport->ledtisch->show();
+   this->systeminterface->ledtisch->show();
 }
 
 void Block::clearall(){
-   this->showport->ledtisch->clear();
+   this->systeminterface->ledtisch->clear();
 }
 
 void Block::clearallarray(){
@@ -160,9 +160,9 @@ boolean Block::drehen()
 {
 boolean failed=false;
 
-   this->showport->ledtisch->setcolor(0,0,0);
+   this->systeminterface->ledtisch->setcolor(0,0,0);
    draw();
-   this->showport->ledtisch->setcolor(rot,gruen,blau);
+   this->systeminterface->ledtisch->setcolor(rot,gruen,blau);
    drehung=drehung+1;
 if(drehung>3){
    drehung=0;
@@ -181,30 +181,30 @@ return failed;
 
 void Block::down()
 {
-   this->showport->ledtisch->setcolor(0,0,0);
+   this->systeminterface->ledtisch->setcolor(0,0,0);
    draw();
    y=y-1;
-   this->showport->ledtisch->setcolor(rot,gruen,blau);
+   this->systeminterface->ledtisch->setcolor(rot,gruen,blau);
    draw();
 
 }
 
 void Block::right()
 {
-   this->showport->ledtisch->setcolor(0,0,0);
+   this->systeminterface->ledtisch->setcolor(0,0,0);
    draw();
    x=x+1;
-   this->showport->ledtisch->setcolor(rot,gruen,blau);
+   this->systeminterface->ledtisch->setcolor(rot,gruen,blau);
    draw();
 
 }
 
 void Block::left()
 {
-   this->showport->ledtisch->setcolor(0,0,0);
+   this->systeminterface->ledtisch->setcolor(0,0,0);
    draw();
    x=x-1;
-   this->showport->ledtisch->setcolor(rot,gruen,blau);
+   this->systeminterface->ledtisch->setcolor(rot,gruen,blau);
    draw();
 
 }
@@ -268,32 +268,32 @@ switch(drehung){
         switch(art){
            case 1:
         if(f1[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
         }
         break;
                   case 2:
         if(f2[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
         }
         break;
                   case 3:
         if(f3[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
         }
         break;
                   case 4:
         if(f4[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
         }
         break;
                   case 5:
         if(f5[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
         }
         break;
                   case 6:
         if(f6[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(xd+x,2-yd+y);
         }
         break;
       }
@@ -311,28 +311,28 @@ break;
         switch(art){
            case 1:
         if(f1[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);
         }
         break;
                   case 2:
         if(f2[yd][xd]==1){
-            this->showport->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
+            this->systeminterface->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
         break;
                   case 3:
         if(f3[yd][xd]==1){
-            this->showport->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
+            this->systeminterface->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
         break;
                   case 4:
         if(f4[yd][xd]==1){
-            this->showport->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
+            this->systeminterface->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
         break;
                   case 5:
         if(f5[yd][xd]==1){
-            this->showport->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
+            this->systeminterface->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
         break;
                   case 6:
         if(f6[yd][xd]==1){
-            this->showport->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
+            this->systeminterface->ledtisch->drawkoordinatensystem(2-yd+x,2-xd+y);        }
         break;
       }
 
@@ -356,32 +356,32 @@ break;
         switch(art){
            case 1:
         if(f1[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
         }
         break;
                   case 2:
         if(f2[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
         }
         break;
                   case 3:
         if(f3[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
         }
         break;
                   case 4:
         if(f4[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
         }
         break;
                   case 5:
         if(f5[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
         }
         break;
                   case 6:
         if(f6[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(2-xd+x,yd+y);
         }
         break;
       }
@@ -410,32 +410,32 @@ break;
         switch(art){
            case 1:
         if(f1[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(yd+x,xd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(yd+x,xd+y);
         }
         break;
                   case 2:
         if(f2[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(yd+x,xd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(yd+x,xd+y);
         }
         break;
                   case 3:
         if(f3[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(yd+x,xd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(yd+x,xd+y);
         }
         break;
                   case 4:
         if(f4[yd][xd]==1){
-          this->showport->ledtisch->drawkoordinatensystem(yd+x,xd+y);
+          this->systeminterface->ledtisch->drawkoordinatensystem(yd+x,xd+y);
         }
         break;
                   case 5:
         if(f5[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(yd+x,xd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(yd+x,xd+y);
         }
         break;
                   case 6:
         if(f6[yd][xd]==1){
-           this->showport->ledtisch->drawkoordinatensystem(yd+x,xd+y);
+           this->systeminterface->ledtisch->drawkoordinatensystem(yd+x,xd+y);
         }
         break;
       }
@@ -455,7 +455,7 @@ break;
 
 }
 
-    this->showport->ledtisch->show();
+    this->systeminterface->ledtisch->show();
 }
 
 int kontrollpixel(int x,int y, int k){

@@ -43,15 +43,15 @@ FlappyBird::FlappyBird() {
 }
 
 
-void FlappyBird::onCreate(ShowPort* showport){
-  showport->ledtisch->clear();
-  showport->ledtisch->show();
+void FlappyBird::onCreate(SystemInterface* systeminterface){
+  systeminterface->ledtisch->clear();
+  systeminterface->ledtisch->show();
   lastTick = millis();
   lastObstacleTick = millis();
   reset();
 
 }
-void FlappyBird::onRun(ShowPort* showport){
+void FlappyBird::onRun(SystemInterface* systeminterface){
 
 
 if(!gameover) {
@@ -124,20 +124,20 @@ if(!gameover) {
 
 
 
-showport->ledtisch->setcolor(0,150,0);    
-    showport->ledtisch->clear();
+systeminterface->ledtisch->setcolor(0,150,0);    
+    systeminterface->ledtisch->clear();
     
   for(int x=0;x<10;x++) {
             for(int y=0;y<15;y++) {
                if( obstacles[x][y]) {
-              showport->ledtisch->drawkoordinatensystem(x,y);
+              systeminterface->ledtisch->drawkoordinatensystem(x,y);
 
                }
             }
         }
 
-    showport->ledtisch->setcolor(150,100,0);    
-    showport->ledtisch->drawkoordinatensystem(x,y);
+    systeminterface->ledtisch->setcolor(150,100,0);    
+    systeminterface->ledtisch->drawkoordinatensystem(x,y);
 
 
     if(obstacles[x][y]||y>14||y<0) {
@@ -147,17 +147,17 @@ showport->ledtisch->setcolor(0,150,0);
 
 }else{
 
-    showport->ledtisch->setcolor(200,0,0);
-    showport->ledtisch->rect(0,0,10,15);
+    systeminterface->ledtisch->setcolor(200,0,0);
+    systeminterface->ledtisch->rect(0,0,10,15);
 
 }
-    showport->ledtisch->show();
+    systeminterface->ledtisch->show();
 
 
 
 }
 
-void FlappyBird::onDataReceive(String data,ShowPort* showport){
+void FlappyBird::onDataReceive(String data,SystemInterface* systeminterface){
 
   if(data=="j") {
 
@@ -177,7 +177,7 @@ void FlappyBird::onDataReceive(String data,ShowPort* showport){
 
   
 }
-void FlappyBird::onStop(ShowPort* showport){
+void FlappyBird::onStop(SystemInterface* systeminterface){
 
 }
 

@@ -7,20 +7,20 @@ Home::Home(){
 
 }
 
-void Home::onCreate(ShowPort* showport){
-  fibonacci.init(showport->ledtisch);
+void Home::onCreate(SystemInterface* systeminterface){
+  fibonacci.init(systeminterface->ledtisch);
 
-  showport->ledtisch->clear();
-  showport->ledtisch->setcolor(255,255,255);
-  showport->ledtisch->show();
-    //showport->ledtisch->drawImage(image,10,15);
-  //showport->ledtisch->show();
+  systeminterface->ledtisch->clear();
+  systeminterface->ledtisch->setcolor(255,255,255);
+  systeminterface->ledtisch->show();
+    //systeminterface->ledtisch->drawImage(image,10,15);
+  //systeminterface->ledtisch->show();
     fibonacci.setPosition(1,9);
-  showport->ledtisch->setRotation(1);
+  systeminterface->ledtisch->setRotation(1);
     clocktime.setTime(10,35,0);
 
 }
-void Home::onRun(ShowPort* showport){
+void Home::onRun(SystemInterface* systeminterface){
  // clocktime.setTime(9,10,11);
   if(millis()>time){
     clocktime.count();
@@ -30,10 +30,10 @@ void Home::onRun(ShowPort* showport){
   }
 
 }
-void Home::onStop(ShowPort* showport){
+void Home::onStop(SystemInterface* systeminterface){
 
 }
-void Home::onDataReceive(String data,ShowPort* showport){
+void Home::onDataReceive(String data,SystemInterface* systeminterface){
 
 }
 

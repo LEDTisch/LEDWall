@@ -7,15 +7,15 @@
 class Tetris: public Application{
 public:
 Tetris();
-void onCreate(ShowPort* showport);
-void onRun(ShowPort* showport);
-void onDataReceive(String data,ShowPort* showport);
+void onCreate(SystemInterface* systeminterface);
+void onRun(SystemInterface* systeminterface);
+void onDataReceive(String data,SystemInterface* systeminterface);
 String getName();
-void onStop(ShowPort* showport);
+void onStop(SystemInterface* systeminterface);
 
 
 private:
-ShowPort* showport;
+SystemInterface* systeminterface;
 Block block=Block(5,8,5);
 
 int v=0;
@@ -106,7 +106,7 @@ void ani_kreisaufl(){
   int i=0;
     while(i<20){
     block.setcolor(0,0,0);
-    this->showport->ledtisch->kreis(5,7,i,2);
+    this->systeminterface->ledtisch->kreis(5,7,i,2);
   i=i+1;
   
   block.show();
@@ -119,8 +119,8 @@ void ani_gameover(){
     int i=0;
   while(i<20){
     block.setcolor(i*12,255-i*12,0);
-  this->showport->ledtisch->kreis(0,0,i,2);
-  this->showport->ledtisch->kreis(9,14,i,2);
+  this->systeminterface->ledtisch->kreis(0,0,i,2);
+  this->systeminterface->ledtisch->kreis(9,14,i,2);
   i=i+1;
   
   block.show();
@@ -311,40 +311,40 @@ void ani_start(){
   delay(20);
   //irstreifen.rot(4);
 
-  this->showport->ledFeld->setRotation(0);
-  this->showport->ledFeld->buchstaben(0,3,"hi",false,0,9,1000);
+  this->systeminterface->ledFeld->setRotation(0);
+  this->systeminterface->ledFeld->buchstaben(0,3,"hi",false,0,9,1000);
   //sound(sound_start);
     int i=0;
   while(i<10){
     block.setcolor(i*25,255-i*25,0);
-  this->showport->ledtisch->kreis(5,7,i,2);
+  this->systeminterface->ledtisch->kreis(5,7,i,2);
   i=i+1;
   
   block.show();
-  this->showport->ledFeld->show();
+  this->systeminterface->ledFeld->show();
   delay(0);
 
   }
   //delay(5000);
 ani_kreisaufl();
-this->showport->ledFeld->clear();
+this->systeminterface->ledFeld->clear();
 
 }
 void levelanzeigen(){
-  this->showport->ledFeld->setRotation(0);
+  this->systeminterface->ledFeld->setRotation(0);
   //led.clear();
   if(level==levelold){
-     this->showport->ledFeld->setcolor(255,0,0);
-     this->showport->ledFeld->zahl(0,2,level);
+     this->systeminterface->ledFeld->setcolor(255,0,0);
+     this->systeminterface->ledFeld->zahl(0,2,level);
   }else{
-  this->showport->ledFeld->setcolor(0,0,0);
-  this->showport->ledFeld->zahl(0,2,levelold);
-     this->showport->ledFeld->setcolor(255,0,0);
-     this->showport->ledFeld->zahl(0,2,level);
+  this->systeminterface->ledFeld->setcolor(0,0,0);
+  this->systeminterface->ledFeld->zahl(0,2,levelold);
+     this->systeminterface->ledFeld->setcolor(255,0,0);
+     this->systeminterface->ledFeld->zahl(0,2,level);
      levelold=level;
   }
-  this->showport->ledFeld->show();
-  this->showport->ledFeld->setRotation(1);
+  this->systeminterface->ledFeld->show();
+  this->systeminterface->ledFeld->setRotation(1);
 }
 
 
@@ -352,7 +352,7 @@ void ani_peng(int x,int y){
     int i=0;
   while(i<10){
     block.setcolor(255,255,255);
-  this->showport->ledtisch->kreis(x,y,i,15);
+  this->systeminterface->ledtisch->kreis(x,y,i,15);
   i=i+1;
   
   block.show();
@@ -445,7 +445,7 @@ void setblockcolor(int art,int d){
 if(d==0){
     block.setcolor(r,g,b);
 }else if(d==1){
-  this->showport->ledFeld->setcolor(r,g,b);
+  this->systeminterface->ledFeld->setcolor(r,g,b);
 }
 }
 
@@ -486,13 +486,13 @@ int blocks_gros[6][4][6] {
 
 };
 
-this->showport->ledFeld->drehung_set(1);
+this->systeminterface->ledFeld->drehung_set(1);
 
-this->showport->ledFeld->setcolor(0,0,0);
+this->systeminterface->ledFeld->setcolor(0,0,0);
 for(int x=0;x<6;x=x+1){
   for(int y=0;y<4;y=y+1){
   if(blocks_gros[artalt-1][y][x]==1){
-  this->showport->ledFeld->drawkoordinatensystem(x+xx,(4-y)+yy);
+  this->systeminterface->ledFeld->drawkoordinatensystem(x+xx,(4-y)+yy);
   }
 }
 }
@@ -502,12 +502,12 @@ setblockcolor(art,1);
 for(int x=0;x<6;x=x+1){
   for(int y=0;y<4;y=y+1){
   if(blocks_gros[art-1][y][x]==1){
-  this->showport->ledFeld->drawkoordinatensystem(x+xx,(4-y)+yy);
+  this->systeminterface->ledFeld->drawkoordinatensystem(x+xx,(4-y)+yy);
   }
 }
 }
 
-this->showport->ledFeld->show();
+this->systeminterface->ledFeld->show();
 
 }
 
@@ -520,16 +520,16 @@ void regenbogen(){
 
 for(int r=0;r<numpixels;r=r+1){
   if(r<numpixels/3+1){
-  this->showport->lightring->light(r, 255/(numpixels/3)*r,255-255/(numpixels/3)*r,0);
+  this->systeminterface->lightring->light(r, 255/(numpixels/3)*r,255-255/(numpixels/3)*r,0);
   }
     if(r>numpixels/3 && r< numpixels/3*2+1){
-  this->showport->lightring->light(r, 255/(numpixels/3)*((numpixels/3)-r),0,255-255/(numpixels/3)*((numpixels/3)-r));
+  this->systeminterface->lightring->light(r, 255/(numpixels/3)*((numpixels/3)-r),0,255-255/(numpixels/3)*((numpixels/3)-r));
   }
       if(r>numpixels/3*2 ){
-  this->showport->lightring->light(r, 0,255-255/(numpixels/3)*((numpixels/3)*2-r),255/(numpixels/3)*((numpixels/3*2)-r));
+  this->systeminterface->lightring->light(r, 0,255-255/(numpixels/3)*((numpixels/3)*2-r),255/(numpixels/3)*((numpixels/3*2)-r));
   }
  // ring.setPixelColor(r, ring.Color(255/60*r,255-255/60*r,0)); // Pixel1 leuchtet in der Farbe Grün
-this->showport->lightring->show(); 
+this->systeminterface->lightring->show(); 
 }
 
 
@@ -545,12 +545,12 @@ this->showport->lightring->show();
 
 void wheelpos(int wheelpos){
   if(wheelpos < 85){
-    this->showport->lightring->light(map(wheelpos,0,255,0,60), wheelpos*3,255-wheelpos*3,0);
+    this->systeminterface->lightring->light(map(wheelpos,0,255,0,60), wheelpos*3,255-wheelpos*3,0);
 
   }else if(wheelpos  < 170){
-    this->showport->lightring->light(map(wheelpos,0,255,0,60), 255-wheelpos*3,0,wheelpos*3);
+    this->systeminterface->lightring->light(map(wheelpos,0,255,0,60), 255-wheelpos*3,0,wheelpos*3);
   }else{
-    this->showport->lightring->light(map(wheelpos,0,255,0,60), 0,wheelpos*3,255-wheelpos*3);
+    this->systeminterface->lightring->light(map(wheelpos,0,255,0,60), 0,wheelpos*3,255-wheelpos*3);
   }
 }
 
@@ -562,7 +562,7 @@ void regenbogen2(){
 for(int i=0;i<256;i=i+1){
   wheelpos(i);
 }
-this->showport->lightring->show();
+this->systeminterface->lightring->show();
 
 
   }

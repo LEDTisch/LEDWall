@@ -4,10 +4,10 @@
 class RacingGame: public Application{
 public:
 RacingGame();
-void onCreate(ShowPort* showport);
-void onRun(ShowPort* showport);
-void onDataReceive(String data,ShowPort* showport);
+void onCreate(SystemInterface* systeminterface);
+void onRun(SystemInterface* systeminterface);
+void onDataReceive(String data,SystemInterface* systeminterface);
 String getName();
-void onStop(ShowPort* showport);
+void onStop(SystemInterface* systeminterface);
 
 };

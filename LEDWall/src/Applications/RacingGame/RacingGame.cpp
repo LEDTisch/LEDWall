@@ -21,7 +21,7 @@ RacingGame::RacingGame() {
 }
 
 
-void reset(ShowPort* showport) {
+void reset(SystemInterface* systeminterface) {
   for(int i=0;i<10;i++){
     row_x[i]=0;
   }
@@ -34,8 +34,8 @@ void reset(ShowPort* showport) {
       roadpieces[x][y]=false;
     }
   }
-    showport->ledtisch->clear();
-    showport->ledtisch->show();
+    systeminterface->ledtisch->clear();
+    systeminterface->ledtisch->show();
 
    for(int x=0;x<10;x++) {
      for(int y=0;y<15;y++) {
@@ -55,14 +55,14 @@ void reset(ShowPort* showport) {
 
 }
 
-void RacingGame::onCreate(ShowPort* showport){
+void RacingGame::onCreate(SystemInterface* systeminterface){
     lasttick = millis();
     lastfasttick = millis();
 
     counter =0;
 
 
-  reset(showport);
+  reset(systeminterface);
 }
 
 
@@ -144,7 +144,7 @@ for(int i=0;i<10;i++) {
 }
 
 
-void RacingGame::onRun(ShowPort* showport){ 
+void RacingGame::onRun(SystemInterface* systeminterface){ 
 
  if(gameend ==0) {
 
@@ -198,22 +198,22 @@ for(int y=0;y<15;y++) {
         
 
         
-        showport->ledtisch->setcolor(0,160,0);
-        showport->ledtisch->drawkoordinatensystem(x,y);
+        systeminterface->ledtisch->setcolor(0,160,0);
+        systeminterface->ledtisch->drawkoordinatensystem(x,y);
 
       }else{
 
         
-        showport->ledtisch->setcolor(100,100,100);
-        showport->ledtisch->drawkoordinatensystem(x,y);
+        systeminterface->ledtisch->setcolor(100,100,100);
+        systeminterface->ledtisch->drawkoordinatensystem(x,y);
 
       
 
       }
 
     }else{
-       showport->ledtisch->setcolor(0,0,0);
-        showport->ledtisch->drawkoordinatensystem(x,y);
+       systeminterface->ledtisch->setcolor(0,0,0);
+        systeminterface->ledtisch->drawkoordinatensystem(x,y);
 
      
     }
@@ -229,20 +229,20 @@ if(counter>2) {
 
 
 
-showport->ledtisch->setcolor(100,0,0);
-showport->ledtisch->drawkoordinatensystem(pixelposx,pixelposy);
-showport->ledtisch->drawkoordinatensystem(pixelposx,pixelposy+1);
-showport->ledtisch->show();
+systeminterface->ledtisch->setcolor(100,0,0);
+systeminterface->ledtisch->drawkoordinatensystem(pixelposx,pixelposy);
+systeminterface->ledtisch->drawkoordinatensystem(pixelposx,pixelposy+1);
+systeminterface->ledtisch->show();
 
 if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
   for(int x=0;x<10;x++) {
     for(int y=0;y<15;y++) {
-        showport->ledtisch->setcolor(100,0,0);
-        showport->ledtisch->drawkoordinatensystem(x,y);
+        systeminterface->ledtisch->setcolor(100,0,0);
+        systeminterface->ledtisch->drawkoordinatensystem(x,y);
      
     }
   }
-  showport->ledtisch->show();
+  systeminterface->ledtisch->show();
 
    gameend = 1;
 
@@ -256,7 +256,7 @@ if(roadpieces[pixelposx][pixelposy]||roadpieces[pixelposx][pixelposy+1]) {
 
 
 
-void RacingGame::onDataReceive(String data,ShowPort* showport){
+void RacingGame::onDataReceive(String data,SystemInterface* systeminterface){
 
 if(data=="h"){//hoch
 pixelposy++;
@@ -274,12 +274,12 @@ if(data=="d"){//runter
 pixelposy--;
 }
 if(data=="n") {//new game
-    reset(showport);
+    reset(systeminterface);
     
 }
  
 }
-void RacingGame::onStop(ShowPort* showport){
+void RacingGame::onStop(SystemInterface* systeminterface){
 
 }
 

@@ -12,19 +12,19 @@ Tetris::Tetris(){
 
 
 
-void Tetris::onCreate(ShowPort* showport){
-this->showport=showport;
+void Tetris::onCreate(SystemInterface* systeminterface){
+this->systeminterface=systeminterface;
 
 
 
 
 
-    block.init(this->showport);
+    block.init(this->systeminterface);
   
 
-  this->showport->ledtisch->clear();
+  this->systeminterface->ledtisch->clear();
 
-    this->showport->ledFeld->setcolor(100,0,0);
+    this->systeminterface->ledFeld->setcolor(100,0,0);
 
   block.clearallarray();
 
@@ -68,7 +68,7 @@ this->showport=showport;
 
 
 }
-void Tetris::onRun(ShowPort* showport){
+void Tetris::onRun(SystemInterface* systeminterface){
 
 if(beistartausfuhren==true){
   ani_start();
@@ -268,7 +268,7 @@ if(stop==1){
 art=artnext;
 }
 }
-void Tetris::onDataReceive(String data,ShowPort* showport){
+void Tetris::onDataReceive(String data,SystemInterface* systeminterface){
 if(data=="t"){
   if(block.drehen()){
 //sound(sound_rotatefailed);
@@ -303,7 +303,7 @@ neuesspiel();
 }
    
 }
-void Tetris::onStop(ShowPort* showport){
+void Tetris::onStop(SystemInterface* systeminterface){
 
 }
 

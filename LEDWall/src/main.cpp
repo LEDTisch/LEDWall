@@ -12,8 +12,8 @@
 #include "utils/Log.h"
 
 
-#include "utils/ShowPort.h"
-ShowPort* showport=new ShowPort();
+#include "utils/SystemInterface.h"
+SystemInterface* systeminterface=new SystemInterface();
 
 
 
@@ -34,20 +34,20 @@ bool isReceiving=false;
 
 
 void OnCreate_Application(){
-  applications->onCreate(showport);
+  applications->onCreate(systeminterface);
   Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","create app: ");
   Log::print(Log::APPLICATION_MANAGE_INFO, applications->getName());
 }
 void OnRun_Application(){
-  applications->onRun(showport);
+  applications->onRun(systeminterface);
 }
 void OnDataReceive_Application(String m){
-    applications->onDataReceive(m, showport);
+    applications->onDataReceive(m, systeminterface);
       Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","DataReceiv app: ");
   Log::print(Log::APPLICATION_MANAGE_INFO, applications->getName());
 }
 void OnStop_Application(){
-applications->onStop(showport);
+applications->onStop(systeminterface);
   Log::println(Log::APPLICATION_MANAGE_INFO,"app_zyklus","stop app: ");
   Log::print(Log::APPLICATION_MANAGE_INFO, applications->getName());
 }
@@ -120,15 +120,16 @@ void setup(){
   Serial2.begin(9600);
   Serial.begin(9600);
 
-  showport->init();
+  systeminterface->init();
 
 if(RunApps){
   OnCreate_Application();
 }
 //sentRequest(Time,houre);
-showport->ledtisch->setBrightness(0.5);
-showport->ledFeld->setBrightness(0.5);
+systeminterface->ledtisch->setBrightness(0.5);
+systeminterface->ledFeld->setBrightness(0.5);
 
+sentRequest(Time, minute);
 }
 
 int iindex=0;
@@ -189,8 +190,8 @@ void receiveAppData(){
           }
           float brightness=atoi(mode);
           if(brightness>=0 && brightness<=100){
-            showport->ledtisch->setBrightness(brightness/100);
-            showport->ledFeld->setBrightness(brightness/100);
+            systeminterface->ledtisch->setBrightness(brightness/100);
+            systeminterface->ledFeld->setBrightness(brightness/100);
           }
           return;
           }
@@ -220,7 +221,8 @@ switch(query){
   case Time:{
     switch(subquery){
       case houre:{
-
+        Serial.println("houre: ");
+          Serial.println(message);
         break;
       }
     }

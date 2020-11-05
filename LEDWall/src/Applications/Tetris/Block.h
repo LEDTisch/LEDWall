@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "../../utils/ShowPort.h"
+#include "../../utils/SystemInterface.h"
 
 
 class Block
@@ -19,7 +19,7 @@ class Block
    public:
 
 
-      ShowPort* showport;
+      SystemInterface* systeminterface;
       Block(int _x,int _y, int _art);
       int getdrehung();
       void draw();
@@ -40,7 +40,7 @@ class Block
       void show();
       int getblockx();
       int getblocky();
-      void init(ShowPort* ShowPort);
+      void init(SystemInterface* SystemInterface);
     
      byte all[15][10];
      byte allfarbe[15][10][3];
