@@ -316,11 +316,11 @@ void loop(){
         timeSyncTicker=millis()+10000;
       }
       if(millis()>secondTicker){
-        Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"Time",systeminterface->clocktime->getHour());
-        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, " : ");
-        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, systeminterface->clocktime->getMinute());
-        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, " : ");
-        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, systeminterface->clocktime->getSecond());
+        Log::println(Log::TIME_AUSGABE,"Time",systeminterface->clocktime->getHour());
+        Log::print(Log::TIME_AUSGABE, " : ");
+        Log::print(Log::TIME_AUSGABE, systeminterface->clocktime->getMinute());
+        Log::print(Log::TIME_AUSGABE, " : ");
+        Log::print(Log::TIME_AUSGABE, systeminterface->clocktime->getSecond());
         systeminterface->clocktime->tick();
         secondTicker=millis()+460;
       }

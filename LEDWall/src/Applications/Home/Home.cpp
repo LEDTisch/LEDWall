@@ -21,8 +21,11 @@ void Home::onCreate(SystemInterface* systeminterface){
 }
 void Home::onRun(SystemInterface* systeminterface){
  // clocktime.setTime(9,10,11);
-
-      fibonacci.drawZahl(fibonacci.zahlasbyte(systeminterface->clocktime->getHour()),fibonacci.zahlasbyte(systeminterface->clocktime->getMinute()/5));
+      if(systeminterface->clocktime->getHour()<13){
+        fibonacci.drawZahl(fibonacci.zahlasbyte(systeminterface->clocktime->getHour()),fibonacci.zahlasbyte(systeminterface->clocktime->getMinute()/5));
+      }else{
+        fibonacci.drawZahl(fibonacci.zahlasbyte(systeminterface->clocktime->getHour()-12),fibonacci.zahlasbyte(systeminterface->clocktime->getMinute()/5));
+      }
   fibonacci.draw();
 
 
