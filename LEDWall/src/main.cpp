@@ -7,6 +7,7 @@
 #include "Applications/Tetris/Tetris.h"
 #include "Applications/RacingGame/RacingGame.h"
 #include "Applications/FlappyBird/FlappyBird.h"
+#include "Applications/Sokoban/Sokoban.h"
 
 
 #include "utils/Log.h"
@@ -66,22 +67,26 @@ delete applications;
 if(s=="Tetris"){
   applications = new Tetris();
 
-}
+}else
 if(s=="Licht"){
     applications = new Licht();
-}
+}else
 if(s=="Home"){
     applications = new Home();
-}
+}else
 if(s=="Snake"){
     applications = new Snake();
-}
+}else
 if(s=="Racing Game"){
     applications = new RacingGame();
-}
-
+}else
 if(s=="Flappy Bird") {
   applications = new FlappyBird();
+}else
+if(s=="Sokoban") {
+  applications = new Sokoban();
+}else{/////////////////////Falls 
+  applications = new Home();
 }
 
 
