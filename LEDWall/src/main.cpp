@@ -126,6 +126,7 @@ if(RunApps){
   OnCreate_Application();
 }
 //sentRequest(Time,houre);
+showport->ledtisch->setBrightness(0.5);
 }
 
 int iindex=0;

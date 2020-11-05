@@ -16,10 +16,10 @@ class LEDTisch{
    private:
       int xmax;
       int ymax;
-      int drehung;
-      int rot;
-      int gruen;
-      int blau;
+      byte drehung;
+      byte rot;
+      byte gruen;
+      byte blau;
       int pin;
       float brightness=1;
 
