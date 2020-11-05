@@ -181,8 +181,8 @@ void ProcessRequest(byte query, byte subquery){
              houredata[2]=(char)(48+timeClient.getHours());
              houredata[3]='\n';
           }else if(timeClient.getHours()>9){
-            houredata[2]=(char)(48+1);
-            houredata[3]=(char)(48+(int)(timeClient.getHours()-10));
+            houredata[2]=(char)(48+(int)(timeClient.getHours()/10));
+            houredata[3]=(char)(48+(int)(timeClient.getHours()-(int)(timeClient.getHours()/10)*10));
             houredata[4]='\n';
           }
           ReceiveData.push(houredata);
