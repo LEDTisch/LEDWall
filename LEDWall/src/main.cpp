@@ -127,6 +127,8 @@ if(RunApps){
 }
 //sentRequest(Time,houre);
 showport->ledtisch->setBrightness(0.5);
+showport->ledFeld->setBrightness(0.5);
+
 }
 
 int iindex=0;
@@ -188,6 +190,7 @@ void receiveAppData(){
           float brightness=atoi(mode);
           if(brightness>=0 && brightness<=100){
             showport->ledtisch->setBrightness(brightness/100);
+            showport->ledFeld->setBrightness(brightness/100);
           }
           return;
           }
