@@ -88,7 +88,7 @@ void setup()
 
 }
 int iindex=2;
-char incommingbyte;
+char incommingbyte=0;
 const int MaxLength=100+2;
 char message[MaxLength];
 
@@ -171,7 +171,10 @@ void ProcessRequest(byte query, byte subquery){
           break;
         }
         case houre:{
-          char houredata[5];
+          char houredata[6];
+          for(int i=0;i<6;i++){
+            houredata[i]=0;
+          }
           houredata[0]=Time;
           houredata[1]=houre;
           if(timeClient.getHours()<10){
@@ -191,15 +194,18 @@ void ProcessRequest(byte query, byte subquery){
           break;
         }
         case minute:{
-          char minutedata[5];
+          char minutedata[6];
+          for(int i=0;i<6;i++){
+            minutedata[i]=0;
+          }
           minutedata[0]=Time;
           minutedata[1]=minute;
           if(timeClient.getMinutes()<10){
              minutedata[2]=(char)(48+timeClient.getMinutes());
              minutedata[3]='\n';
           }else if(timeClient.getMinutes()>9){
-            minutedata[2]=(char)(48+(int)(timeClient.getMinutes()/10));
-            minutedata[3]=(char)(48+(int)(timeClient.getMinutes()-(int)(timeClient.getMinutes()/10)*10));
+            minutedata[2]=(char)((byte)(48+(int)(timeClient.getMinutes()/10)));
+            minutedata[3]=(char)((byte)(48+(int)(timeClient.getMinutes()-(int)(timeClient.getMinutes()/10)*10)));
             minutedata[4]='\n';
           }
           ReceiveData.push(minutedata);
@@ -211,7 +217,26 @@ void ProcessRequest(byte query, byte subquery){
           break;
         }
         case second:{
-
+          char seconddata[6];
+          for(int i=0;i<6;i++){
+            seconddata[i]=0;
+          }
+          seconddata[0]=Time;
+          seconddata[1]=second;
+          if(timeClient.getSeconds()<10){
+             seconddata[2]=(char)(48+timeClient.getSeconds());
+             seconddata[3]='\n';
+          }else if(timeClient.getSeconds()>9){
+            seconddata[2]=(char)((byte)(48+(int)(timeClient.getSeconds()/10)));
+            seconddata[3]=(char)((byte)(48+(int)(timeClient.getSeconds()-(int)(timeClient.getSeconds()/10)*10)));
+            seconddata[4]='\n';
+          }
+          ReceiveData.push(seconddata);
+                                 if(ReceiveData.empty()){
+                        digitalWrite(DataAvailiblePin, LOW);
+                        }else{
+                          digitalWrite(DataAvailiblePin, HIGH);
+                        }
           break;
         }
         

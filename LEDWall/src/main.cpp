@@ -22,6 +22,7 @@ SystemInterface* systeminterface=new SystemInterface();
 
 
 unsigned long secondTicker=0;
+unsigned long timeSyncTicker=0;
 int DataAvailablePin=8;
 bool dataavailablechanche=false;
 
@@ -129,8 +130,6 @@ if(RunApps){
 systeminterface->ledtisch->setBrightness(0.5);
 systeminterface->ledFeld->setBrightness(0.5);
 
-sentRequest(Time, minute);
-
 }
 
 int iindex=0;
@@ -222,8 +221,15 @@ switch(query){
   case Time:{
     switch(subquery){
       case houre:{
-        Serial.println("houre: ");
-          Serial.println(message);
+        systeminterface->clocktime->setHour(atoi(message));
+        break;
+      }
+      case minute:{
+        systeminterface->clocktime->setMinute(atoi(message));
+        break;
+      }
+      case second:{
+        systeminterface->clocktime->setSecond(atoi(message));
         break;
       }
     }
@@ -303,9 +309,20 @@ void loop(){
         OnRun_Application();
       }
 
+      if(millis()>timeSyncTicker){
+        sentRequest(Time, houre);
+        sentRequest(Time, minute);
+        sentRequest(Time, second);
+        timeSyncTicker=millis()+10000;
+      }
       if(millis()>secondTicker){
+        Log::println(Log::ESP_ARDUINO_CONNECTION_INFO,"Time",systeminterface->clocktime->getHour());
+        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, " : ");
+        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, systeminterface->clocktime->getMinute());
+        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, " : ");
+        Log::print(Log::ESP_ARDUINO_CONNECTION_INFO, systeminterface->clocktime->getSecond());
         systeminterface->clocktime->tick();
-        secondTicker=millis()+1000;
+        secondTicker=millis()+460;
       }
 
 

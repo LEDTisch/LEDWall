@@ -21,7 +21,7 @@ public:
             minute=0;
             hour+=1;
         }
-        if(hour>12){
+        if(hour>24){
             hour=1;
         }
     }
