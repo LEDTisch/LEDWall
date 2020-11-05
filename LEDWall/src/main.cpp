@@ -21,7 +21,7 @@ SystemInterface* systeminterface=new SystemInterface();
 #define RunApps true
 
 
-
+unsigned long secondTicker=0;
 int DataAvailablePin=8;
 bool dataavailablechanche=false;
 
@@ -130,6 +130,7 @@ systeminterface->ledtisch->setBrightness(0.5);
 systeminterface->ledFeld->setBrightness(0.5);
 
 sentRequest(Time, minute);
+systeminterface->clocktime->setTime(0,0,0);
 }
 
 int iindex=0;
@@ -300,6 +301,11 @@ void loop(){
 
       if(RunApps){
         OnRun_Application();
+      }
+
+      if(millis()>secondTicker){
+        systeminterface->clocktime->tick();
+        secondTicker=millis()+1000;
       }
 
 

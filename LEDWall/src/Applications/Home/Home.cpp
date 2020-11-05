@@ -17,17 +17,14 @@ void Home::onCreate(SystemInterface* systeminterface){
   //systeminterface->ledtisch->show();
     fibonacci.setPosition(1,9);
   systeminterface->ledtisch->setRotation(1);
-    clocktime.setTime(10,35,0);
 
 }
 void Home::onRun(SystemInterface* systeminterface){
  // clocktime.setTime(9,10,11);
-  if(millis()>time){
-    clocktime.count();
-      fibonacci.drawZahl(fibonacci.zahlasbyte(clocktime.getHour()),fibonacci.zahlasbyte(clocktime.getMinute()/5));
+
+      fibonacci.drawZahl(fibonacci.zahlasbyte(systeminterface->clocktime->getHour()),fibonacci.zahlasbyte(systeminterface->clocktime->getMinute()/5));
   fibonacci.draw();
-    time=millis()+1000;
-  }
+
 
 }
 void Home::onStop(SystemInterface* systeminterface){

@@ -13,7 +13,6 @@ String getName();
 void onStop(SystemInterface* systeminterface);
 private:
 Fibonacci fibonacci=Fibonacci();
-ClockTime clocktime=ClockTime();
 unsigned long time=0;
 uint32_t image[150]{
 0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,0x000000,

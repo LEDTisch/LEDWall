@@ -1,3 +1,6 @@
+#ifndef ClockTime_H
+#define ClockTime_H
+
 class ClockTime{
 
 public:
@@ -8,7 +11,7 @@ public:
         this->second=second;
 
     }
-    void count(){
+    void tick(){
         second++;
         if(second>59){
             second=0;
@@ -45,3 +48,4 @@ private:
     int minute;
     int second;
 };
+#endif

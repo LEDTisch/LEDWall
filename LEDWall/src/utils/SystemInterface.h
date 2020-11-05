@@ -2,6 +2,7 @@
 #include "Device/LED-Tisch/LED-Tisch.h"
 #include "Device/Matrix/Matrix.h"
 #include "Device/LightRing/LightRing.h"
+#include "ClockTime.h"
 #ifndef SystemInterface_H
 #define SystemInterface_H
 
@@ -15,6 +16,7 @@ LEDTisch* ledtisch=new LEDTisch(10,15,1);
 LEDTisch* ledFeld=new LEDTisch(10,10,0);
 Matrix* matrix=new Matrix(45,47,49);
 LightRing* lightring=new LightRing(12,60);
+ClockTime* clocktime=new ClockTime();
 
 
 
