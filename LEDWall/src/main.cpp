@@ -296,7 +296,6 @@ void serialreadupdate(){
 
 
 void loop(){
-
       if(digitalRead(DataAvailablePin)){
       sentRequest(transfere, line);
       isReceiving=true;
@@ -322,7 +321,7 @@ void loop(){
         Log::print(Log::TIME_AUSGABE, " : ");
         Log::print(Log::TIME_AUSGABE, systeminterface->clocktime->getSecond());
         systeminterface->clocktime->tick();
-        secondTicker=millis()+460;
+        secondTicker=millis()+1000;
       }
 
 
