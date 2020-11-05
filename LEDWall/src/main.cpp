@@ -184,7 +184,10 @@ void receiveAppData(){
               i_b++;
 
           }
-         showport->ledtisch->brightness= atoi(mode);
+          float brightness=atoi(mode);
+          if(brightness>=0 && brightness<=100){
+            showport->ledtisch->setBrightness(brightness/100);
+          }
           return;
           }
       
