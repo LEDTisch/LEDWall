@@ -42,8 +42,8 @@ class Block
       int getblocky();
       void init(ShowPort* ShowPort);
     
-     int all[15][10];
-     int allfarbe[15][10][3];
+     byte all[15][10];
+     byte allfarbe[15][10][3];
       
  
        

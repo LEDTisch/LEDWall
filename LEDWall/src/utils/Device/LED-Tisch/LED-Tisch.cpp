@@ -7,7 +7,7 @@ LEDTisch::LEDTisch(int _x,int _y,int _d)
 xmax=_x;
 ymax=_y;
 drehung=_d;
-this->brightness = 5;
+this->brightness = 1;
 
 
 }

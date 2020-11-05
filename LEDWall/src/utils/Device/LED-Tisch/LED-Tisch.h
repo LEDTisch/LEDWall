@@ -21,7 +21,7 @@ class LEDTisch{
       int gruen;
       int blau;
       int pin;
-      float brightness;
+      float brightness=1;
 
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
