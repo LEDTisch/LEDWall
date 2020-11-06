@@ -85,7 +85,7 @@ if(s=="Flappy Bird") {
 }else
 if(s=="Sokoban") {
   applications = new Sokoban();
-}else{/////////////////////Falls 
+}else{/////////////////////Falls keine dann Defaultapplication sonst Probleme
   applications = new Home();
 }
 
