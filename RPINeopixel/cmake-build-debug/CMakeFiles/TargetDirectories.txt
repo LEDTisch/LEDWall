@@ -1,0 +1,3 @@
+/run/media/tim/Festplatte²/cpp/RPINeopixel/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/run/media/tim/Festplatte²/cpp/RPINeopixel/cmake-build-debug/CMakeFiles/edit_cache.dir
+/run/media/tim/Festplatte²/cpp/RPINeopixel/cmake-build-debug/CMakeFiles/RPINeopixel.dir

@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/run/media/tim/Festplatte²/cpp/RPINeopixel/Neopixel.cpp
+iostream
+-
+Neopixel.h
+/run/media/tim/Festplatte²/cpp/RPINeopixel/Neopixel.h
+
+/run/media/tim/Festplatte²/cpp/RPINeopixel/Neopixel.h
+stdint.h
+-
+
+/run/media/tim/Festplatte²/cpp/RPINeopixel/main.cpp
+iostream
+-
+Neopixel.cpp
+/run/media/tim/Festplatte²/cpp/RPINeopixel/Neopixel.cpp
+stdint.h
+-
+
