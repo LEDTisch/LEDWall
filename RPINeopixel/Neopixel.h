@@ -22,12 +22,11 @@ public:
     void              show(void);
     void              setPin(uint8_t p);
     void              setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b);
-    void              setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b,
-                                    uint8_t w);
     void              setPixelColor(uint16_t n, uint32_t c);
     void              fill(uint32_t c=0, uint16_t first=0, uint16_t count=0);
     void              setBrightness(uint8_t);
     void              clear(void);
+    void              end(void);
 
 
 // Constructor: number of LEDs, pin number, LED type
