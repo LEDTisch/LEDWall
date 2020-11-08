@@ -11,7 +11,7 @@
 #define green 0x0000FF00
 #define blue 0x000000FF
 
-Neopixel::Neopixel(int n, int pin) {
+Neopixel::Neopixel(int n, uint8_t pin) {
 this->numpixels = n;
 this->pin = pin;
 this->buffer = (uint32_t *) malloc(sizeof(uint32_t)*this->numpixels);
@@ -24,6 +24,9 @@ void Neopixel::show() {
 
 
 
+
+}
+void Neopixel::setBrightness(uint8_t) {
 
 }
 

@@ -31,7 +31,7 @@ public:
 
 
 // Constructor: number of LEDs, pin number, LED type
-    Neopixel(int n, int pin);
+    Neopixel(int n, uint8_t pin);
 
 private:
     uint8_t pin;
