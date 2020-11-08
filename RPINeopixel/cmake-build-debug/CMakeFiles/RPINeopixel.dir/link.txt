@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/RPINeopixel.dir/main.cpp.o  -o RPINeopixel 

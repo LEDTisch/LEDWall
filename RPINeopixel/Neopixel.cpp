@@ -27,6 +27,10 @@ void Neopixel::show() {
 
 }
 
+void Neopixel::setPin(uint8_t p) {
+    this->pin=p;
+}
+
 void Neopixel::begin(void) {
     printf("Begin!");
 

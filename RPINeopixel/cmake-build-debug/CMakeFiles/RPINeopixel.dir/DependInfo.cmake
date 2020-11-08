@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/run/media/tim/Festplatte²/cpp/RPINeopixel/main.cpp" "/run/media/tim/Festplatte²/cpp/RPINeopixel/cmake-build-debug/CMakeFiles/RPINeopixel.dir/main.cpp.o"
+  "C:/Users/Felix/Documents/GitHub/LEDWall/RPINeopixel/main.cpp" "C:/Users/Felix/Documents/GitHub/LEDWall/RPINeopixel/cmake-build-debug/CMakeFiles/RPINeopixel.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "MSVC")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/RPINeopixel.dir/main.cpp.o"
-  "RPINeopixel"
+  "CMakeFiles/RPINeopixel.dir/main.cpp.obj"
+  "RPINeopixel.exe"
+  "RPINeopixel.exe.manifest"
+  "RPINeopixel.lib"
   "RPINeopixel.pdb"
 )
 
