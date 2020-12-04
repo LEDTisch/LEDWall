@@ -2,7 +2,6 @@
 // Created by tim on 07.11.20.
 //
 
-#include <iostream>
 #include "gpio.h"
 #include "Neopixel.h"
 #define WS2811_TARGET_FREQ                       800000   // Can go as low as 400000

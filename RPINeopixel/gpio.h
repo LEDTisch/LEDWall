@@ -2,7 +2,6 @@
 // Created by tim on 08.11.20.
 //
 
-#include <iostream>
 
 #include <errno.h>
 #include <fcntl.h>
@@ -14,6 +13,8 @@
 
 #include <fcntl.h>
 #include <cstring>
+#include <stdint-gcc.h>
+#include <string>
 
 #ifndef RPINEOPIXEL_GPIO_H
 #define RPINEOPIXEL_GPIO_H
