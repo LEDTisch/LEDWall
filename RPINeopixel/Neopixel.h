@@ -7,36 +7,50 @@
  * Default Neopixel String RGB order is GBR this Library only support them
  */
 
-#ifndef RPINEOPIXEL_NEOPIXEL_H
-#define RPINEOPIXEL_NEOPIXEL_H
-
+#ifndef NEOPIXEL_H
+#define NEOPIXEL_H
 
 #include <stdint.h>
-
+#include <memory>
 
 
 class Neopixel {
 public:
 
-    void              begin(void);
-    void              show(void);
-    void              setPin(uint8_t p);
-    void              setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b);
-    void              setPixelColor(uint16_t n, uint32_t c);
-    void              fill(uint32_t c=0, uint16_t first=0, uint16_t count=0);
-    void              setBrightness(uint8_t);
-    void              clear(void);
-    void              end(void);
 
 
-// Constructor: number of LEDs, pin number, LED type
-    Neopixel(int n, uint8_t pin);
+    Neopixel(int n);
+    void begin(void);
+    void show(void);
+    void setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b);
+    void setPixelColor(uint16_t n, uint32_t c);
+    void setBrightness(uint8_t);
+    void clear(void);
+    void end(void);
 
+
+
+    enum BlockTypes {
+        DATA    = 0xDA,
+    };
+
+    static const uint8_t kStartByte = 0xC9;
+    static const uint8_t kEndByte   = 0x36;
+    struct termios m_serialConfig;
+
+    struct Packet {
+        BlockTypes type;
+        std::shared_ptr<uint8_t>bufferPtr;
+        uint8_t                *dataPtr;
+        size_t dataSize;
+    };
+
+    Packet frame;
 private:
-    uint8_t pin;
+
     int numpixels;
     uint32_t* buffer;
 };
 
 
-#endif //RPINEOPIXEL_NEOPIXEL_H
+#endif
