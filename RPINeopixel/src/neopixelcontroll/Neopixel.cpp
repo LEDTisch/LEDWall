@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <termio.h>
-#include "gpio.h"
 #include "stdio.h"
 #include "Neopixel.h"
 
@@ -51,7 +50,6 @@ void Neopixel::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
 
     this->buffer[n] = (r << 16 | g << 8 | b);
 
-    std::cout << std::hex << this->buffer[n]<<std::endl;
 
 
 }
@@ -60,7 +58,6 @@ void Neopixel::setPixelColor(uint16_t n, uint32_t c) {
     if (n > this->numpixels) return;
     this->buffer[n] = c;
 
-    std::cout << std::hex << this->buffer[n];
 
 }
 

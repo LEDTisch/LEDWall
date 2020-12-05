@@ -29,7 +29,6 @@ public:
     void end(void);
 
 
-
     enum BlockTypes {
         DATA    = 0xDA,
     };
