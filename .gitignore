@@ -1,2 +1,5 @@
 /RPINeopixel/cmake-build-debug/
 /RPINeopixel/cmake-build-debug-remote/
+RPINeopixel/.idea/deployment.xml
+RPINeopixel/cmake-build-remote-pi/
+RPINeopixel/cmake-build-remote-pi/cmake_install.cmake
