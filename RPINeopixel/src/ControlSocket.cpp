@@ -30,13 +30,17 @@ void ControlSocket::readFromSocket(long controllerNumber, int Socket) {
             return;
         }
 
+        printf("Player %u: %s", controllerNumber, buffer);
+
         if (controllerNumber == 1) {
             if(this->applicationManager->checkSystemCommand(buffer)) return; //Request was handled
-            this->applicationManager->getCurrentApplication()->onDataReceive(buffer,this->systemInterface,controllerNumber);
         }
 
+        if(this->applicationManager->getCurrentApplication()!=NULL)
+            this->applicationManager->getCurrentApplication()->onDataReceive(buffer,this->systemInterface,controllerNumber);
 
-        printf("Player %u: %s", controllerNumber, buffer);
+
+
 
 
     }
@@ -56,10 +60,10 @@ void ControlSocket::acceptNewSockets() {
 
             this->sockets.insert(this->sockets.begin(), tmpSocket);
             send(tmpSocket, "connected", strlen("connected"), 0);
-            printf("New Client registered %ld\n", controllerCount.operator long());
+            printf("New Player: %ld\n", controllerCount.operator long());
 
             controllerCount++;
-            printf("New Client registered %ld\n", controllerCount.operator long());
+
             std::thread clientConnected(&ControlSocket::readFromSocket, *this, controllerCount.operator long(),
                                         tmpSocket);
             clientConnected.detach();

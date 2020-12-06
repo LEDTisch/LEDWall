@@ -7,7 +7,7 @@ class ApplicationManager{
 public:
 
 bool checkSystemCommand(char command[]) { //Check SystemCommand for Example Switch Application, LedTisch off... Can only be executed from Player 1
-
+    return false;
 }
 
 Application* getCurrentApplication() {
