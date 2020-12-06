@@ -8,10 +8,13 @@
 
 #include <netinet/in.h>
 #include <vector>
+#include <atomic>
+#include "utils/ApplicationManager.h"
+
 
 class ControlSocket {
 public:
-ControlSocket();
+ControlSocket(ApplicationManager* applicationManager,SystemInterface* systemInterface);
 void begin();
 
 private:
@@ -19,9 +22,13 @@ private:
     std::vector<int> sockets;
     struct sockaddr_in address;
     int opt = 1;
+    ApplicationManager* applicationManager;
+    SystemInterface* systemInterface;
+
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
      void acceptNewSockets();
+     void readFromSocket(long controllerNumber,int Socket);
 };
 
 

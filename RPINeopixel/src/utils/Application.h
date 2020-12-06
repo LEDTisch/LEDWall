@@ -9,7 +9,7 @@ public:
 
     virtual void onCreate(SystemInterface* systeminterface)=0;
     virtual void onRun(SystemInterface* systeminterface)=0;
-    virtual void onDataReceive(char data[], SystemInterface* systeminterface)=0;
+    virtual void onDataReceive(char data[], SystemInterface* systeminterface,int ControllerID)=0;
     virtual char* getName()=0;
     virtual void onStop(SystemInterface* systeminterface)=0;
 

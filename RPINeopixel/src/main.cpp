@@ -15,7 +15,7 @@ SystemInterface* systeminterface=new SystemInterface();
 
 
 
-ControlSocket controlSocket = ControlSocket();
+ControlSocket controlSocket = ControlSocket(applicationManager,systeminterface);
 
 void ani_kreisaufl(){
     int i=0;

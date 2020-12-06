@@ -5,9 +5,41 @@
 #include <cstring>
 #include <thread>
 #include <iostream>
+#include <algorithm>
 #include "ControlSocket.h"
 
-ControlSocket::ControlSocket() {
+std::atomic<long> controllerCount(0);
+
+ControlSocket::ControlSocket(ApplicationManager *applicationManager,SystemInterface* systemInterface) {
+    this->applicationManager = applicationManager;
+    this->systemInterface = systemInterface;
+
+}
+
+void ControlSocket::readFromSocket(long controllerNumber, int Socket) {
+
+    char buffer[255];
+    while (1) {
+        bzero(buffer, 256);
+        int status = read(Socket, buffer, 255);
+        if (status < 0) printf("Error while Reading from Socket\n");
+        if (strlen(buffer) == 0) {
+            sockets.erase(sockets.begin() + controllerNumber - 1);
+            controllerCount--;
+            printf("Removed %ld\n", controllerCount.operator long());
+            return;
+        }
+
+        if (controllerNumber == 1) {
+            if(this->applicationManager->checkSystemCommand(buffer)) return; //Request was handled
+            this->applicationManager->getCurrentApplication()->onDataReceive(buffer,this->systemInterface,controllerNumber);
+        }
+
+
+        printf("Player %u: %s", controllerNumber, buffer);
+
+
+    }
 
 
 }
@@ -22,28 +54,33 @@ void ControlSocket::acceptNewSockets() {
             exit(EXIT_FAILURE);
         } else {
 
-            this->sockets.push_back(tmpSocket);
+            this->sockets.insert(this->sockets.begin(), tmpSocket);
+            send(tmpSocket, "connected", strlen("connected"), 0);
+            printf("New Client registered %ld\n", controllerCount.operator long());
 
+            controllerCount++;
+            printf("New Client registered %ld\n", controllerCount.operator long());
+            std::thread clientConnected(&ControlSocket::readFromSocket, *this, controllerCount.operator long(),
+                                        tmpSocket);
+            clientConnected.detach();
         }
 
 
-        for(auto x:this->sockets) {
+        // for(auto x:this->sockets) {
 
-            //valread = read( new_socket , buffer, 1024);
-            printf("%s\n", buffer);
-            send(x, "Test", strlen("Test"), 0);
-            close(x);
-            printf("Hello message sent\n");
+        //valread = read( new_socket , buffer, 1024);
 
-        }
+
+        // }
 
     }
-
 
 
 }
 
 void ControlSocket::begin() {
+
+
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -73,11 +110,9 @@ void ControlSocket::begin() {
     }
 
     //pthread_t threadId;
-  //  pthread_create( &threadId, NULL,  &ControlSocket::acceptNewSockets, *this);
-  std::thread t(&ControlSocket::acceptNewSockets,*this);
+    //  pthread_create( &threadId, NULL,  &ControlSocket::acceptNewSockets, *this);
+    std::thread t(&ControlSocket::acceptNewSockets, *this);
     t.detach();
-
-
 
 
 }
