@@ -1,22 +1,22 @@
 #include "LEDTisch.h"
 #include "font.h"
 #include <math.h>
+#include <chrono>
 
-LEDTisch::LEDTisch(int _x,int _y,int _d)
-{
-    xmax=_x;
-    ymax=_y;
-    drehung=_d;
+LEDTisch::LEDTisch(int _x, int _y, int _d) {
+    xmax = _x;
+    ymax = _y;
+    drehung = _d;
     this->brightness = 1;
 
 
 }
 
-void LEDTisch::drawImage(uint32_t image[],int w,int h){
-    int i=0;
-    for(int wy=0;wy<h;wy++){
-        for(int wx=0;wx<w;wx++){
-            drawkoordinatensystem(wx,wy,image[i]);
+void LEDTisch::drawImage(uint32_t image[], int w, int h) {
+    int i = 0;
+    for (int wy = 0; wy < h; wy++) {
+        for (int wx = 0; wx < w; wx++) {
+            drawkoordinatensystem(wx, wy, image[i]);
             i++;
         }
     }
@@ -27,20 +27,19 @@ void LEDTisch::drawImage(uint32_t image[],int w,int h){
 }
 
 
-
-void LEDTisch::gerade(float x1,float y1,float x2,float y2,float g){
+void LEDTisch::gerade(float x1, float y1, float x2, float y2, float g) {
     x2++;
     y2++;
 
-    float m=0;
+    float m = 0;
 
-    m=(y2-y1)/(x2-x1);
+    m = (y2 - y1) / (x2 - x1);
     //Serial.println(m);
 
-    float x=0;
-    while(x<x2-x1){
-        drawkoordinatensystem(x+x1,m*x+y1);
-        x=x+g;
+    float x = 0;
+    while (x < x2 - x1) {
+        drawkoordinatensystem(x + x1, m * x + y1);
+        x = x + g;
     }
 
     pixels.show();
@@ -49,11 +48,11 @@ void LEDTisch::gerade(float x1,float y1,float x2,float y2,float g){
 }
 
 
-void LEDTisch::setBrightness(float brightness){
-    this->brightness=brightness;
+void LEDTisch::setBrightness(float brightness) {
+    this->brightness = brightness;
 }
 
-void LEDTisch::init(){
+void LEDTisch::init() {
     pixels.begin();
     //pin=_pin;
     //Serial.println("pin:");
@@ -61,22 +60,21 @@ void LEDTisch::init(){
 //Serial.println(pixels.getPin());
 }
 
-void LEDTisch::drehung_set(int d){
-    drehung=d;
+void LEDTisch::drehung_set(int d) {
+    drehung = d;
 }
 
-void LEDTisch::setcolor(int r,int g, int b){
-    if(r<0){r=0;}
-    if(g<0){g=0;}
-    if(b<0){b=0;}
-    rot=r*this->brightness;
-    gruen=g*this->brightness;
-    blau=b*this->brightness;
+void LEDTisch::setcolor(int r, int g, int b) {
+    if (r < 0) { r = 0; }
+    if (g < 0) { g = 0; }
+    if (b < 0) { b = 0; }
+    rot = r * this->brightness;
+    gruen = g * this->brightness;
+    blau = b * this->brightness;
 }
 
 
-
-void LEDTisch::zahl(int x_zahl, int y_zahl, int zahl){
+void LEDTisch::zahl(int x_zahl, int y_zahl, int zahl) {
 
     int counter_x;
     int counter_y;
@@ -99,66 +97,66 @@ void LEDTisch::zahl(int x_zahl, int y_zahl, int zahl){
         while (counter_x < 5) {
             //Serial.println(counter_x);
 
-            PO=koordinatensystem(counter_x + x_zahl,counter_y+y_zahl);
+            PO = koordinatensystem(counter_x + x_zahl, counter_y + y_zahl);
 
             switch (erste_stelle) {
                 case 0:
                     if (nul[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 1:
                     if (eins[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 2:
                     if (zwei[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 3:
                     if (drei[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 4:
                     if (vier[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 5:
                     if (funf[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 6:
                     if (sechs[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 7:
                     if (sieben[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 8:
                     if (acht[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
                 case 9:
                     if (neun[counter_x][counter_y] == 1) {
-                        pixels.setPixelColor(PO, rot,gruen,blau);
+                        pixels.setPixelColor(PO, rot, gruen, blau);
 
                     }
                     break;
@@ -181,66 +179,66 @@ void LEDTisch::zahl(int x_zahl, int y_zahl, int zahl){
             while (counter_x < 5) {
                 //Serial.println(counter_x);
 
-                PO=koordinatensystem(counter_x + x_zahl,counter_y + y_zahl + 4);
+                PO = koordinatensystem(counter_x + x_zahl, counter_y + y_zahl + 4);
 
                 switch (zweite_stelle) {
                     case 0:
                         if (nul[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 1:
                         if (eins[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 2:
                         if (zwei[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 3:
                         if (drei[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 4:
                         if (vier[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 5:
                         if (funf[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 6:
                         if (sechs[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 7:
                         if (sieben[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 8:
                         if (acht[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
                     case 9:
                         if (neun[counter_x][counter_y] == 1) {
-                            pixels.setPixelColor(PO, rot,gruen,blau);
+                            pixels.setPixelColor(PO, rot, gruen, blau);
 
                         }
                         break;
@@ -262,14 +260,16 @@ void LEDTisch::zahl(int x_zahl, int y_zahl, int zahl){
 }
 
 
-void LEDTisch::show(){
 
-    pixels.show();
+void LEDTisch::show() {
+
+
+
+
+        pixels.show();
+
 
 }
-
-
-
 
 
 //Buchstaben start
@@ -279,7 +279,6 @@ int buchstaben[5][3][26];
 //yuheeeeeeeeeeeeeeeeeeeee
 
 int testt = 'a';
-
 
 
 /*
@@ -521,28 +520,27 @@ void LEDTisch::buchstaben(int x_wort, int y_wort, char wort[], boolean s, int gr
 }
 */
 
-void LEDTisch::kreis(int x,int y,int r,int u){
-    for(int w=0;w<360;w=w+u){
-        drawkoordinatensystem(x+round(cos(w*3.1415/180)*r),y+round(sin(w*3.1415/180)*r));
+void LEDTisch::kreis(int x, int y, int r, int u) {
+    for (int w = 0; w < 360; w = w + u) {
+        drawkoordinatensystem(x + round(cos(w * 3.1415 / 180) * r), y + round(sin(w * 3.1415 / 180) * r));
     }
 }
 
-void LEDTisch::rect(int x,int y,int w,int h){
-    for(int _w=0;_w<w;_w=_w+1){
-        for(int _h=0;_h<h;_h=_h+1){
-            drawkoordinatensystem(_w+x,_h+y);
+void LEDTisch::rect(int x, int y, int w, int h) {
+    for (int _w = 0; _w < w; _w = _w + 1) {
+        for (int _h = 0; _h < h; _h = _h + 1) {
+            drawkoordinatensystem(_w + x, _h + y);
         }
     }
 }
 
-void LEDTisch::setRotation(int r){
-    drehung=r;
+void LEDTisch::setRotation(int r) {
+    drehung = r;
 }
 
-int LEDTisch::koordinatensystem(int x,int y)
-{
+int LEDTisch::koordinatensystem(int x, int y) {
     long PO = -1;
-    if(x>=0 && x<xmax && y>=0 && y<ymax){
+    if (x >= 0 && x < xmax && y >= 0 && y < ymax) {
 
         long led = 0;
 
@@ -550,50 +548,42 @@ int LEDTisch::koordinatensystem(int x,int y)
         //x = 0;
         //y = 5;
         // PO = ((ymax-1)-y) + 15 * ((xmax-1)-x);
-        if(drehung==0){
-            PO= x + ymax * (xmax - y-1);
+        if (drehung == 0) {
+            PO = x + ymax * (xmax - y - 1);
         }
-        if(drehung==1){
-            PO = ((ymax-1)-y) + ymax * ((xmax-1)-x);
+        if (drehung == 1) {
+            PO = ((ymax - 1) - y) + ymax * ((xmax - 1) - x);
         }
 
         led = PO;
 
 
-
-        if (led >= ymax && led < ymax*2)
-        {
-            led = (ymax*2+1) - (led - ymax);
+        if (led >= ymax && led < ymax * 2) {
+            led = (ymax * 2 + 1) - (led - ymax);
             led = led - 2;
         }
 
-        if (led >= ymax*3 && led < ymax*4)
-        {
-            led = (ymax*6+1 - (led - ymax));
+        if (led >= ymax * 3 && led < ymax * 4) {
+            led = (ymax * 6 + 1 - (led - ymax));
             led = led - 2;
         }
 
-        if (led >= ymax*5 && led < ymax*6)
-        {
-            led = (ymax*10+1 - (led - ymax));
+        if (led >= ymax * 5 && led < ymax * 6) {
+            led = (ymax * 10 + 1 - (led - ymax));
             led = led - 2;
         }
 
 
-        if (led >= ymax*7 && led < ymax*8)
-        {
-            led = (ymax*14+1 - (led - ymax));
+        if (led >= ymax * 7 && led < ymax * 8) {
+            led = (ymax * 14 + 1 - (led - ymax));
             led = led - 2;
         }
 
-        if (led >= ymax*9 && led < ymax*10)
-        {
-            led = (ymax*18+1 - (led - ymax));
+        if (led >= ymax * 9 && led < ymax * 10) {
+            led = (ymax * 18 + 1 - (led - ymax));
             led = led - 2;
         }
         PO = led;
-
-
 
 
     }
@@ -602,13 +592,14 @@ int LEDTisch::koordinatensystem(int x,int y)
 }
 
 
-int LEDTisch::drawkoordinatensystem(int x,int y){
-    pixels.setPixelColor(koordinatensystem(x,y), rot,gruen,blau);
-}
-int LEDTisch::drawkoordinatensystem(int x,int y,uint32_t color){
-    pixels.setPixelColor(koordinatensystem(x,y), color);
+int LEDTisch::drawkoordinatensystem(int x, int y) {
+    pixels.setPixelColor(koordinatensystem(x, y), rot, gruen, blau);
 }
 
-void LEDTisch::clear(){
+int LEDTisch::drawkoordinatensystem(int x, int y, uint32_t color) {
+    pixels.setPixelColor(koordinatensystem(x, y), color);
+}
+
+void LEDTisch::clear() {
     pixels.clear();
 }
