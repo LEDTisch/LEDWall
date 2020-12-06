@@ -8,7 +8,7 @@
 
 #include <cstdint>
 #include <jmorecfg.h>
-#include "../../../../neopixelcontroll/Neopixel.h"
+#include "../neopixelcontroll/Neopixel.cpp"
 
 class LEDTisch {
 private:

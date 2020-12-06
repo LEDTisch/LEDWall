@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include "utils/GPIO/RPI.h"
 #include "utils/GPIO/RPI.cpp"
-#include "neopixelcontroll/Neopixel.cpp"
 #include "ControlSocket.cpp"
 #include "utils/systeminterface/SystemInterface.cpp"
 
@@ -69,10 +68,10 @@ void ani() {
 }
 
 int main() {
+
+
+    controlSocket.begin();
     systeminterface->init();
-
-  //  controlSocket.begin();
-
 
     while(1) {
 

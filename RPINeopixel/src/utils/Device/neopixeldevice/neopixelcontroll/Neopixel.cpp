@@ -75,7 +75,7 @@ void Neopixel::begin(void) {
     if (neopixel_device == -1) {
         printf("failed to open port ");
     } else {
-        printf("Connected");
+      std::cout<<  "Connected"<<std::endl;
     }
 
 

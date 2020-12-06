@@ -4,6 +4,7 @@
 
 #include <cstring>
 #include <thread>
+#include <iostream>
 #include "ControlSocket.h"
 
 ControlSocket::ControlSocket() {
@@ -11,7 +12,8 @@ ControlSocket::ControlSocket() {
 
 }
 
-void * ControlSocket::acceptNewSockets() {
+void ControlSocket::acceptNewSockets() {
+
     while (1) {
         int tmpSocket = accept(server_fd, (struct sockaddr *) &address, (socklen_t *) &addrlen);
 
@@ -37,7 +39,7 @@ void * ControlSocket::acceptNewSockets() {
 
     }
 
-    return NULL;
+
 
 }
 
@@ -70,10 +72,10 @@ void ControlSocket::begin() {
         exit(EXIT_FAILURE);
     }
 
-    typedef void * (*THREADFUNCPTR)(void *);
-    pthread_t threadId;
+    //pthread_t threadId;
   //  pthread_create( &threadId, NULL,  &ControlSocket::acceptNewSockets, *this);
-this->acceptNewSockets();
+  std::thread t(&ControlSocket::acceptNewSockets,*this);
+    t.detach();
 
 
 

@@ -21,7 +21,7 @@ private:
     int opt = 1;
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
-     void * acceptNewSockets();
+     void acceptNewSockets();
 };
 
 
