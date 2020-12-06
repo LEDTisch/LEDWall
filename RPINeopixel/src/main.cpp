@@ -3,10 +3,12 @@
 #include "RPI.h"
 #include "RPI.cpp"
 #include "neopixelcontroll/Neopixel.cpp"
+#include "ControlSocket.cpp"
 
 #include "Device/LED-Tisch/LEDTisch.cpp"
 
 LEDTisch ledTisch=LEDTisch(10,15,1);
+ControlSocket controlSocket = ControlSocket();
 
 void ani_kreisaufl(){
     int i=0;
@@ -59,6 +61,8 @@ void ani() {
 }
 
 int main() {
+
+  //  controlSocket.begin();
     ledTisch.init();
     ledTisch.setcolor(255,255,0);
 
