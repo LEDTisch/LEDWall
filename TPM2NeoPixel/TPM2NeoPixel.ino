@@ -11,7 +11,7 @@
 
 #include "TPM2.h"
 
-#define PIN 6
+#define PIN 10
 #define NO_OF_LEDS 160
 
 uint8_t buffer[NO_OF_LEDS * 3];

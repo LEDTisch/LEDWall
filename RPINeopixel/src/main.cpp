@@ -1,24 +1,27 @@
 
 #include <stdint.h>
-#include "RPI.h"
-#include "RPI.cpp"
+#include "utils/GPIO/RPI.h"
+#include "utils/GPIO/RPI.cpp"
 #include "neopixelcontroll/Neopixel.cpp"
 #include "ControlSocket.cpp"
+#include "utils/systeminterface/SystemInterface.cpp"
 
-#include "Device/LED-Tisch/LEDTisch.cpp"
+#include "utils/Device/neopixeldevice/LEDTisch/LEDTisch.cpp"
 
-LEDTisch ledTisch=LEDTisch(10,15,1);
+SystemInterface* systeminterface=new SystemInterface();
+
+
 ControlSocket controlSocket = ControlSocket();
 
 void ani_kreisaufl(){
     int i=0;
     while(i<20){
-        ledTisch.setcolor(0,0,0);
-        ledTisch.kreis(5,7,i,2);
+        systeminterface->ledTisch->setcolor(0,0,0);
+        systeminterface->ledTisch->kreis(5,7,i,2);
         i=i+1;
 
-        ledTisch.show();
-        usleep(48*1000);
+        systeminterface->ledTisch->show();
+        usleep(60*1000);
 
     }
 }
@@ -27,11 +30,11 @@ void ani_kreisaufl(){
 void ani_peng(int x,int y){
     int i=0;
     while(i<10){
-        ledTisch.setcolor(255,255,255);
-       ledTisch.kreis(x,y,i,15);
+        systeminterface->ledTisch->setcolor(255,255,255);
+        systeminterface->ledTisch->kreis(x,y,i,15);
         i=i+1;
 
-        ledTisch.show();
+        systeminterface->ledTisch->show();
         usleep(60*1000);
 
 
@@ -44,13 +47,13 @@ void ani() {
 
     int i = 0;
     while (i < 20) {
-        ledTisch.setcolor(i * 12, 255 - i * 12, 0);
-        ledTisch.kreis(0, 0, i, 2);
-        ledTisch.kreis(9, 14, i, 2);
+        systeminterface->ledTisch->setcolor(i * 12, 255 - i * 12, 0);
+        systeminterface->ledTisch->kreis(0, 0, i, 2);
+        systeminterface->ledTisch->kreis(9, 14, i, 2);
         i = i + 1;
 
-        ledTisch.show();
-        usleep(48 * 1000);
+        systeminterface->ledTisch->show();
+        usleep(60 * 1000);
 
     }
 
@@ -61,10 +64,10 @@ void ani() {
 }
 
 int main() {
+    systeminterface->init();
 
-    controlSocket.begin();
-    ledTisch.init();
-    ledTisch.setcolor(255,255,0);
+  //  controlSocket.begin();
+
 
     while(1) {
 

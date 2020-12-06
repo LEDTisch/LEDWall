@@ -2,15 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="Raspberry Pi Neopixel (62a65680-e0c2-44c4-8a24-4968e6b8d94a)">
+      <paths name="Remote Host (fe0b0960-9c54-465a-a72b-3904189ec2d4)">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.5RSwO8xcBL" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/tmp.wS0g3dvlr8" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-remote-pi" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote-host" />
           </excludedPaths>
         </serverdata>
       </paths>

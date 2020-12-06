@@ -8,7 +8,7 @@
 
 #include <cstdint>
 #include <jmorecfg.h>
-#include "../../neopixelcontroll/Neopixel.h"
+#include "../../../../neopixelcontroll/Neopixel.h"
 
 class LEDTisch {
 private:
@@ -18,7 +18,6 @@ private:
     uint8_t rot;
     uint8_t gruen;
     uint8_t blau;
-    int pin;
     float brightness=1;
 
     Neopixel pixels =  Neopixel(150);
