@@ -1,11 +1,11 @@
 
 #include <stdint.h>
-#include "RPI.h"
-#include "RPI.cpp"
+#include "utils/GPIO/RPI.h"
+#include "utils/GPIO/RPI.cpp"
 #include "neopixelcontroll/Neopixel.cpp"
 #include "ControlSocket.cpp"
 
-#include "Device/LED-Tisch/LEDTisch.cpp"
+#include "utils/Device/neopixeldevice/LEDTisch/LEDTisch.cpp"
 
 LEDTisch ledTisch=LEDTisch(10,15,1);
 ControlSocket controlSocket = ControlSocket();
