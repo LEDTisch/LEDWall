@@ -16,7 +16,7 @@ void ani_kreisaufl(){
         i=i+1;
 
         ledTisch.show();
-        usleep(48*1000);
+        usleep(60*1000);
 
     }
 }
@@ -48,7 +48,7 @@ void ani() {
         i = i + 1;
 
         ledTisch.show();
-        usleep(48 * 1000);
+        usleep(60 * 1000);
 
     }
 
