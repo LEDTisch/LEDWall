@@ -1,3 +1,0 @@
-/tmp/tmp.5RSwO8xcBL/cmake-build-remote-pi/CMakeFiles/rebuild_cache.dir
-/tmp/tmp.5RSwO8xcBL/cmake-build-remote-pi/CMakeFiles/RPINeopixel.dir
-/tmp/tmp.5RSwO8xcBL/cmake-build-remote-pi/CMakeFiles/edit_cache.dir
