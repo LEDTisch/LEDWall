@@ -7,8 +7,13 @@
 #include "utils/systeminterface/SystemInterface.cpp"
 
 #include "utils/Device/neopixeldevice/LEDTisch/LEDTisch.cpp"
+#include "utils/Application.h"
+#include "utils/ApplicationManager.h"
+
+ApplicationManager* applicationManager=new ApplicationManager();
 
 SystemInterface* systeminterface=new SystemInterface();
+
 
 
 ControlSocket controlSocket = ControlSocket();
