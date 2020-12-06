@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.13)
 project(RPINeopixel)
-
+add_compile_options(-lpthread)
+find_package(Threads REQUIRED)
+target_link_libraries( Threads::Threads)
 set(CMAKE_CXX_STANDARD 14)
 include_directories("${PROJECT_SOURCE_DIR}/*/")
 add_executable(RPINeopixel src/main.cpp)

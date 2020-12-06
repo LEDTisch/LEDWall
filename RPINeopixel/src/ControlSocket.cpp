@@ -3,10 +3,41 @@
 //
 
 #include <cstring>
+#include <thread>
 #include "ControlSocket.h"
 
 ControlSocket::ControlSocket() {
 
+
+}
+
+void * ControlSocket::acceptNewSockets() {
+    while (1) {
+        int tmpSocket = accept(server_fd, (struct sockaddr *) &address, (socklen_t *) &addrlen);
+
+        if (tmpSocket < 0) {
+            perror("accept");
+            exit(EXIT_FAILURE);
+        } else {
+
+            this->sockets.push_back(tmpSocket);
+
+        }
+
+
+        for(auto x:this->sockets) {
+
+            //valread = read( new_socket , buffer, 1024);
+            printf("%s\n", buffer);
+            send(x, "Test", strlen("Test"), 0);
+            close(x);
+            printf("Hello message sent\n");
+
+        }
+
+    }
+
+    return NULL;
 
 }
 
@@ -39,21 +70,12 @@ void ControlSocket::begin() {
         exit(EXIT_FAILURE);
     }
 
-    int tmpSocket = accept(server_fd, (struct sockaddr *) &address,(socklen_t *) &addrlen);
+    typedef void * (*THREADFUNCPTR)(void *);
+    pthread_t threadId;
+  //  pthread_create( &threadId, NULL,  &ControlSocket::acceptNewSockets, *this);
+this->acceptNewSockets();
 
-    if (tmpSocket < 0) {
-        perror("accept");
-        exit(EXIT_FAILURE);
-    }else{
 
-        this->sockets.push_back(tmpSocket);
-
-    }
-    //valread = read( new_socket , buffer, 1024);
-    printf("%s\n", buffer);
-    send(this->sockets.at(0), "Test", strlen("Test"), 0);
-    close(this->sockets.at(0));
-    printf("Hello message sent\n");
 
 
 }

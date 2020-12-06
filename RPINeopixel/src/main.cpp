@@ -62,7 +62,7 @@ void ani() {
 
 int main() {
 
-  //  controlSocket.begin();
+    controlSocket.begin();
     ledTisch.init();
     ledTisch.setcolor(255,255,0);
 
