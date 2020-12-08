@@ -1,5 +1,6 @@
 #include "Application.h"
-#include "../Applications/Licht.cpp"
+#include "../Applications/Licht/Licht.cpp"
+#include "../Applications/RacingGame/RacingGame.cpp"
 
 #ifndef APPLICATIONMANAGER_H
 #define APPLICATIONMANAGER_H
@@ -28,7 +29,7 @@ public:
 
 private:
     SystemInterface* systemInterface;
-    Application *frontApplication = new Licht();
+    Application *frontApplication = new RacingGame();
 
 };
 

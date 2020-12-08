@@ -2,25 +2,21 @@
 // Created by tim on 08.12.20.
 //
 
-#ifndef RPINEOPIXEL_LICHT_H
-#define RPINEOPIXEL_LICHT_H
+#ifndef RPINEOPIXEL_RACINGGAME_H
+#define RPINEOPIXEL_RACINGGAME_H
 
 
-#include "../utils/Application.h"
+#include "../../utils/Application.h"
 
-class Licht: public Application {
+class RacingGame: public Application{
 public:
-    Licht();
+    RacingGame();
     void onCreate(SystemInterface* systeminterface);
     void onRun(SystemInterface* systeminterface);
     void onDataReceive(char* data, SystemInterface* systeminterface,int ControllerID);
     char* getName();
     void onStop(SystemInterface* systeminterface);
-private:
-    bool lightstatus=false;
-
-
 };
 
 
-#endif //RPINEOPIXEL_LICHT_H
+#endif //RPINEOPIXEL_RACINGGAME_H

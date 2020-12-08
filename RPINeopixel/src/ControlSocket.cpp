@@ -20,10 +20,10 @@ ControlSocket::ControlSocket(ApplicationManager *applicationManager,SystemInterf
 void ControlSocket::readFromSocket(int* controllerNumber, int* Socket) {
 
 
-    char buffer[255];
+    char buffer[100];
     while (1) {
-        bzero(buffer, 256);
-        int status = read(*Socket, buffer, 255);
+        bzero(buffer, 100);
+        int status = read(*Socket, buffer, 100);
         if (status < 0) printf("Error while Reading from Socket\n");
         if (strlen(buffer) == 0) {
            sockets->remove(Socket);
