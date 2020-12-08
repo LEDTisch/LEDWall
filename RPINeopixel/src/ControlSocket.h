@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <vector>
 #include <atomic>
+#include <list>
 #include "utils/ApplicationManager.h"
 
 
@@ -19,7 +20,7 @@ void begin();
 
 private:
     int server_fd, valread;
-    std::vector<int> sockets;
+    std::list<int*>* sockets = new std::list<int*>;
     struct sockaddr_in address;
     int opt = 1;
     ApplicationManager* applicationManager;
@@ -28,7 +29,7 @@ private:
     int addrlen = sizeof(address);
     char buffer[1024] = {0};
      void acceptNewSockets();
-     void readFromSocket(long controllerNumber,int Socket);
+     void readFromSocket(int* controllerNumber,int* Socket);
 };
 
 

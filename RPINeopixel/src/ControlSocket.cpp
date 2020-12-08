@@ -6,38 +6,64 @@
 #include <thread>
 #include <iostream>
 #include <algorithm>
+#include <mutex>
 #include "ControlSocket.h"
 
 std::atomic<long> controllerCount(0);
-
+std::mutex myMutex;
 ControlSocket::ControlSocket(ApplicationManager *applicationManager,SystemInterface* systemInterface) {
     this->applicationManager = applicationManager;
     this->systemInterface = systemInterface;
 
 }
 
-void ControlSocket::readFromSocket(long controllerNumber, int Socket) {
+void ControlSocket::readFromSocket(int* controllerNumber, int* Socket) {
+
 
     char buffer[255];
     while (1) {
         bzero(buffer, 256);
-        int status = read(Socket, buffer, 255);
+        int status = read(*Socket, buffer, 255);
         if (status < 0) printf("Error while Reading from Socket\n");
         if (strlen(buffer) == 0) {
-            sockets.erase(sockets.begin() + controllerNumber - 1);
+           sockets->remove(Socket);
             controllerCount--;
-            printf("Removed %ld\n", controllerCount.operator long());
+            printf("Player %ld Left\n", *controllerNumber);
+            if(*controllerNumber==1) {
+                printf("Disconnect all other Players!\n");
+
+                   // send(*it,"close",strlen("close"),0);
+
+                // Iterating over list elements and display them
+
+                std::list<int*>::iterator it = sockets->begin();
+                while(it != sockets->end())
+                {
+                    std::cout<<(**it)<<"  ";
+                    send(**it,"disconnect",strlen("disconnect"),0);
+                    close(**it);
+
+                    it++;
+                }
+                std::cout<<std::endl;
+
+               sockets->clear();
+                //controllerCount =0;
+
+
+            }
+
             return;
         }
 
-        printf("Player %u: %s", controllerNumber, buffer);
+        printf("Player %u: %s", *controllerNumber, buffer);
 
-        if (controllerNumber == 1) {
+        if (*controllerNumber == 1) {
             if(this->applicationManager->checkSystemCommand(buffer)) return; //Request was handled
         }
 
         if(this->applicationManager->getCurrentApplication()!=NULL)
-            this->applicationManager->getCurrentApplication()->onDataReceive(buffer,this->systemInterface,controllerNumber);
+            this->applicationManager->getCurrentApplication()->onDataReceive(buffer,this->systemInterface,*controllerNumber);
 
 
 
@@ -58,14 +84,24 @@ void ControlSocket::acceptNewSockets() {
             exit(EXIT_FAILURE);
         } else {
 
-            this->sockets.insert(this->sockets.begin(), tmpSocket);
             send(tmpSocket, "connected", strlen("connected"), 0);
             printf("New Player: %ld\n", controllerCount.operator long());
 
             controllerCount++;
 
-            std::thread clientConnected(&ControlSocket::readFromSocket, *this, controllerCount.operator long(),
-                                        tmpSocket);
+            send(tmpSocket,std::to_string(controllerCount).c_str() , strlen(std::to_string(controllerCount).c_str()), 0);
+            int* p = new int[1];
+
+            *p = tmpSocket;
+
+
+            this->sockets->push_back(&(*p));
+
+            int* n = new int[1];
+            *n = controllerCount.operator long();
+
+
+            std::thread clientConnected(&ControlSocket::readFromSocket, *this,n ,&(*p));
             clientConnected.detach();
         }
 
@@ -92,7 +128,7 @@ void ControlSocket::begin() {
         exit(EXIT_FAILURE);
     }
 
-    // Forcefully attaching socket to the port 8080
+    // Forcefully attaching socket to the port 8888
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
                    &opt, sizeof(opt))) {
         perror("setsockopt");
