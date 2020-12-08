@@ -1,23 +1,35 @@
 #include "Application.h"
+#include "../Applications/Licht.cpp"
 
 #ifndef APPLICATIONMANAGER_H
 #define APPLICATIONMANAGER_H
 
-class ApplicationManager{
+class ApplicationManager {
 public:
 
-bool checkSystemCommand(char command[]) { //Check SystemCommand for Example Switch Application, LedTisch off... Can only be executed from Player 1
-    return false;
-}
+    ApplicationManager(SystemInterface* systemInterface) {
+        this->systemInterface = systemInterface;
+    }
 
-Application* getCurrentApplication() {
-    return frontApplication;
-}
-Application* frontApplication;
-void setfrontApp(Application* app){
-    frontApplication=app;
-}
+
+    bool checkSystemCommand(char command[]) { //Check SystemCommand for Example Switch Application, LedTisch off... Can only be executed from Player 1
+
+        return false;
+    }
+
+    Application *getCurrentApplication() {
+        return frontApplication;
+    }
+
+
+    void setApplication(Application *app) {
+        frontApplication = app;
+    }
+
 private:
+    SystemInterface* systemInterface;
+    Application *frontApplication = new Licht();
+
 };
 
 #endif

@@ -9,10 +9,10 @@
 #include "utils/Application.h"
 #include "utils/ApplicationManager.h"
 
-ApplicationManager* applicationManager=new ApplicationManager();
 
 SystemInterface* systeminterface=new SystemInterface();
 
+ApplicationManager* applicationManager=new ApplicationManager(systeminterface);
 
 
 ControlSocket controlSocket = ControlSocket(applicationManager,systeminterface);
@@ -75,7 +75,7 @@ int main() {
 
     while(1) {
 
-ani();
+if(applicationManager->getCurrentApplication()!=NULL) applicationManager->getCurrentApplication()->onRun(systeminterface);
     }
  //   return 0;
 

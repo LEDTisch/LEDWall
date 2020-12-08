@@ -106,12 +106,6 @@ void ControlSocket::acceptNewSockets() {
         }
 
 
-        // for(auto x:this->sockets) {
-
-        //valread = read( new_socket , buffer, 1024);
-
-
-        // }
 
     }
 
