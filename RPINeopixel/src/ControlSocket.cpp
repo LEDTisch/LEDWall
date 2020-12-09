@@ -20,10 +20,14 @@ ControlSocket::ControlSocket(ApplicationManager *applicationManager,SystemInterf
 void ControlSocket::readFromSocket(int* controllerNumber, int* Socket) {
 
 
-    char buffer[100];
+    char buffer[512];
     while (1) {
-        bzero(buffer, 100);
-        int status = read(*Socket, buffer, 100);
+        bzero(buffer, 512);
+        //int status = read(*Socket, buffer, 50);
+        int status = recv(*Socket,buffer,512,0);
+
+
+
         if (status < 0) printf("Error while Reading from Socket\n");
         if (strlen(buffer) == 0) {
            sockets->remove(Socket);
@@ -79,10 +83,12 @@ void ControlSocket::acceptNewSockets() {
     while (1) {
         int tmpSocket = accept(server_fd, (struct sockaddr *) &address, (socklen_t *) &addrlen);
 
+
         if (tmpSocket < 0) {
-            perror("accept");
+            perror("error");
             exit(EXIT_FAILURE);
         } else {
+
 
             send(tmpSocket, "connected", strlen("connected"), 0);
             printf("New Player: %ld\n", controllerCount.operator long());
@@ -131,6 +137,9 @@ void ControlSocket::begin() {
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(8888);
+
+
+
 
     // Forcefully attaching socket to the port 8080
     if (bind(server_fd, (struct sockaddr *) &address,
