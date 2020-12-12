@@ -5,7 +5,8 @@ import java.nio.channels.SocketChannel;
 
 public class Main {
     public static Neopixel neo = new Neopixel(150);
-    static SocketController sc = new SocketController();
+    public static SocketController sc = new SocketController();
+    public static ApplicationManager am = new ApplicationManager();
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         neo.begin();
