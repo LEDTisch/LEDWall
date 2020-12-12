@@ -1,8 +1,10 @@
 package de.ft.ledwall;
 
+import de.ft.ledwall.socket.Socket;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Socket.initSocket();
     }
 }
