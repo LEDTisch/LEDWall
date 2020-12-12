@@ -19,6 +19,7 @@ public class Neopixel {
 
     }
     public void show(){
+        /*
         uint8_t *outputPtr = this->frame.dataPtr;
         for(int i=0;i<numpixels*3;i=i+3){
             outputPtr[i+0]=buffer[i/3]>>16;
@@ -28,6 +29,8 @@ public class Neopixel {
         }
 
         this.device.write();
+
+         */
     }
 
     public void setPixelColor(int n, byte r, byte g, byte b){
