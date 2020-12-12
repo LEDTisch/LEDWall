@@ -5,18 +5,29 @@ import java.io.*;
 public class Neopixel {
     public int numpixels=0;
     private long buffer[];
+    private OutputStream device;
     public Neopixel(int numpixels){
         this.numpixels=numpixels;
         buffer=new long[this.numpixels];
     }
     public void begin() throws FileNotFoundException {
         File device=new File("/dev/ttyACM0");
-        OutputStream os=new FileOutputStream(device);
-
+        if(device.exists()) {
+            this.device = new FileOutputStream(device);
+            System.out.println("Connected");
+        }
 
     }
     public void show(){
+        uint8_t *outputPtr = this->frame.dataPtr;
+        for(int i=0;i<numpixels*3;i=i+3){
+            outputPtr[i+0]=buffer[i/3]>>16;
+            outputPtr[i+1]=(buffer[i/3] & 0xFF00)>>8;
+            outputPtr[i+2]=(buffer[i/3] & 0xFFF0);
 
+        }
+
+        this.device.write();
     }
 
     public void setPixelColor(int n, byte r, byte g, byte b){

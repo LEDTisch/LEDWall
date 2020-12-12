@@ -1,9 +1,18 @@
-import java.nio.channels.SocketChannel;
+import neopixeldevice.Neopixel;
+
+import java.io.FileNotFoundException;
+
+
 
 public class Main {
-   static SocketController sc = new SocketController();
+    public static Neopixel neo = new Neopixel(150);
+    static SocketController sc = new SocketController();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        neo.begin();
+
         sc.initSocket();
+
     }
+
 }
