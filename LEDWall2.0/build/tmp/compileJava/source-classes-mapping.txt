@@ -1,6 +1,8 @@
+device/neopixeldevice/LEDTisch.java
+ device.neopixeldevice.LEDTisch
 Main.java
  Main
+device/neopixeldevice/Neopixel.java
+ device.neopixeldevice.Neopixel
 Var.java
  Var
-neopixeldevice/Neopixel.java
- neopixeldevice.Neopixel
