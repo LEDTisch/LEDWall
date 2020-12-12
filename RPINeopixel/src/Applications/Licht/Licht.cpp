@@ -15,7 +15,7 @@ void Licht::onCreate(SystemInterface* systeminterface){
     systeminterface->ledTisch->setcolor(255,255,255);
     systeminterface->ledTisch->show();
 }
-void Licht::onRun(SystemInterface* systeminterface){
+void Licht::onDraw(SystemInterface* systeminterface){
 
 }
 void Licht::onDataReceive(char* data, SystemInterface* systeminterface,int ControllerID){
@@ -39,10 +39,12 @@ void Licht::onDataReceive(char* data, SystemInterface* systeminterface,int Contr
 
 
         }
-        systeminterface->ledTisch->show();
 
 
     }
+}
+void Licht::onRun(SystemInterface *systemInterface) {
+
 }
 void Licht::onStop(SystemInterface* systeminterface){
 

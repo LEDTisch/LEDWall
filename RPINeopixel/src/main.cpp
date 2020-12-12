@@ -69,13 +69,17 @@ void ani() {
 
 int main() {
 
-
-    controlSocket.begin();
     systeminterface->init();
+    controlSocket.begin();
+    applicationManager->begin();
+
+
 
     while(1) {
 
-if(applicationManager->getCurrentApplication()!=NULL) applicationManager->getCurrentApplication()->onRun(systeminterface);
+if(applicationManager->getCurrentApplication()!=NULL)
+    applicationManager->getCurrentApplication()->onRun(systeminterface);
+
     }
  //   return 0;
 

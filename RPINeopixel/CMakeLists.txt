@@ -4,4 +4,6 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories("${PROJECT_SOURCE_DIR}/*/")
 find_package (Threads)
 add_executable(RPINeopixel src/main.cpp)
+
+
 target_link_libraries (RPINeopixel ${CMAKE_THREAD_LIBS_INIT})

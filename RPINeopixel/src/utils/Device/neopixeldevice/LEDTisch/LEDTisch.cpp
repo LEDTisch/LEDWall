@@ -265,7 +265,6 @@ void LEDTisch::show() {
 
 
 
-
         pixels.show();
 
 

@@ -12,7 +12,8 @@ class Licht: public Application {
 public:
     Licht();
     void onCreate(SystemInterface* systeminterface);
-    void onRun(SystemInterface* systeminterface);
+    void onDraw(SystemInterface* systeminterface);
+    void onRun(SystemInterface* systemInterface);
     void onDataReceive(char* data, SystemInterface* systeminterface,int ControllerID);
     char* getName();
     void onStop(SystemInterface* systeminterface);

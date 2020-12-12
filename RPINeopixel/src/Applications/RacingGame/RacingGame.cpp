@@ -157,8 +157,50 @@ void tick()
 
 }
 
+void RacingGame::onRun(SystemInterface* systemInterface) {
 
-void RacingGame::onRun(SystemInterface* systeminterface){
+    if(gameend ==0) {
+
+
+        if ((millis() - lastfasttick) >= fasttickdelay) {
+
+
+            fasttickdelay -= 0.13f;
+
+            tick();
+
+            if (fasttickercounter == 3) {
+                fasttickercounter = 0;
+            }
+
+            for (int i = 0; i < 15; i++) {
+                ison[i] = false;
+
+                if ((i + fasttickercounter) % 3 == 0) {
+                    ison[i] = true;
+                }
+/*
+    if(i==12+fasttickercounter) {
+
+        ison[i] = true;
+
+    }
+*/
+
+            }
+
+
+            fasttickercounter++;
+            lastfasttick = millis();
+
+        }
+
+    }
+
+
+}
+
+void RacingGame::onDraw(SystemInterface* systeminterface){
 
     if(gameend ==0) {
 
@@ -261,7 +303,6 @@ void RacingGame::onRun(SystemInterface* systeminterface){
 
 
         }
-        systeminterface->ledTisch->show();
     }
 
 

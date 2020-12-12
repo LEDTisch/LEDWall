@@ -9,6 +9,8 @@
 #include <mutex>
 #include "ControlSocket.h"
 
+#include "lib/json_tokener.h"
+
 std::atomic<long> controllerCount(0);
 std::mutex myMutex;
 ControlSocket::ControlSocket(ApplicationManager *applicationManager,SystemInterface* systemInterface) {
@@ -61,6 +63,11 @@ void ControlSocket::readFromSocket(int* controllerNumber, int* Socket) {
         }
 
         printf("Player %u: %s", *controllerNumber, buffer);
+
+
+
+       printf("test  ");
+        printf(buffer);
 
         if (*controllerNumber == 1) {
             if(this->applicationManager->checkSystemCommand(buffer)) return; //Request was handled

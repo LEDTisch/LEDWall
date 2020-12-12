@@ -30,6 +30,7 @@ private:
     char buffer[1024] = {0};
      void acceptNewSockets();
      void readFromSocket(int* controllerNumber,int* Socket);
+
 };
 
 
