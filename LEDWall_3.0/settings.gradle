@@ -1,0 +1,3 @@
+rootProject.name = 'LEDWall_3.0'
+include 'LEDWall'
+
