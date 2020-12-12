@@ -8,26 +8,26 @@ class SocketController {
     private val socketServer = ServerSocket(8888)
     private val sockets = ArrayList<Socket>()
 
-    private fun readSocket(playerID: Int, socket: Socket) {
+    private fun readSocket( socket: Socket) {
         try {
-            println("Player $playerID joined")
+            println("Player ${sockets.indexOf(socket)} joined")
             while (true) {
                 val text = BufferedReader(InputStreamReader(socket.inputStream)).readLine()
                 if (text == null) {
-                    lostConnection(playerID, socket)
+                    lostConnection( socket)
                     return
                 }
-                println("Player $playerID: $text")
+                println("Player ${sockets.indexOf(socket)}: $text")
             }
         }catch (e:Exception) {
 
         }
     }
 
-    private fun lostConnection(playerID: Int, socket: Socket) {
+    private fun lostConnection( socket: Socket) {
         sockets.remove(socket)
-        println("Player $playerID left")
-        if (playerID == 1) {
+        println("Player ${sockets.indexOf(socket)} left")
+        if (sockets.indexOf(socket) == 1) {
             println("Master Player left! Disconnecting all others...")
             for (socket in sockets) {
                 socket.close()
@@ -39,7 +39,7 @@ class SocketController {
     private fun acceptNewSockets() {
         while (true) {
             sockets.add(socketServer.accept())
-            Thread { readSocket(sockets.size, sockets[sockets.size - 1]) }.start()
+            Thread { readSocket(sockets[sockets.size - 1]) }.start()
         }
     }
 
