@@ -1,6 +1,6 @@
 class ApplicationManager() {
 
-    private var currentApp:Application? = null;
+    private var currentApp: Application? = null;
     private var allowDrawing:Boolean = false;
 
     init {
@@ -11,11 +11,11 @@ class ApplicationManager() {
         return false
     }
 
-    fun getCurrentApplication():Application? {
+    fun getCurrentApplication(): Application? {
         return this.currentApp
     }
 
-    fun setApplication(app:Application)  {
+    fun setApplication(app: Application)  {
         this.currentApp = app
     }
 

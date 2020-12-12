@@ -1,4 +1,4 @@
-package neopixeldevice;
+package device.neopixeldevice;
 
 import com.fazecast.jSerialComm.SerialPort;
 
@@ -26,7 +26,7 @@ public class Neopixel {
         device = SerialPort.getCommPort("ttyACM0");
         device.setBaudRate(112500);
         device.openPort();
-        TimeUnit.MILLISECONDS.sleep(5000);
+        TimeUnit.MILLISECONDS.sleep(2000);
 
         System.out.println("Connected");
 
