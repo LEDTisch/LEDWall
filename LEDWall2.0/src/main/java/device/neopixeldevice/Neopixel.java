@@ -32,7 +32,7 @@ public class Neopixel {
 
     }
     public void show(){
-        System.arraycopy(this.buffer,0,sendbuffer,4,this.numpixels);
+        System.arraycopy(this.buffer,0,sendbuffer,4,this.numpixels*3);
         device.writeBytes(sendbuffer,sendbuffer.length);
 
     }
@@ -53,7 +53,7 @@ public class Neopixel {
     }
     public void clear(){
         for(int i=0;i<numpixels;i++){
-            setPixelColor(i,(byte)0,(byte)0,(byte)0);
+            setPixelColor(i,0,0,0);
         }
     }
 }
