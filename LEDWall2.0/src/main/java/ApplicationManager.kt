@@ -29,7 +29,7 @@ class ApplicationManager() {
     private fun runningThread() {
         while(true) {
             if (this.currentApp != null) this.currentApp!!.onRun()
-            TimeUnit.MILLISECONDS.sleep(10)
+            TimeUnit.MILLISECONDS.sleep(7)
         }
     }
 
@@ -39,7 +39,7 @@ class ApplicationManager() {
             if(this.currentApp!=null)
                 this.currentApp!!.onDraw();
             SystemInterface.table.show();
-            TimeUnit.MILLISECONDS.sleep(80)
+            TimeUnit.MILLISECONDS.sleep(60)
 
         }
 
