@@ -1,3 +1,5 @@
+package de.ft.ledwall
+
 interface Application {
 
     fun onCreate()

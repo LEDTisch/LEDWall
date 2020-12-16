@@ -1,4 +1,5 @@
-import apps.racingGame.RacingGame
+package de.ft.ledwall
+
 import java.util.concurrent.TimeUnit
 
 class ApplicationManager() {
@@ -28,7 +29,11 @@ class ApplicationManager() {
 
     private fun runningThread() {
         while(true) {
-            if (this.currentApp != null) this.currentApp!!.onRun()
+            try {
+                if (this.currentApp != null) this.currentApp!!.onRun()
+            }catch (e:Exception) {
+                error(e);
+            }
             TimeUnit.MILLISECONDS.sleep(7)
         }
     }
@@ -37,11 +42,30 @@ class ApplicationManager() {
         while(true) {
             if(!allowDrawing) continue
             if(this.currentApp!=null)
-                this.currentApp!!.onDraw();
+                try {
+                    this.currentApp!!.onDraw();
+                }catch (e:Exception) {
+                    error(e);
+                }
             SystemInterface.table.show();
             TimeUnit.MILLISECONDS.sleep(60)
 
         }
+
+    }
+
+    private fun error(e:Exception) {
+        try {
+            this.currentApp!!.onStop()
+        }catch (e:Exception){}
+        this.currentApp = null;
+
+        SystemInterface.table.clear()
+        SystemInterface.table.show()
+        println("Fehler!")
+        e.printStackTrace()
+
+
 
     }
 

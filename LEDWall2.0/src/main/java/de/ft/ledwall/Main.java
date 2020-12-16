@@ -1,6 +1,7 @@
+package de.ft.ledwall;
 
-import apps.racingGame.RacingGame;
-import device.neopixeldevice.Neopixel;
+import de.ft.ledwall.apps.racingGame.RacingGame;
+import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
 import java.io.FileNotFoundException;
 

@@ -1,9 +1,10 @@
-package apps.racingGame
+package de.ft.ledwall.apps.racingGame
 
-import Application
+import de.ft.ledwall.Application
+import de.ft.ledwall.SystemInterface
 
 
-class RacingGame:Application{
+class RacingGame: Application {
     var counter:Int = 0
     var row_x = IntArray(10)
     var fasttickdelay:Float = 100f //75

@@ -1,8 +1,7 @@
-package device.neopixeldevice;
+package de.ft.ledwall.device.neopixeldevice;
 
 import com.fazecast.jSerialComm.SerialPort;
 
-import java.io.*;
 import java.util.concurrent.TimeUnit;
 
 public class Neopixel {

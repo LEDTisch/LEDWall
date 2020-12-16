@@ -1,3 +1,5 @@
+package de.ft.ledwall
+
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket

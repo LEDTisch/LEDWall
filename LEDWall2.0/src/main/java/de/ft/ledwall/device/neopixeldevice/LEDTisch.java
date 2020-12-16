@@ -1,4 +1,4 @@
-package device.neopixeldevice;
+package de.ft.ledwall.device.neopixeldevice;
 
 import java.io.FileNotFoundException;
 
@@ -37,7 +37,7 @@ public class LEDTisch {
     public void drawPixel(int x, int y){
         this.strip.setPixelColor(calculateStripPixel(x,y), this.red, this.green, this.blue);
     }
-    public int calculateStripPixel(int x,int y){
+    private int calculateStripPixel(int x,int y){
         int PO = -1;
         if (x >= 0 && x < width && y >= 0 && y < height) {
 
