@@ -33,8 +33,7 @@ class RacingGame:Application{
             roadpieces[x][y]=false
         }
         }
-       // systeminterface->ledtisch->clear() todo
-       // systeminterface->ledtisch->show()
+        SystemInterface.table.clear()
 
         for(x in 0 until 10) {
             for(y in 0 until 15) {
@@ -56,8 +55,8 @@ class RacingGame:Application{
 
     private fun tick() {
         if (keepstate == 0) {
-            if (Math.random() % 10 > 7) {
-                if (Math.random() % 10 > 4) {
+            if (Math.random()*Int.MAX_VALUE % 10 > 7) {
+                if (Math.random()*Int.MAX_VALUE % 10 > 4) {
                     keepstate++
                     if (referenzpoint != 0) {
                         referenzpoint--
@@ -98,6 +97,8 @@ class RacingGame:Application{
 
 
     override fun onCreate() {
+
+
         lasttick = System.currentTimeMillis()
         lastfasttick = System.currentTimeMillis()
 
@@ -113,29 +114,30 @@ class RacingGame:Application{
                 for (x in 0..9) {
                     if (roadpieces[x][y]) {
                         if (ison[y]) {
-                           // { systeminterface -> { ledTisch -> setcolor(0, 160, 0) } }
-                          //  { systeminterface -> { ledTisch -> drawkoordinatensystem(x, y) } }
+
+                            SystemInterface.table.setColor(0,160,0)
+                            SystemInterface.table.drawPixel(x,y)
                         } else {
-                           // { systeminterface -> { ledTisch -> setcolor(100, 100, 100) } }
-                           // { systeminterface -> { ledTisch -> drawkoordinatensystem(x, y) } }
+                            SystemInterface.table.setColor(100,100,100)
+                            SystemInterface.table.drawPixel(x,y)
                         }
                     } else {
-                      //  { systeminterface -> { ledTisch -> setcolor(0, 0, 0) } }
-                       // { systeminterface -> { ledTisch -> drawkoordinatensystem(x, y) } }
+                        SystemInterface.table.setColor(0,0,0)
+                        SystemInterface.table.drawPixel(x,y)
                     }
                 }
                 if (counter > 2) {
                     counter = 0
                 }
             }
-            ////{ systeminterface -> { ledTisch -> setcolor(100, 0, 0) } }
-           // { systeminterface -> { ledTisch -> drawkoordinatensystem(pixelposx, pixelposy) } }
-            //{ systeminterface -> { ledTisch -> drawkoordinatensystem(pixelposx, pixelposy + 1) } }
+            SystemInterface.table.setColor(100,0,0)
+            SystemInterface.table.drawPixel(pixelposx,pixelposy)
+            SystemInterface.table.drawPixel(pixelposx,pixelposy+1)
             if (roadpieces[pixelposx][pixelposy] || roadpieces[pixelposx][pixelposy + 1]) {
                 for (x in 0..9) {
                     for (y in 0..14) {
-                      //  { systeminterface -> { ledTisch -> setcolor(100, 0, 0) } }
-                      //  { systeminterface -> { ledTisch -> drawkoordinatensystem(x, y) } }
+                        SystemInterface.table.setColor(100,0,0)
+                        SystemInterface.table.drawPixel(x,y)
                     }
                 }
                 gameend = 1
@@ -172,12 +174,12 @@ class RacingGame:Application{
     }
 
     override fun onDataReceive(data: String, playerID: Int) {
-        if(data.contentEquals("h\n")) pixelposy++
-        if(data.contentEquals("r\n")) pixelposx++
-        if(data.contentEquals("l\n")) pixelposx--
-        if(data.contentEquals("d\n")) pixelposy--
+        if(data.contentEquals("h")) pixelposy++
+        if(data.contentEquals("r")) pixelposx++
+        if(data.contentEquals("l")) pixelposx--
+        if(data.contentEquals("d")) pixelposy--
 
-        if(data.contentEquals("n\n")) reset()
+        if(data.contentEquals("n")) reset()
     }
 
     override fun getName(): String {

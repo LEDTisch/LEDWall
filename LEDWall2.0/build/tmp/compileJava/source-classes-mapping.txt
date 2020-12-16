@@ -1,7 +1,7 @@
-SystemInterface.java
- SystemInterface
 Var.java
  Var
+SystemInterface.java
+ SystemInterface
 device/neopixeldevice/LEDTisch.java
  device.neopixeldevice.LEDTisch
 device/neopixeldevice/Neopixel.java

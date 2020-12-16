@@ -1,10 +1,14 @@
+import apps.racingGame.RacingGame
+import java.util.concurrent.TimeUnit
+
 class ApplicationManager() {
 
-    private var currentApp: Application? = null;
-    private var allowDrawing:Boolean = false;
+    private var currentApp: Application? = null
+    private var allowDrawing:Boolean = true
 
-    init {
-        Thread{drawingThread()}.start()
+    fun init() {
+        Thread { drawingThread() }.start()
+        Thread { runningThread() }.start()
     }
 
     fun checkSystemCommand(command:String):Boolean {
@@ -16,18 +20,26 @@ class ApplicationManager() {
     }
 
     fun setApplication(app: Application)  {
+        if(this.currentApp!=null) this.currentApp!!.onStop()
         this.currentApp = app
+        if(this.currentApp!=null) app.onCreate()
+    }
+
+
+    private fun runningThread() {
+        while(true) {
+            if (this.currentApp != null) this.currentApp!!.onRun()
+            TimeUnit.MILLISECONDS.sleep(10)
+        }
     }
 
     private fun drawingThread() {
-        var lastDrawTime:Long;
         while(true) {
-            lastDrawTime = System.currentTimeMillis()
             if(!allowDrawing) continue
             if(this.currentApp!=null)
                 this.currentApp!!.onDraw();
-            Main.neo.show();
-            while(System.currentTimeMillis()-lastDrawTime<60);
+            SystemInterface.table.show();
+            TimeUnit.MILLISECONDS.sleep(80)
 
         }
 

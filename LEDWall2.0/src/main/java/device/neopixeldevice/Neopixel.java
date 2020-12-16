@@ -22,7 +22,7 @@ public class Neopixel {
         sendbuffer[3] = low;
         sendbuffer[sendbuffer.length-1]=(byte)0x36;
     }
-    public void begin() throws FileNotFoundException, InterruptedException {
+    public void begin() throws InterruptedException {
         device = SerialPort.getCommPort("ttyACM0");
         device.setBaudRate(112500);
         device.openPort();

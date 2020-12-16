@@ -10,14 +10,16 @@ class SocketController {
 
     private fun readSocket( socket: Socket) {
         try {
-            println("Player ${sockets.indexOf(socket)} joined")
+            println("Player ${sockets.indexOf(socket)+1} joined")
             while (true) {
                 val text = BufferedReader(InputStreamReader(socket.inputStream)).readLine()
                 if (text == null) {
                     lostConnection( socket)
                     return
                 }
-                println("Player ${sockets.indexOf(socket)}: $text")
+                println("Player ${sockets.indexOf(socket)+1}: $text")
+                Main.am.getCurrentApplication()!!.onDataReceive(text,sockets.indexOf(socket)+1) //TODO Debug
+
             }
         }catch (e:Exception) {
 
@@ -25,15 +27,16 @@ class SocketController {
     }
 
     private fun lostConnection( socket: Socket) {
-        sockets.remove(socket)
-        println("Player ${sockets.indexOf(socket)} left")
-        if (sockets.indexOf(socket) == 1) {
+        println("Player ${sockets.indexOf(socket)+1} left")
+        if (sockets.indexOf(socket)+1 == 1) {
             println("Master Player left! Disconnecting all others...")
             for (socket in sockets) {
                 socket.close()
             }
             sockets.clear()
         }
+        sockets.remove(socket)
+
     }
 
     private fun acceptNewSockets() {
