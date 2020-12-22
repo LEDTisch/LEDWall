@@ -10,7 +10,5 @@ de/ft/ledwall/Main.java
  de.ft.ledwall.Main
 de/ft/ledwall/apps/tetris/Form.java
  de.ft.ledwall.apps.tetris.Form
-de/ft/ledwall/device/neopixeldevice/Neopixel.java
- de.ft.ledwall.device.neopixeldevice.Neopixel
 de/ft/ledwall/Var.java
  de.ft.ledwall.Var

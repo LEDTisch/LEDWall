@@ -13,12 +13,13 @@ public class Main {
     public static ApplicationManager am = new ApplicationManager();
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+
         sc.initSocket();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
         SystemInterface.table.setColor(255,255,255);
         SystemInterface.table.show();
-        TimeUnit.MILLISECONDS.sleep(1000);
+        new Red();
 
         am.init();
         am.setApplication(new Tetris());

@@ -1,6 +1,9 @@
 package de.ft.ledwall.device.neopixeldevice;
 
+import de.ft.ledwall.SystemInterface;
+
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class LEDTisch {
     private int width;
@@ -88,7 +91,14 @@ public class LEDTisch {
         }
         return PO;
     }
-    public void drawdigit(int x, int y, int digit){
+
+
+    public void copyFrameToPixelBuffer(int[] frame) {
+
+        for(int i=0;i<frame.length;i++) {
+            strip.setPixelColor(i,frame[i]);
+        }
+
 
     }
 
