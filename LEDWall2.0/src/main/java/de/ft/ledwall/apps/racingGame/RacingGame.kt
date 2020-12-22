@@ -2,6 +2,7 @@ package de.ft.ledwall.apps.racingGame
 
 import de.ft.ledwall.Application
 import de.ft.ledwall.SystemInterface
+import de.ft.ledwall.animation.AnimationManager
 
 
 class RacingGame: Application {
@@ -20,6 +21,8 @@ class RacingGame: Application {
     var firstone:Boolean = true
     var keepstate:Int = 0 //Keep State meens a natural street
 
+
+    var ani_manager:AnimationManager = AnimationManager()
 
     fun reset() {
         for(i in 0 until 10){
@@ -103,11 +106,14 @@ class RacingGame: Application {
         lasttick = System.currentTimeMillis()
         lastfasttick = System.currentTimeMillis()
 
+        ani_manager.addToQueue(AnimationManager.test)
         counter =0
         reset()
     }
 
     override fun onDraw() {
+        if(ani_manager.update()) return
+
         if (gameend == 0) {
             var counter = 0
             for (y in 0..14) {
@@ -148,6 +154,7 @@ class RacingGame: Application {
     }
 
     override fun onRun() {
+        if(ani_manager.animationsAvailable()) return
         if (gameend == 0) {
             if (System.currentTimeMillis() - lastfasttick >= fasttickdelay) {
                 fasttickdelay -= 0.13f
