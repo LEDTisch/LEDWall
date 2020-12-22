@@ -4,6 +4,7 @@ import de.ft.ledwall.apps.racingGame.RacingGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     private static Neopixel neo = new Neopixel(150);
@@ -14,7 +15,10 @@ public class Main {
         sc.initSocket();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
+        SystemInterface.table.setColor(255,255,255);
+        SystemInterface.table.drawPixel(4,4);
         SystemInterface.table.show();
+        TimeUnit.MILLISECONDS.sleep(1000);
 
         am.init();
         am.setApplication(new RacingGame());
