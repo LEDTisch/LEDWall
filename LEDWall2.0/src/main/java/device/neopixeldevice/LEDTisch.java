@@ -35,7 +35,6 @@ public class LEDTisch {
         strip.show();
     }
     public void drawPixel(int x, int y){
-        System.out.println(calculateStripPixel(x,y));
         this.strip.setPixelColor(calculateStripPixel(x, y), this.red, this.green, this.blue);
     }
     public int calculateStripPixel(int x,int y){

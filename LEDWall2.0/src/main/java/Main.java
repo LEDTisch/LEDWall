@@ -14,7 +14,7 @@ public class Main {
         table.init(neo);
         table.clear();
         table.setColor(255,0,0);
-        table.drawPixel(0,0);
+        table.drawPixel(5,14);
         table.show();
     }
 }

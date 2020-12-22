@@ -17,13 +17,14 @@ public class Neopixel {
         sendbuffer[0]=(byte)0xC9;
         sendbuffer[1]=(byte)0xDA;
         byte high = (byte)(this.numpixels*3 >> 8);
-        sendbuffer[2] = high;
         byte low = (byte)(this.numpixels*3);
-        sendbuffer[3] = low;
+
+        sendbuffer[2] = low;
+        sendbuffer[3] = high;
         sendbuffer[sendbuffer.length-1]=(byte)0x36;
     }
     public void begin() throws FileNotFoundException, InterruptedException {
-        device = SerialPort.getCommPort("ttyACM0");
+        device = SerialPort.getCommPort("COM3");
         device.setBaudRate(112500);
         device.openPort();
         TimeUnit.MILLISECONDS.sleep(2000);
