@@ -2,6 +2,7 @@ package de.ft.ledwall.apps.felixtetris;
 
 import de.ft.ledwall.Application;
 import de.ft.ledwall.SystemInterface;
+import de.ft.ledwall.Var;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -9,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 public class Tetris implements Application {
 
 
-    public SystemInterface systeminterface;
     Block block= new Block(5,8,5);
 
     int v=0;
@@ -509,16 +509,15 @@ public class Tetris implements Application {
 
     @Override
     public void onCreate() {
-        this.systeminterface=systeminterface;
 
 
 
 
 
-        block.init(this.systeminterface);
+        block.init();
 
 
-        this.systeminterface.table.clear();
+        SystemInterface.table.clear();
 
         //TODO HARDWARE this.systeminterface.ledFeld.setcolor(100,0,0);
 
@@ -533,7 +532,7 @@ public class Tetris implements Application {
         if(beistartausfuhren==true){
             ani_start();
             beistartausfuhren=false;
-            art=2;
+            art=(int)(Math.random()*7);
         }
 
         if(stop==1){
@@ -577,7 +576,7 @@ public class Tetris implements Application {
 //levelanzeigen();
             block.show();
 
-            artnext=2;
+            artnext=(int)(Math.random()*7);
             //art=3;
             setblockcolor(art,0);
 

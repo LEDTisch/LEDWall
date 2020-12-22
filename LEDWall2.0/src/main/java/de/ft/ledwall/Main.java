@@ -1,5 +1,6 @@
 package de.ft.ledwall;
 
+import de.ft.ledwall.animation.Red.Red;
 import de.ft.ledwall.apps.felixtetris.Tetris;
 import de.ft.ledwall.apps.racingGame.RacingGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
