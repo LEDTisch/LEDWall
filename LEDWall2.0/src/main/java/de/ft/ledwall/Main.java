@@ -1,5 +1,6 @@
 package de.ft.ledwall;
 
+import de.ft.ledwall.apps.felixtetris.Tetris;
 import de.ft.ledwall.apps.racingGame.RacingGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
@@ -16,12 +17,11 @@ public class Main {
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
         SystemInterface.table.setColor(255,255,255);
-        SystemInterface.table.drawPixel(4,4);
         SystemInterface.table.show();
         TimeUnit.MILLISECONDS.sleep(1000);
 
         am.init();
-        am.setApplication(new RacingGame());
+        am.setApplication(new Tetris());
 
     }
 }

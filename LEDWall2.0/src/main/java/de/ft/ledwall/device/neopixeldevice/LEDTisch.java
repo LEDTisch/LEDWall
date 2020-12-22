@@ -38,7 +38,7 @@ public class LEDTisch {
         this.strip.setPixelColor(calculateStripPixel(x,y), this.red, this.green, this.blue);
     }
     private int calculateStripPixel(int x,int y){
-        int PO = -1;
+        int PO = 0;
         if (x >= 0 && x < width && y >= 0 && y < height) {
 
             int led = 0;
