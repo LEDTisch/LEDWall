@@ -22,7 +22,6 @@ public class Block {
     int f6[][] = {{1, 0},{1, 0},{1, 1},{0, 0}};
 
 
-    SystemInterface systeminterface;
 
     public Block(int x,int y,int art)
     {
@@ -51,13 +50,12 @@ int Block::reihenkontrolle(){
 */
 
 
-    public void init(SystemInterface systemInterface){
+    public void init(){
         // l.init(_pin);
-        this.systeminterface=systemInterface;
     }
 
     public void show(){
-        this.systeminterface.table.show();
+        SystemInterface.table.show();
     }
 
 
@@ -138,7 +136,7 @@ int Block::reihenkontrolle(){
         rot=r;
         gruen=g;
         blau=b;
-        this.systeminterface.table.setColor(rot,gruen,blau);
+        SystemInterface.table.setColor(rot,gruen,blau);
     }
 
 
@@ -146,16 +144,16 @@ int Block::reihenkontrolle(){
         for(int x=0;x<10;x=x+1){
             for(int y=0;y<15;y=y+1){
                 if(all[y][x]==1){
-                    this.systeminterface.table.setColor(allfarbe[y][x][0],allfarbe[y][x][1],allfarbe[y][x][2]);
-                    this.systeminterface.table.drawPixel(x,y);
+                    SystemInterface.table.setColor(allfarbe[y][x][0],allfarbe[y][x][1],allfarbe[y][x][2]);
+                    SystemInterface.table.drawPixel(x,y);
                 }
             }
         }
-        this.systeminterface.table.show();
+        SystemInterface.table.show();
     }
 
     public void clearall(){
-        this.systeminterface.table.clear();
+        SystemInterface.table.clear();
     }
 
     public void clearallarray(){
@@ -174,9 +172,9 @@ int Block::reihenkontrolle(){
     {
         boolean failed=false;
 
-        this.systeminterface.table.setColor(0,0,0);
+        SystemInterface.table.setColor(0,0,0);
         draw();
-        this.systeminterface.table.setColor(rot,gruen,blau);
+        SystemInterface.table.setColor(rot,gruen,blau);
         drehung=drehung+1;
         if(drehung>3){
             drehung=0;
@@ -195,30 +193,30 @@ int Block::reihenkontrolle(){
 
     public void down()
     {
-        this.systeminterface.table.setColor(0,0,0);
+        SystemInterface.table.setColor(0,0,0);
         draw();
         y=y-1;
-        this.systeminterface.table.setColor(rot,gruen,blau);
+        SystemInterface.table.setColor(rot,gruen,blau);
         draw();
 
     }
 
     public void right()
     {
-        this.systeminterface.table.setColor(0,0,0);
+        SystemInterface.table.setColor(0,0,0);
         draw();
         x=x+1;
-        this.systeminterface.table.setColor(rot,gruen,blau);
+        SystemInterface.table.setColor(rot,gruen,blau);
         draw();
 
     }
 
     public void left()
     {
-        this.systeminterface.table.setColor(0,0,0);
+        SystemInterface.table.setColor(0,0,0);
         draw();
         x=x-1;
-        this.systeminterface.table.setColor(rot,gruen,blau);
+        SystemInterface.table.setColor(rot,gruen,blau);
         draw();
 
     }
@@ -241,32 +239,32 @@ int Block::reihenkontrolle(){
                         switch(art){
                             case 1:
                                 if(f1[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(xd+x,2-yd+y);
+                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
                                 }
                                 break;
                             case 2:
                                 if(f2[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(xd+x,2-yd+y);
+                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
                                 }
                                 break;
                             case 3:
                                 if(f3[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(xd+x,2-yd+y);
+                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
                                 }
                                 break;
                             case 4:
                                 if(f4[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(xd+x,2-yd+y);
+                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
                                 }
                                 break;
                             case 5:
                                 if(f5[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(xd+x,2-yd+y);
+                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
                                 }
                                 break;
                             case 6:
                                 if(f6[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(xd+x,2-yd+y);
+                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
                                 }
                                 break;
                         }
@@ -284,28 +282,28 @@ int Block::reihenkontrolle(){
                         switch(art){
                             case 1:
                                 if(f1[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-yd+x,2-xd+y);
+                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);
                                 }
                                 break;
                             case 2:
                                 if(f2[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-yd+x,2-xd+y);        }
+                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
                                 break;
                             case 3:
                                 if(f3[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-yd+x,2-xd+y);        }
+                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
                                 break;
                             case 4:
                                 if(f4[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-yd+x,2-xd+y);        }
+                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
                                 break;
                             case 5:
                                 if(f5[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-yd+x,2-xd+y);        }
+                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
                                 break;
                             case 6:
                                 if(f6[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-yd+x,2-xd+y);        }
+                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
                                 break;
                         }
 
@@ -329,32 +327,32 @@ int Block::reihenkontrolle(){
                         switch(art){
                             case 1:
                                 if(f1[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-xd+x,yd+y);
+                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
                                 }
                                 break;
                             case 2:
                                 if(f2[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-xd+x,yd+y);
+                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
                                 }
                                 break;
                             case 3:
                                 if(f3[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-xd+x,yd+y);
+                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
                                 }
                                 break;
                             case 4:
                                 if(f4[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-xd+x,yd+y);
+                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
                                 }
                                 break;
                             case 5:
                                 if(f5[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-xd+x,yd+y);
+                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
                                 }
                                 break;
                             case 6:
                                 if(f6[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(2-xd+x,yd+y);
+                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
                                 }
                                 break;
                         }
@@ -383,32 +381,32 @@ int Block::reihenkontrolle(){
                         switch(art){
                             case 1:
                                 if(f1[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(yd+x,xd+y);
+                                    SystemInterface.table.drawPixel(yd+x,xd+y);
                                 }
                                 break;
                             case 2:
                                 if(f2[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(yd+x,xd+y);
+                                    SystemInterface.table.drawPixel(yd+x,xd+y);
                                 }
                                 break;
                             case 3:
                                 if(f3[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(yd+x,xd+y);
+                                    SystemInterface.table.drawPixel(yd+x,xd+y);
                                 }
                                 break;
                             case 4:
                                 if(f4[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(yd+x,xd+y);
+                                    SystemInterface.table.drawPixel(yd+x,xd+y);
                                 }
                                 break;
                             case 5:
                                 if(f5[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(yd+x,xd+y);
+                                    SystemInterface.table.drawPixel(yd+x,xd+y);
                                 }
                                 break;
                             case 6:
                                 if(f6[yd][xd]==1){
-                                    this.systeminterface.table.drawPixel(yd+x,xd+y);
+                                    SystemInterface.table.drawPixel(yd+x,xd+y);
                                 }
                                 break;
                         }
@@ -428,7 +426,7 @@ int Block::reihenkontrolle(){
 
         }
 
-        this.systeminterface.table.show();
+        SystemInterface.table.show();
     }
 
     public int kontrollpixel(int x,int y, int k){
@@ -474,21 +472,28 @@ int Block::reihenkontrolle(){
                 koli=1;
             }
 
-            if(all[y-1][x]==1 && k==5){
-                koli=1;
+            if(y-1<15 && y-1>=0 && x>=0 && x<10) {
+                if (all[y - 1][x] == 1 && k == 5) {
+                    koli = 1;
 
+                }
             }
-            if(all[y][x+1]==1 && k==6){
-                koli=1;
+            if(x+1<10 && x+1>=0 && y>=0 && y<15) {
+                if (all[y][x + 1] == 1 && k == 6) {
+                    koli = 1;
 
+                }
             }
-            if(all[y][x-1]==1 && k==7){
-                koli=1;
+            if(x-1>=0 && x-1<10 && y>=0 && y<15) {
+                if (all[y][x - 1] == 1 && k == 7) {
+                    koli = 1;
 
+                }
             }
-
-            if(all[y][x]==1 && k==8){
-                koli=1;
+            if(y>=0 && y<15 && x>=0 && x<10) {
+                if (all[y][x] == 1 && k == 8) {
+                    koli = 1;
+                }
             }
             if(x<0 && k==8){
                 koli=1;
