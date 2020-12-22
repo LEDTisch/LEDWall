@@ -3,31 +3,28 @@ package de.ft.ledwall.apps.racingGame
 import de.ft.ledwall.Application
 import de.ft.ledwall.SystemInterface
 import de.ft.ledwall.animation.AnimationManager
+import de.ft.ledwall.animation.dynamic.PengAnimation
 
 
 class RacingGame: Application {
-    var counter:Int = 0
-    var row_x = IntArray(10)
     var fasttickdelay:Float = 100f //75
     var ison = BooleanArray(15)
     var fasttickercounter:Int =0
     var gameend:Int = 0
     var referenzpoint:Int =4 //Point where the left roadside is
-    var pixelposx:Int=referenzpoint+1
-    var pixelposy:Int=5
+    var carposx:Int=referenzpoint+1
+    var carposy:Int=5
     var roadpieces = Array(10) {BooleanArray(16)}
     var  lasttick:Long=0
     var lastfasttick:Long=0
     var firstone:Boolean = true
-    var keepstate:Int = 0 //Keep State meens a natural street
+    var keepstate:Int = 2 //Keep State meens a natural street
 
 
     var ani_manager:AnimationManager = AnimationManager()
 
     fun reset() {
-        for(i in 0 until 10){
-            row_x[i]=0
-        }
+
         for(i in 0 until 15){
             ison[i]=false
         }
@@ -48,9 +45,9 @@ class RacingGame: Application {
 
         firstone = true
 
-        pixelposy = 5
-        pixelposx = 5
-        keepstate = 0
+        carposy = 5
+        carposx = 5
+        keepstate = 2
         gameend = 0
         fasttickdelay = 100f
         fasttickercounter =1
@@ -74,7 +71,7 @@ class RacingGame: Application {
             }
         } else {
             keepstate++
-            if (keepstate == 2) {
+            if (keepstate >= 2) {
                 keepstate = 0
             }
         }
@@ -106,16 +103,15 @@ class RacingGame: Application {
         lasttick = System.currentTimeMillis()
         lastfasttick = System.currentTimeMillis()
 
-        //ani_manager.addToQueue(AnimationManager.rainbowOut)
-        ani_manager.addToQueue(AnimationManager.rainbowInAndOut)
-        counter =0
         reset()
     }
 
     override fun onDraw() {
-        if(ani_manager.update()) return
+        try {
 
-        if (gameend == 0) {
+            if (ani_manager.update() && ani_manager.animationQueue.size > 0 && !ani_manager.animationQueue[0].getName()
+                    .contentEquals("peng")
+            ) return
             var counter = 0
             for (y in 0..14) {
                 counter++
@@ -123,33 +119,55 @@ class RacingGame: Application {
                     if (roadpieces[x][y]) {
                         if (ison[y]) {
 
-                            SystemInterface.table.setColor(0,160,0)
-                            SystemInterface.table.drawPixel(x,y)
+                            SystemInterface.table.setColor(0, 160, 0)
+                            SystemInterface.table.drawPixel(x, y)
                         } else {
-                            SystemInterface.table.setColor(100,100,100)
-                            SystemInterface.table.drawPixel(x,y)
+                            SystemInterface.table.setColor(100, 100, 100)
+                            SystemInterface.table.drawPixel(x, y)
                         }
                     } else {
-                        SystemInterface.table.setColor(0,0,0)
-                        SystemInterface.table.drawPixel(x,y)
+                        SystemInterface.table.setColor(0, 0, 0)
+                        SystemInterface.table.drawPixel(x, y)
                     }
                 }
                 if (counter > 2) {
                     counter = 0
                 }
             }
-            SystemInterface.table.setColor(100,0,0)
-            SystemInterface.table.drawPixel(pixelposx,pixelposy)
-            SystemInterface.table.drawPixel(pixelposx,pixelposy+1)
-            if (roadpieces[pixelposx][pixelposy] || roadpieces[pixelposx][pixelposy + 1]) {
-                for (x in 0..9) {
-                    for (y in 0..14) {
-                        SystemInterface.table.setColor(100,0,0)
-                        SystemInterface.table.drawPixel(x,y)
-                    }
+            SystemInterface.table.setColor(100, 0, 0)
+            SystemInterface.table.drawPixel(carposx, carposy)
+            SystemInterface.table.drawPixel(carposx, carposy + 1)
+
+
+            if (ani_manager.update() && ani_manager.animationQueue.size > 0 && ani_manager.animationQueue[0].getName()
+                    .contentEquals("peng")
+            ) return
+
+            if (gameend == 0) {
+                if (ani_manager.animationsAvailable()) return
+                if (roadpieces[carposx][carposy] || roadpieces[carposx][carposy + 1]) {
+
+                    ani_manager.addToQueue(PengAnimation.getAnimation(carposx, carposy));
+
+
+                    gameend = 1
                 }
-                gameend = 1
+            } else {
+                //for (x in 0..9) {
+                //for (y in 0..14) {
+                //SystemInterface.table.setColor(100,0,0)
+                // SystemInterface.table.drawPixel(x,y)
+                // }
+                // }
+                ani_manager.addToQueue(AnimationManager.redGameOver)
+
+                reset()
+                gameend = 0
             }
+        }catch (e:Exception) {
+            ani_manager.addToQueue(PengAnimation.getAnimation(carposx, carposy));
+
+            gameend = 1
         }
 
     }
@@ -183,12 +201,15 @@ class RacingGame: Application {
     }
 
     override fun onDataReceive(data: String, playerID: Int) {
-        if(data.contentEquals("h")) pixelposy++
-        if(data.contentEquals("r")) pixelposx++
-        if(data.contentEquals("l")) pixelposx--
-        if(data.contentEquals("d")) pixelposy--
-
         if(data.contentEquals("n")) reset()
+        if(gameend==1) return
+        if(ani_manager.animationsAvailable()) return
+        if(data.contentEquals("h")) carposy++
+        if(data.contentEquals("r")) carposx++
+        if(data.contentEquals("l")) carposx--
+        if(data.contentEquals("d")) carposy--
+
+
     }
 
     override fun getName(): String {

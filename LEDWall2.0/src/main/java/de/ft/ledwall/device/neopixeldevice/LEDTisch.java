@@ -101,7 +101,7 @@ public class LEDTisch {
 
 
 
-                if(skipOff) if(frame[i]==-16777216) continue;
+                if(skipOff) if(frame[i]==0) {i++;continue;};
                 strip.setPixelColor(this.calculateStripPixel(x,y),frame[i]);
 
                 i++;

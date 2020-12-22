@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 public class AnimationManager {
 
+    //Static Animations
     public static Animation test = AnimationFileParser.Companion.parseFile("rgb.txt");
     public static Animation rainbowOut = RainbowOut.getAnimation();
     public static Animation rainbowInAndOut = RainbowInAndOut.getAnimation();
+    public static Animation redGameOver = RedGameOver.getAnimation();
 
     int currentStep = 0;
     long frameStart =-1;
@@ -40,5 +42,7 @@ public class AnimationManager {
         animationQueue.add(animation);
     }
 
-
+    public ArrayList<Animation> getAnimationQueue() {
+        return animationQueue;
+    }
 }

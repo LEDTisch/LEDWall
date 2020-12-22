@@ -17,7 +17,7 @@ class Animation {
         this.ani_name=name
         this.frames =frames
         this.durations =durations
-        this.skipOff = true;
+        this.skipOff = skipOff;
     }
 
     fun getFrame(frame:Int):IntArray {
