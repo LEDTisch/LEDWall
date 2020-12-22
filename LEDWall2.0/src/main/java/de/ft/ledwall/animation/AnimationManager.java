@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class AnimationManager {
 
     public static Animation test = AnimationFileParser.Companion.parseFile("rgb.txt");
+    public static Animation anistart = AniStart.aniStart();
 
     int currentStep = 0;
     long frameStart =-1;

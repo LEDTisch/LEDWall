@@ -106,7 +106,7 @@ class RacingGame: Application {
         lasttick = System.currentTimeMillis()
         lastfasttick = System.currentTimeMillis()
 
-        ani_manager.addToQueue(AnimationManager.test)
+        ani_manager.addToQueue(AnimationManager.anistart)
         counter =0
         reset()
     }
