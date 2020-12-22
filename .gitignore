@@ -3,3 +3,5 @@
 RPINeopixel/.idea/deployment.xml
 RPINeopixel/cmake-build-remote-pi/
 RPINeopixel/cmake-build-remote-pi/cmake_install.cmake
+LEDWall2.0/.gradle/
+LEDWall2.0/build/
