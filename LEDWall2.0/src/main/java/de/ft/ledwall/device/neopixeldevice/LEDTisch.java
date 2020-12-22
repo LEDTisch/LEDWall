@@ -95,8 +95,18 @@ public class LEDTisch {
 
     public void copyFrameToPixelBuffer(int[] frame) {
 
-        for(int i=0;i<frame.length;i++) {
-            strip.setPixelColor(i,frame[i]);
+        int i=0;
+        for(int y=0;y<this.height;y++) {
+        for(int x=0;x<this.width;x++) {
+
+
+
+
+                strip.setPixelColor(this.calculateStripPixel(x,y),frame[i]);
+
+        i++;
+            }
+
         }
 
 

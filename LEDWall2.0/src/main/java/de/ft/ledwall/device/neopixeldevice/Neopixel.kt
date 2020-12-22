@@ -16,7 +16,7 @@ class Neopixel(numpixels: Int) {
         device = SerialPort.getCommPort("ttyACM0")
         device!!.baudRate = 112500
         device!!.openPort()
-        TimeUnit.MILLISECONDS.sleep(2000)
+        TimeUnit.MILLISECONDS.sleep(2500)
         println("Connected")
     }
 

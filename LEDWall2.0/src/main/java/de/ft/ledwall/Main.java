@@ -4,6 +4,7 @@ import de.ft.ledwall.animation.Red.Red;
 import de.ft.ledwall.apps.racingGame.RacingGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 
@@ -14,14 +15,15 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
+//System.out.println(new Color(255,0,0).getRGB());
         sc.initSocket();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
         SystemInterface.table.show();
         new Red();
 
-        am.init();
-        am.setApplication(new RacingGame());
+      //  am.init();
+      //  am.setApplication(new RacingGame());
 
     }
 }
