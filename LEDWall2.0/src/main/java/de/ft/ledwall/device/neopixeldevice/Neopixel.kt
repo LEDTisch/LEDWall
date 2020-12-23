@@ -13,7 +13,7 @@ class Neopixel(numpixels: Int) {
     private val sendbuffer: ByteArray
     @Throws(InterruptedException::class)
     fun begin() {
-        device = SerialPort.getCommPort("ttyACM0")
+        device = SerialPort.getCommPort("COM3")
         device!!.baudRate = 112500
         device!!.openPort()
         TimeUnit.MILLISECONDS.sleep(2500)

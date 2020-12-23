@@ -78,159 +78,6 @@ public class Tetris implements Application {
 
 
 
-    long[] image={
-        15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                921328,
-                921328,
-                921328,
-                921328,
-                921328,
-                921328,
-                921328,
-                921328,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15740942,
-                15732291,
-                15732291,
-                15740942,
-                15740942,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                0,
-                0,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-                65280,
-    };
-
 
 
 
@@ -386,6 +233,7 @@ public class Tetris implements Application {
 
 
     void show_nextblock(int art,int artalt){
+        /*
         int xx=4;
         int yy=-1;
         int[][][] blocks_gros=
@@ -444,14 +292,14 @@ public class Tetris implements Application {
         }
 
         //TODO HARDWARE this.systeminterface.ledFeld.show();
-
+*/
     }
 
 
 
     int numpixels=60;
 
-
+/*
     void regenbogen(){
 
         for(int r=0;r<numpixels;r=r+1){
@@ -471,7 +319,7 @@ public class Tetris implements Application {
 
     }
 
-
+*/
 
 
 
@@ -642,7 +490,7 @@ public class Tetris implements Application {
 
     @Override
     public void onDataReceive(@NotNull String data, int playerID) {
-        if(data=="t"){
+        if(data.contentEquals("t")){
             if(block.drehen()){
 //sound(sound_rotatefailed);
             }else{
@@ -651,17 +499,17 @@ public class Tetris implements Application {
 
         }
 
-        if(data=="r"&&block.kontrolle(1)==0&&block.kontrolle(6)==0){
+        if(data.contentEquals("r")&&block.kontrolle(1)==0&&block.kontrolle(6)==0){
             block.right();
 //  sound(sound_button);
         }
 
-        if(data=="l"&&block.kontrolle(3)==0&&block.kontrolle(7)==0){
+        if(data.contentEquals("l")&&block.kontrolle(3)==0&&block.kontrolle(7)==0){
             block.left();
             // sound(sound_button);
         }
 
-        if(data=="d"){
+        if(data.contentEquals("d")){
             speed=50;
             blockschneller=true;
         }else{
@@ -671,7 +519,7 @@ public class Tetris implements Application {
         }
 
 
-        if(data=="n"){
+        if(data.contentEquals("n")){
             neuesspiel();
         }
     }

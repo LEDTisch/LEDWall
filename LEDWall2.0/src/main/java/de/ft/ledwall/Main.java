@@ -2,6 +2,7 @@ package de.ft.ledwall;
 
 import de.ft.ledwall.animation.AnimationFileParser;
 import de.ft.ledwall.animation.AnimationManager;
+import de.ft.ledwall.apps.felixtetris.Tetris;
 import de.ft.ledwall.apps.racingGame.RacingGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
@@ -23,7 +24,7 @@ public class Main {
 
 
         am.init();
-        am.setApplication(new RacingGame());
+        am.setApplication(new Tetris());
 
     }
 }

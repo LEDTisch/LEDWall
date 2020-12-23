@@ -10,8 +10,8 @@ public class Block {
     int gruen=0;
     int blau=0;
     int drehung=0;
-    byte[][] all=new byte[15][10];
-    byte[][][] allfarbe=new byte[15][10][3];
+    int[][] all=new int[15][10];
+    int[][][] allfarbe=new int[15][10][3];
 
 
     int f1[][] = {{1, 0},{1, 1},{0, 1},{0, 0}};
@@ -508,9 +508,9 @@ int Block::reihenkontrolle(){
         if(s==1){
             if(x>=0 && x<10 && y>=0 && y<15){
                 all[y][x]=1;
-                allfarbe[y][x][0]=(byte)rot;
-                allfarbe[y][x][1]=(byte)gruen;
-                allfarbe[y][x][2]=(byte)blau;
+                allfarbe[y][x][0]=rot;
+                allfarbe[y][x][1]=gruen;
+                allfarbe[y][x][2]=blau;
             }
             if(y>=15){
                 koli=10;
