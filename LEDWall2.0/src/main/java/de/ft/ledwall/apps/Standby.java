@@ -24,10 +24,12 @@ public Long lastdraw = 0L;
             ani_manager.addToQueue(AnimationManager.christmasTree);
             ani_manager.addToQueue(AnimationManager.christmasTree);
             ani_manager.addToQueue(AnimationManager.christmasTree);
-            ani_manager.update();
             lastdraw = System.currentTimeMillis();
 
         }
+
+        ani_manager.update();
+
     }
 
     @Override
@@ -43,7 +45,7 @@ public Long lastdraw = 0L;
     @NotNull
     @Override
     public String getName() {
-        return "test";
+        return "Standby";
     }
 
     @Override
