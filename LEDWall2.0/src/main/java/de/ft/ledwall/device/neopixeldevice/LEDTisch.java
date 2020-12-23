@@ -93,7 +93,7 @@ public class LEDTisch {
     }
 
 
-    public void copyFrameToPixelBuffer(int[] frame) {
+    public void copyFrameToPixelBuffer(int[] frame,boolean skipOff) {
 
         int i=0;
         for(int y=0;y<this.height;y++) {
@@ -101,10 +101,10 @@ public class LEDTisch {
 
 
 
-
+                if(skipOff) if(frame[i]==0) {i++;continue;};
                 strip.setPixelColor(this.calculateStripPixel(x,y),frame[i]);
 
-        i++;
+                i++;
             }
 
         }

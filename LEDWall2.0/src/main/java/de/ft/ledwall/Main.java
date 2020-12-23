@@ -17,6 +17,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
+
         sc.initSocket();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
