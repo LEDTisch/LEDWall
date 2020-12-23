@@ -21,6 +21,8 @@ public class Block {
     int f5[][] = {{1, 0},{1, 1},{1, 0},{0, 0}};
     int f6[][] = {{1, 0},{1, 0},{1, 1},{0, 0}};
 
+    int blocks[][][] = {f1,f2,f3,f4,f5,f6};
+
 
 
     public Block(int x,int y,int art)
@@ -229,200 +231,47 @@ int Block::reihenkontrolle(){
 
     public void draw()
     {
-
-
         switch(drehung){
             case 0:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(xd+x,2-yd+y);
-                                }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            SystemInterface.table.drawPixel(xd+x,2-yd+y);
                         }
 
                     }
                 }
-
                 break;
-
-
-
             case 1:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-yd+x,2-xd+y);        }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            SystemInterface.table.drawPixel(2-yd+x,2-xd+y);
                         }
 
                     }
                 }
-
                 break;
-
-
-
-
-
-
-
-
-
-
             case 2:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(2-xd+x,yd+y);
-                                }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            SystemInterface.table.drawPixel(2-xd+x,yd+y);
                         }
 
                     }
                 }
-
                 break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             case 3:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(yd+x,xd+y);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(yd+x,xd+y);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(yd+x,xd+y);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(yd+x,xd+y);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(yd+x,xd+y);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    SystemInterface.table.drawPixel(yd+x,xd+y);
-                                }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            SystemInterface.table.drawPixel(yd+x,xd+y);
                         }
 
                     }
                 }
-
                 break;
-
-
-
-
-
-
-
-
-
         }
 
         //SystemInterface.table.show();
