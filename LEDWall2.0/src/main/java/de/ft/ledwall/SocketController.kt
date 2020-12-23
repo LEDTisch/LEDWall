@@ -1,5 +1,8 @@
 package de.ft.ledwall
 
+import de.ft.ledwall.animation.system.ConnectAnimation
+import de.ft.ledwall.apps.Standby
+import de.ft.ledwall.apps.racingGame.RacingGame
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
@@ -8,7 +11,7 @@ import java.net.Socket
 class SocketController {
 
     private val socketServer = ServerSocket(8888)
-    private val sockets = ArrayList<Socket>()
+    internal val sockets = ArrayList<Socket>()
 
     private fun readSocket( socket: Socket) {
         try {
@@ -39,12 +42,21 @@ class SocketController {
         }
         sockets.remove(socket)
 
+        //TEMP
+        Main.am.setApplication(Standby())
+        (Main.am.getCurrentApplication() as Standby).lastdraw = System.currentTimeMillis()-13500
+
+
     }
 
     private fun acceptNewSockets() {
         while (true) {
             sockets.add(socketServer.accept())
             Thread { readSocket(sockets[sockets.size - 1]) }.start()
+            Main.am.systemAnimation.addToQueue(ConnectAnimation.animation)
+
+            Main.am.setApplication(RacingGame())
+
         }
     }
 

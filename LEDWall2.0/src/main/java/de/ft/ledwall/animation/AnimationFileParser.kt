@@ -36,7 +36,7 @@ class AnimationFileParser {
 
             if (frameCounter == 1) return null
 
-            return Animation(animation.getString("name"),frames,durations)
+            return Animation(animation.getString("name"),frames,durations,false,animation.getBoolean("loop"))
 
 
         }

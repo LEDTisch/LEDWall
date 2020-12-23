@@ -1,9 +1,11 @@
 package de.ft.ledwall.apps.racingGame
 
 import de.ft.ledwall.Application
+import de.ft.ledwall.Main
 import de.ft.ledwall.SystemInterface
 import de.ft.ledwall.animation.AnimationManager
 import de.ft.ledwall.animation.dynamic.PengAnimation
+import java.util.concurrent.TimeUnit
 
 
 class RacingGame: Application {
@@ -34,7 +36,7 @@ class RacingGame: Application {
             roadpieces[x][y]=false
         }
         }
-        SystemInterface.table.clear()
+        //SystemInterface.table.clear()
 
         for(x in 0 until 10) {
             for(y in 0 until 15) {
@@ -51,6 +53,8 @@ class RacingGame: Application {
         gameend = 0
         fasttickdelay = 100f
         fasttickercounter =1
+
+
 
     }
 
@@ -106,7 +110,11 @@ class RacingGame: Application {
         reset()
     }
 
+
+
     override fun onDraw() {
+
+
         try {
 
             if (ani_manager.update() && ani_manager.animationQueue.size > 0 && !ani_manager.animationQueue[0].getName()
@@ -161,7 +169,7 @@ class RacingGame: Application {
                 // }
                 ani_manager.addToQueue(AnimationManager.redGameOver)
 
-                reset()
+                 reset()
                 gameend = 0
             }
         }catch (e:Exception) {

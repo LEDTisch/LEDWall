@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class AnimationManager {
 
     //Static Animations
-    public static Animation test = AnimationFileParser.Companion.parseFile("rgb.txt");
+    public static Animation christmasTree = AnimationFileParser.Companion.parseFile("ChrismasTree.txt");
+    public static Animation christmasCap = AnimationFileParser.Companion.parseFile("ChristmasCap.txt");
     public static Animation rainbowOut = RainbowOut.getAnimation();
     public static Animation rainbowInAndOut = RainbowInAndOut.getAnimation();
     public static Animation redGameOver = RedGameOver.getAnimation();
@@ -26,6 +27,7 @@ public class AnimationManager {
                 currentStep++;
             }else{
                 currentStep=0;
+                if(!animationQueue.get(0).isLoop())
                 animationQueue.remove(0);
             }
 
@@ -35,7 +37,7 @@ public class AnimationManager {
     }
 
     public boolean animationsAvailable() {
-        return animationQueue.size()==1;
+        return animationQueue.size()>=1;
     }
 
     public void addToQueue(Animation animation) {

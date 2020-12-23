@@ -22,10 +22,11 @@ public class Main {
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
         SystemInterface.table.show();
+        System.out.println(new Color(255, 0, 0).getRGB());
 
 
         am.init();
-        am.setApplication(new Tetris());
+        am.setApplication(new RacingGame());
 
     }
 }
