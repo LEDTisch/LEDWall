@@ -32,24 +32,6 @@ public class Block {
         art=this.art;
         
     }
-/*
-int Block::reihenkontrolle(){
-   int k=0;
-   for(int x=0;x<10;x=x+1){
-   if(all[0][x]==0){
-      k=1;
-   }
-   }
-
-   if(k==0){
-      for(int x=0;x<10;x=x+1){
-         all[0][x]=0;
-      }
-   }
-
-   return k;
-}
-*/
 
     /**
      * @deprecated
@@ -375,224 +357,48 @@ int Block::reihenkontrolle(){
             case 0:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    //l.drawPixel(xd+x,2-yd+y);
-                                    koli=kr(xd+x,2-yd+y,k,s,koli);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    //l.drawPixel(xd+x,2-yd+y);
-                                    koli=kr(xd+x,2-yd+y,k,s,koli);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    //l.drawPixel(xd+x,2-yd+y);
-                                    koli=kr(xd+x,2-yd+y,k,s,koli);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    //l.drawPixel(xd+x,2-yd+y);
-                                    koli=kr(xd+x,2-yd+y,k,s,koli);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    //l.drawPixel(xd+x,2-yd+y);
-                                    koli=kr(xd+x,2-yd+y,k,s,koli);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    //l.drawPixel(xd+x,2-yd+y);
-                                    koli=kr(xd+x,2-yd+y,k,s,koli);
-                                }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            //l.drawPixel(xd+x,2-yd+y);
+                            koli=kr(xd+x,2-yd+y,k,s,koli);
                         }
-
                     }
                 }
 
                 break;
-
-
-
             case 1:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    //l.drawPixel(2-yd+x,2-xd+y);
-                                    koli=kr(2-yd+x,2-xd+y,k,s,koli);
+                        if(blocks[art-1][yd][xd]==1){
+                            //l.drawPixel(2-yd+x,2-xd+y);
+                            koli=kr(2-yd+x,2-xd+y,k,s,koli);
 
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    //l.drawPixel(2-yd+x,2-xd+y); 
-                                    koli=kr(2-yd+x,2-xd+y,k,s,koli);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    //l.drawPixel(2-yd+x,2-xd+y);  
-                                    koli=kr(2-yd+x,2-xd+y,k,s,koli);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    //l.drawPixel(2-yd+x,2-xd+y);    
-                                    koli=kr(2-yd+x,2-xd+y,k,s,koli);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    //l.drawPixel(2-yd+x,2-xd+y);    
-                                    koli=kr(2-yd+x,2-xd+y,k,s,koli);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    //l.drawPixel(2-yd+x,2-xd+y);   
-                                    koli=kr(2-yd+x,2-xd+y,k,s,koli);
-                                }
-                                break;
                         }
-
                     }
                 }
 
                 break;
-
-
-
-
-
-
-
-
-
-
             case 2:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    //l.drawPixel(2-xd+x,yd+y);
-                                    koli=kr(2-xd+x,yd+y,k,s,koli);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    //l.drawPixel(2-xd+x,yd+y);
-                                    koli=kr(2-xd+x,yd+y,k,s,koli);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    //l.drawPixel(2-xd+x,yd+y);
-                                    koli=kr(2-xd+x,yd+y,k,s,koli);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    //l.drawPixel(2-xd+x,yd+y);
-                                    koli=kr(2-xd+x,yd+y,k,s,koli);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    //l.drawPixel(2-xd+x,yd+y);
-                                    koli=kr(2-xd+x,yd+y,k,s,koli);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    //l.drawPixel(2-xd+x,yd+y);
-                                    koli=kr(2-xd+x,yd+y,k,s,koli);
-                                }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            //l.drawPixel(2-xd+x,yd+y);
+                            koli=kr(2-xd+x,yd+y,k,s,koli);
                         }
-
                     }
                 }
 
                 break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             case 3:
                 for(int xd=0;xd<2;xd=xd+1){
                     for(int yd=0;yd<4;yd=yd+1){
-                        switch(art){
-                            case 1:
-                                if(f1[yd][xd]==1){
-                                    //l.drawPixel(yd+x,xd+y);
-                                    koli=kr(yd+x,xd+y,k,s,koli);
-                                }
-                                break;
-                            case 2:
-                                if(f2[yd][xd]==1){
-                                    //l.drawPixel(yd+x,xd+y);
-                                    koli=kr(yd+x,xd+y,k,s,koli);
-                                }
-                                break;
-                            case 3:
-                                if(f3[yd][xd]==1){
-                                    //l.drawPixel(yd+x,xd+y);
-                                    koli=kr(yd+x,xd+y,k,s,koli);
-                                }
-                                break;
-                            case 4:
-                                if(f4[yd][xd]==1){
-                                    //l.drawPixel(yd+x,xd+y);
-                                    koli=kr(yd+x,xd+y,k,s,koli);
-                                }
-                                break;
-                            case 5:
-                                if(f5[yd][xd]==1){
-                                    //l.drawPixel(yd+x,xd+y);
-                                    koli=kr(yd+x,xd+y,k,s,koli);
-                                }
-                                break;
-                            case 6:
-                                if(f6[yd][xd]==1){
-                                    //l.drawPixel(yd+x,xd+y);
-                                    koli=kr(yd+x,xd+y,k,s,koli);
-                                }
-                                break;
+                        if(blocks[art-1][yd][xd]==1){
+                            //l.drawPixel(yd+x,xd+y);
+                            koli=kr(yd+x,xd+y,k,s,koli);
                         }
-
                     }
                 }
 
                 break;
-
-
-
-
-
-
-
-
-
         }
 
         return koli;
