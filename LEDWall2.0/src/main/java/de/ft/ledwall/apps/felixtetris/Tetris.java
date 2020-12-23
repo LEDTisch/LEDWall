@@ -76,7 +76,6 @@ public class Tetris implements Application {
     void neuesspiel(){
         //sound(sound_gameover);
         ani_manager.addToQueue(AnimationManager.tetrisgameover);
-        ani_manager.addToQueue(AnimationManager.rainbowOut);
 
 
         block.clearallarray();

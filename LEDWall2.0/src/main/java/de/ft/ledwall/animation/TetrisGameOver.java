@@ -18,9 +18,21 @@ public class TetrisGameOver {
             durations.add(20);
             kreis(0, 0, i, 2,frames.get(frames.size()-1),new Color(i * 12, 255 - i * 12, 0).getRGB());
             kreis(9, 14, i, 2,frames.get(frames.size()-1),new Color(i * 12, 255 - i * 12, 0).getRGB());
+            if(i==18){
+                durations.add(1000);
+            }
             i = i + 1;
         }
 
+        i=0;
+        while(i<20) {
+
+            frames.add(new int[150]);
+            frames.set(frames.size()-1,frames.get(frames.size()-2).clone());
+            durations.add(50);
+            kreis(5,7,i,2,frames.get(frames.size()-1),new Color(0,0,0).getRGB());
+            i++;
+        }
 
 
         return new Animation("TetrisGameOver",frames,durations);
