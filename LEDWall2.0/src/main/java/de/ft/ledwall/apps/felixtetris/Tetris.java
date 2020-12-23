@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class Tetris implements Application {
 
 
-    Block block= new Block(5,8,5);
+    Block block= new Block();
 
     int v=0;
     int speed=1000;

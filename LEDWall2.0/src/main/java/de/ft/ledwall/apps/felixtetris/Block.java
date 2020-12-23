@@ -25,12 +25,9 @@ public class Block {
 
 
 
-    public Block(int x,int y,int art)
+    public Block()
     {
-        x=this.x;
-        y=this.y;
-        art=this.art;
-        
+
     }
 
     /**
@@ -41,11 +38,8 @@ public class Block {
     }
 
 
-
-
     public int reihenkontrolle(){
         int k=0;
-        int kk=0;
         int m=0;
 
         int reihenanzahl=0;
@@ -61,12 +55,9 @@ public class Block {
                     k=1;
                 }
             }
-//Serial.print(y);
-//Serial.print(" :  ");
-            // Serial.println(k);
-            // Serial.println();
+
+
             if(k==0){
-                // Serial.println("reihe");
                 reihenanzahl=reihenanzahl+1;
                 for(int yy=y;yy<14;yy=yy+1){
                     for(int xx=0;xx<10;xx=xx+1){
@@ -74,30 +65,14 @@ public class Block {
                         allfarbe[yy][xx][0]=allfarbe[yy+1][xx][0];
                         allfarbe[yy][xx][1]=allfarbe[yy+1][xx][1];
                         allfarbe[yy][xx][2]=allfarbe[yy+1][xx][2];
-
-
-
                     }
-
-
                 }
 
                 m=1;
-                kk++;
 
             }
-            //Serial.println(y);
-
         }
 
-//Serial.println(kk);
-//Serial.println();
-//Serial.println();
-/*if(k==0){
-   for(int x=0;x<10;x=x+1){
-
-   }
-}*/
 
         return reihenanzahl;
     }
