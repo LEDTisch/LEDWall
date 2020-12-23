@@ -3,6 +3,7 @@ package de.ft.ledwall
 import de.ft.ledwall.animation.AnimationManager
 import de.ft.ledwall.animation.system.ErrorAnimation
 import de.ft.ledwall.apps.racingGame.RacingGame
+import de.ft.ledwall.apps.snake.SnakeGame
 import de.ft.ledwall.apps.tetris.Tetris
 import java.util.concurrent.TimeUnit
 
@@ -31,6 +32,8 @@ class ApplicationManager() {
                 Main.am.setApplication(RacingGame())
                 return true
             }
+
+
 
 
 

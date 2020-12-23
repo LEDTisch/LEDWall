@@ -181,6 +181,7 @@ class RacingGame: Application {
     override fun onRun() {
         if(ani_manager.animationsAvailable()) return
         if (gameend == 0) {
+            println("Punkte: "+(100-fasttickdelay))
             if (System.currentTimeMillis() - lastfasttick >= fasttickdelay) {
                 fasttickdelay -= 0.13f
                 tick()

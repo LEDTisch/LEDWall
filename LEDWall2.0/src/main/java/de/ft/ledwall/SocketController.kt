@@ -3,6 +3,7 @@ package de.ft.ledwall
 import de.ft.ledwall.animation.system.ConnectAnimation
 import de.ft.ledwall.apps.Standby
 import de.ft.ledwall.apps.racingGame.RacingGame
+import de.ft.ledwall.apps.snake.SnakeGame
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
@@ -55,7 +56,7 @@ class SocketController {
             Thread { readSocket(sockets[sockets.size - 1]) }.start()
             Main.am.systemAnimation.addToQueue(ConnectAnimation.animation)
 
-            Main.am.setApplication(RacingGame())
+            Main.am.setApplication(SnakeGame())
 
         }
     }
