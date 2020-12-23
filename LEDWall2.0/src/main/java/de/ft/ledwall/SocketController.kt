@@ -44,9 +44,11 @@ class SocketController {
         sockets.remove(socket)
 
         //TEMP
-        Main.am.setApplication(Standby())
-        (Main.am.getCurrentApplication() as Standby).lastdraw = System.currentTimeMillis()-13500
 
+        if(Main.am.getCurrentApplication() !is Standby) {
+            Main.am.setApplication(Standby())
+            (Main.am.getCurrentApplication() as Standby).lastdraw = System.currentTimeMillis() - 13500
+        }
 
     }
 
@@ -56,7 +58,7 @@ class SocketController {
             Thread { readSocket(sockets[sockets.size - 1]) }.start()
             Main.am.systemAnimation.addToQueue(ConnectAnimation.animation)
 
-            Main.am.setApplication(SnakeGame())
+
 
         }
     }

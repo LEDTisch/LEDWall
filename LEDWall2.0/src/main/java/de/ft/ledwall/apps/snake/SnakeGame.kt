@@ -4,18 +4,14 @@ import de.ft.ledwall.Application
 import de.ft.ledwall.SystemInterface
 import javafx.util.Duration.millis
 import javafx.util.Duration.millis
-
-
-
-
-
+import javax.xml.bind.JAXBElement
 
 
 class SnakeGame:Application {
 
 
     var snake:Snake
-    var schritt: Long = 0
+    var schritt: Float = 0f
     var takt: Long = 0
     var u = 10
     init {
@@ -41,37 +37,35 @@ class SnakeGame:Application {
 
     }
 
+
     override fun onDraw() {
 
-            snake.draw(schritt, u)
+        if (schritt > 255 / u) {
+            snake.move()
+            if (snake.WandKontrolle() != -1 || snake.SnakeKontrolle() != -1) {
+                GameOver()
+            }
+            schritt = 0f
+        }
+
+
+            snake.draw(schritt.toLong(), u)
             snake.drawFood()
-
-
-
-
-
+        schritt+=2.5f
         if (snake.foodCheck() != -1) {
             //Serial.println("fooddelete: "+snake.foodCheck());
-
             snake.deleteFood(snake.foodCheck())
             snake.createRandomFood(1)
             snake.addPixel()
         }
+
+
     }
+
 
     override fun onRun() {
-        if (System.currentTimeMillis() > takt) {
-            if (schritt > 255 / u) {
-                snake.move()
-                if (snake.WandKontrolle() != -1 || snake.SnakeKontrolle() != -1) {
-                    GameOver()
-                }
-                schritt = 0
-            }
 
-        schritt++
-        takt = (System.currentTimeMillis() + 15).toLong()
-    }
+
     }
 
     override fun onDataReceive(data: String, playerID: Int) {

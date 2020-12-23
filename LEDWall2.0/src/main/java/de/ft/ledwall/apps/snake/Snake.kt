@@ -50,6 +50,7 @@ class Snake {
             snake[i][1] = snake[i - 1][1]
         }
 
+
         when (direction) {
             0 -> {
                 direction = 0

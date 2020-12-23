@@ -1,5 +1,8 @@
 package de.ft.ledwall.animation;
 
+import de.ft.ledwall.Application;
+import de.ft.ledwall.ApplicationManager;
+import de.ft.ledwall.Main;
 import de.ft.ledwall.SystemInterface;
 
 import java.util.ArrayList;
@@ -27,8 +30,13 @@ public class AnimationManager {
                 currentStep++;
             }else{
                 currentStep=0;
-                if(!animationQueue.get(0).isLoop())
-                animationQueue.remove(0);
+                if(!animationQueue.get(0).isLoop()) {
+                    if(this== Main.am.getSysAnimation()) {
+
+                        SystemInterface.table.clear();
+                    }
+                    animationQueue.remove(0);
+                }
             }
 
         }

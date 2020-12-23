@@ -33,6 +33,11 @@ class ApplicationManager() {
                 return true
             }
 
+            if(command.contentEquals("switchTo:Snake#")) {
+                Main.am.setApplication(SnakeGame())
+                return true
+            }
+
 
 
 
@@ -100,6 +105,10 @@ class ApplicationManager() {
 
 
 
+    }
+
+    fun getSysAnimation():AnimationManager {
+        return systemAnimation
     }
 
 

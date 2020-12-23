@@ -5,6 +5,8 @@ import de.ft.ledwall.animation.AnimationManager;
 import de.ft.ledwall.apps.Standby;
 import de.ft.ledwall.apps.felixtetris.Tetris;
 import de.ft.ledwall.apps.racingGame.RacingGame;
+import de.ft.ledwall.apps.snake.Snake;
+import de.ft.ledwall.apps.snake.SnakeGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
 import java.awt.*;
@@ -28,6 +30,8 @@ public class Main {
 
         am.init();
         am.setApplication(new Standby());
+
+
 
     }
 }
