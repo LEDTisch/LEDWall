@@ -2,9 +2,7 @@ package de.ft.ledwall.apps.snake
 
 import de.ft.ledwall.Application
 import de.ft.ledwall.SystemInterface
-import javafx.util.Duration.millis
-import javafx.util.Duration.millis
-import javax.xml.bind.JAXBElement
+
 
 
 class SnakeGame:Application {

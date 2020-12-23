@@ -85,7 +85,7 @@ class ApplicationManager() {
 
             systemAnimation.update()
             SystemInterface.table.show();
-            TimeUnit.MILLISECONDS.sleep(50)
+            TimeUnit.MILLISECONDS.sleep(20)
 
         }
 

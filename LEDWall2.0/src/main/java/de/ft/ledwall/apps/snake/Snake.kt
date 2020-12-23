@@ -1,7 +1,6 @@
 package de.ft.ledwall.apps.snake
 
 import de.ft.ledwall.SystemInterface
-import sun.security.util.Length
 
 class Snake {
 

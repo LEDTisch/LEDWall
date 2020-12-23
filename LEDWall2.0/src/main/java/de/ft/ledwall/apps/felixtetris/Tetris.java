@@ -3,6 +3,8 @@ package de.ft.ledwall.apps.felixtetris;
 import de.ft.ledwall.Application;
 import de.ft.ledwall.SystemInterface;
 import de.ft.ledwall.Var;
+import de.ft.ledwall.animation.AnimationManager;
+import de.ft.ledwall.animation.dynamic.PengAnimation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -42,74 +44,11 @@ public class Tetris implements Application {
 
 
     int sound_output=1;
-
-
-
-    void ani_kreisaufl(){
-        int i=0;
-        while(i<20){
-            SystemInterface.table.setColor(0,0,0);
-            //TODO HARDWARE this.systeminterface.table.kreis(5,7,i,2);
-            i=i+1;
-
-            SystemInterface.table.show();
-            //delay(0);
-
-        }
-    }
-
-    void ani_gameover(){
-        int i=0;
-        while(i<20){
-            SystemInterface.table.setColor(i*12,255-i*12,0);
-            //TODO HARDWARE this.systeminterface.table.kreis(0,0,i,2);
-            //TODO HARDWARE this.systeminterface.table.kreis(9,14,i,2);
-            i=i+1;
-
-            SystemInterface.table.show();
-            //delay(0);
-
-        }
-
-
-
-        ani_kreisaufl();
-    }
+    AnimationManager ani_manager = new AnimationManager();
 
 
 
 
-
-
-    void ani_start(){
-
-        //block.l.drawImage(image,10,15);
-//delay(50000);
-
-        //irstreifen.on();
-        //delay(20);
-        //irstreifen.rot(4);
-
-        //TODO HARDWARE this.systeminterface.ledFeld.setRotation(0);
-        //TODO HARDWARE this.systeminterface.ledFeld.buchstaben(0,3,"hi",false,0,9,1000);
-        //sound(sound_start);
-        int i=0;
-        while(i<10){
-            block.setcolor(i*25,255-i*25,0);
-            //TODO HARDWARE this.systeminterface.table.kreis(5,7,i,2);
-            i=i+1;
-
-            SystemInterface.table.show();
-            //TODO HARDWARE this.systeminterface.ledFeld.show();
-            //delay(0);
-
-        }
-        //delay(5000);
-        ani_kreisaufl();
-        //TODO HARDWARE this.systeminterface.ledFeld.clear();
-
-    }
-    
     
    
     void levelanzeigen(){
@@ -130,31 +69,13 @@ public class Tetris implements Application {
     }
 
 
-    void ani_peng(int x,int y){
-        int i=0;
-        while(i<10){
-            block.setcolor(255,255,255);
-            //TODO HARDWARE this.systeminterface.table.kreis(x,y,i,15);
-            i=i+1;
-
-            //SystemInterface.table.show();
-            //delay(0);
-            block.clearall();
-            //levelanzeigen();
-            block.drawall();
-
-
-        }
-
-
-    }
 
 
 
 
     void neuesspiel(){
         //sound(sound_gameover);
-        ani_gameover();
+        //ani_gameover();
 
 
         block.clearallarray();
@@ -368,8 +289,9 @@ public class Tetris implements Application {
 
     @Override
     public void onDraw() {
+        if(ani_manager.update()) return;
         if(beistartausfuhren==true){
-            ani_start();
+            ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
             beistartausfuhren=false;
             art=((int)(Math.random()*6)+1);
         }
@@ -459,7 +381,7 @@ public class Tetris implements Application {
                         }else{
                             // sound(sound_softdrop);
                         }
-                        ani_peng(block.getblockx(),block.getblocky());
+                        ani_manager.addToQueue(PengAnimation.getAnimation(block.getblockx(),block.getblocky()));
                         punkte=punkte+punkte_fur_block_setzen*level;
                     }
 
@@ -516,6 +438,7 @@ public class Tetris implements Application {
 
     @Override
     public void onRun() {
+        if(ani_manager.animationsAvailable()) return;
 
     }
 
