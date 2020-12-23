@@ -103,10 +103,8 @@ class RacingGame: Application {
 
     override fun onCreate() {
 
-
         lasttick = System.currentTimeMillis()
         lastfasttick = System.currentTimeMillis()
-
         reset()
     }
 

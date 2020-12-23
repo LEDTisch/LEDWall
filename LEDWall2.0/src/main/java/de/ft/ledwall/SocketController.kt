@@ -23,7 +23,7 @@ class SocketController {
                     return
                 }
                 println("Player ${sockets.indexOf(socket)+1}: $text")
-                Main.am.getCurrentApplication()!!.onDataReceive(text,sockets.indexOf(socket)+1) //TODO Debug
+               if(sockets.indexOf(socket)+1!=1||!Main.am.checkSystemCommand(text))  Main.am.getCurrentApplication()!!.onDataReceive(text,sockets.indexOf(socket)+1)
 
             }
         }catch (e:Exception) {

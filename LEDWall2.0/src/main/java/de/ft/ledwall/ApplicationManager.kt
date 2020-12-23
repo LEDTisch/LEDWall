@@ -2,6 +2,8 @@ package de.ft.ledwall
 
 import de.ft.ledwall.animation.AnimationManager
 import de.ft.ledwall.animation.system.ErrorAnimation
+import de.ft.ledwall.apps.racingGame.RacingGame
+import de.ft.ledwall.apps.tetris.Tetris
 import java.util.concurrent.TimeUnit
 
 class ApplicationManager() {
@@ -17,6 +19,22 @@ class ApplicationManager() {
     }
 
     fun checkSystemCommand(command:String):Boolean {
+
+        if(command.contains("switchTo:")) {
+
+
+            if(command.contentEquals("switchTo:Tetris#")) {
+                Main.am.setApplication(de.ft.ledwall.apps.felixtetris.Tetris())
+                return true
+            }
+            if(command.contentEquals("switchTo:Racing Game#")) {
+                Main.am.setApplication(RacingGame())
+                return true
+            }
+
+
+
+        }
         return false
     }
 
@@ -25,6 +43,7 @@ class ApplicationManager() {
     }
 
     fun setApplication(app: Application)  {
+        println(app.getName())
         if(this.currentApp!=null) this.currentApp!!.onStop()
         this.currentApp = app
         if(this.currentApp!=null) app.onCreate()
