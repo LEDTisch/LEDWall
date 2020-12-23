@@ -48,11 +48,11 @@ public class Tetris implements Application {
     void ani_kreisaufl(){
         int i=0;
         while(i<20){
-            block.setcolor(0,0,0);
+            SystemInterface.table.setColor(0,0,0);
             //TODO HARDWARE this.systeminterface.table.kreis(5,7,i,2);
             i=i+1;
 
-            block.show();
+            SystemInterface.table.show();
             //delay(0);
 
         }
@@ -61,12 +61,12 @@ public class Tetris implements Application {
     void ani_gameover(){
         int i=0;
         while(i<20){
-            block.setcolor(i*12,255-i*12,0);
+            SystemInterface.table.setColor(i*12,255-i*12,0);
             //TODO HARDWARE this.systeminterface.table.kreis(0,0,i,2);
             //TODO HARDWARE this.systeminterface.table.kreis(9,14,i,2);
             i=i+1;
 
-            block.show();
+            SystemInterface.table.show();
             //delay(0);
 
         }
@@ -99,7 +99,7 @@ public class Tetris implements Application {
             //TODO HARDWARE this.systeminterface.table.kreis(5,7,i,2);
             i=i+1;
 
-            block.show();
+            SystemInterface.table.show();
             //TODO HARDWARE this.systeminterface.ledFeld.show();
             //delay(0);
 
@@ -137,7 +137,7 @@ public class Tetris implements Application {
             //TODO HARDWARE this.systeminterface.table.kreis(x,y,i,15);
             i=i+1;
 
-            block.show();
+            //SystemInterface.table.show();
             //delay(0);
             block.clearall();
             //levelanzeigen();
@@ -357,21 +357,12 @@ public class Tetris implements Application {
 
     @Override
     public void onCreate() {
-
-
-
-
-
         block.init();
-
-
         SystemInterface.table.clear();
 
         //TODO HARDWARE this.systeminterface.ledFeld.setcolor(100,0,0);
 
         block.clearallarray();
-
-
 
     }
 
@@ -421,17 +412,13 @@ public class Tetris implements Application {
 
 
 
-//levelanzeigen();
-            block.show();
 
             artnext=(int)(Math.random()*7);
-            //art=3;
             setblockcolor(art,0);
 
             show_nextblock(artnext,art);
 
             block.setblockto(5,15,art);
-            //block.setblockto(5,10,1);
 
             stop=0;
 

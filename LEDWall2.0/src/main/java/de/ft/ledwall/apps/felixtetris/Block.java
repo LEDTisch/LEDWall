@@ -49,14 +49,13 @@ int Block::reihenkontrolle(){
 }
 */
 
-
+    /**
+     * @deprecated
+     */
     public void init(){
         // l.init(_pin);
     }
 
-    public void show(){
-        SystemInterface.table.show();
-    }
 
 
 
@@ -149,7 +148,7 @@ int Block::reihenkontrolle(){
                 }
             }
         }
-        SystemInterface.table.show();
+        //SystemInterface.table.show();
     }
 
     public void clearall(){
@@ -426,7 +425,7 @@ int Block::reihenkontrolle(){
 
         }
 
-        SystemInterface.table.show();
+        //SystemInterface.table.show();
     }
 
     public int kontrollpixel(int x,int y, int k){
