@@ -371,7 +371,7 @@ public class Tetris implements Application {
         if(beistartausfuhren==true){
             ani_start();
             beistartausfuhren=false;
-            art=(int)(Math.random()*7);
+            art=((int)(Math.random()*6)+1);
         }
 
         if(stop==1){
@@ -413,7 +413,9 @@ public class Tetris implements Application {
 
 
 
-            artnext=(int)(Math.random()*7);
+            artnext=((int)(Math.random()*6)+1);
+
+
             setblockcolor(art,0);
 
             show_nextblock(artnext,art);
@@ -448,7 +450,7 @@ public class Tetris implements Application {
                     System.out.println("blockdown ");
                     block.down();
                 }else{
-                    if(block.writeblocktoall() == 1){
+                    if(block.writeblocktoall() == 10){
                         GameOver();
                     }else{
                         stop=1;
