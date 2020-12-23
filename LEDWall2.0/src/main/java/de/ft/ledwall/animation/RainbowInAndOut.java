@@ -19,7 +19,7 @@ public class RainbowInAndOut {
         if(frames.size()>1)
             frames.set(frames.size()-1,frames.get(frames.size()-2).clone());
 
-       durations.add(20);
+       durations.add(50);
         kreis(5,7,i,2,frames.get(frames.size()-1),new Color(i*25,255-i*25,0).getRGB());
         if(i==8){
             durations.add(1000);
@@ -32,7 +32,7 @@ public class RainbowInAndOut {
 
         frames.add(new int[150]);
         frames.set(frames.size()-1,frames.get(frames.size()-2).clone());
-        durations.add(20);
+        durations.add(50);
         kreis(5,7,i,2,frames.get(frames.size()-1),new Color(0,0,0).getRGB());
         i++;
     }

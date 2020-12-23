@@ -75,7 +75,8 @@ public class Tetris implements Application {
 
     void neuesspiel(){
         //sound(sound_gameover);
-        //ani_gameover();
+        ani_manager.addToQueue(AnimationManager.tetrisgameover);
+        ani_manager.addToQueue(AnimationManager.rainbowOut);
 
 
         block.clearallarray();
@@ -381,7 +382,7 @@ public class Tetris implements Application {
                         }else{
                             // sound(sound_softdrop);
                         }
-                        ani_manager.addToQueue(PengAnimation.getAnimation(block.getblockx(),block.getblocky()));
+                       // ani_manager.addToQueue(PengAnimation.getAnimation(block.getblockx(),block.getblocky()));
                         punkte=punkte+punkte_fur_block_setzen*level;
                     }
 

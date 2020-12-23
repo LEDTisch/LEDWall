@@ -8,7 +8,7 @@ import de.ft.ledwall.apps.tetris.Tetris
 import java.util.concurrent.TimeUnit
 
 class ApplicationManager() {
-
+    private var timer=0;
     private var currentApp: Application? = null
     private var allowDrawing:Boolean = true
     internal final var systemAnimation:AnimationManager = AnimationManager()
@@ -75,6 +75,7 @@ class ApplicationManager() {
 
     private fun drawingThread() {
         while(true) {
+            timer= System.currentTimeMillis().toInt();
             if(!allowDrawing) continue
             if(this.currentApp!=null)
                 try {
@@ -85,7 +86,8 @@ class ApplicationManager() {
 
             systemAnimation.update()
             SystemInterface.table.show();
-            TimeUnit.MILLISECONDS.sleep(20)
+
+            TimeUnit.MILLISECONDS.sleep(50-(System.currentTimeMillis()-timer));
 
         }
 

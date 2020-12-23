@@ -1,7 +1,5 @@
 package de.ft.ledwall.animation;
 
-import de.ft.ledwall.Application;
-import de.ft.ledwall.ApplicationManager;
 import de.ft.ledwall.Main;
 import de.ft.ledwall.SystemInterface;
 
@@ -15,6 +13,7 @@ public class AnimationManager {
     public static Animation rainbowOut = RainbowOut.getAnimation();
     public static Animation rainbowInAndOut = RainbowInAndOut.getAnimation();
     public static Animation redGameOver = RedGameOver.getAnimation();
+    public static Animation tetrisgameover= TetrisGameOver.getAnimation();
 
     int currentStep = 0;
     long frameStart =-1;
