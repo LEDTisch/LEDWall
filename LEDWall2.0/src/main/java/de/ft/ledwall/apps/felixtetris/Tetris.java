@@ -1,15 +1,42 @@
 package de.ft.ledwall.apps.felixtetris;
 
 import de.ft.ledwall.Application;
+import de.ft.ledwall.Main;
 import de.ft.ledwall.SystemInterface;
 import de.ft.ledwall.Var;
 import de.ft.ledwall.animation.AnimationManager;
 import de.ft.ledwall.animation.dynamic.PengAnimation;
 import org.jetbrains.annotations.NotNull;
 
+import javax.sound.sampled.*;
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.FileSystems;
 import java.util.concurrent.TimeUnit;
 
 public class Tetris implements Application {
+    public static Clip clip;
+    public static AudioInputStream ais;
+
+
+    static {
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ais = AudioSystem.getAudioInputStream(new File(String.valueOf(FileSystems.getDefault().getPath("src", "tetris.wav"))));
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     Block block= new Block();
@@ -44,11 +71,10 @@ public class Tetris implements Application {
 
     AnimationManager ani_manager = new AnimationManager();
 
+    public Tetris() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    }
 
 
-
-    
-   
     void levelanzeigen(){
         //TODO HARDWARE  this.systeminterface.ledFeld.setRotation(0);
         //led.clear();
@@ -275,6 +301,16 @@ public class Tetris implements Application {
 
     @Override
     public void onCreate() {
+        try {
+            clip.open(ais);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+
         block.init();
         SystemInterface.table.clear();
 
@@ -345,9 +381,6 @@ public class Tetris implements Application {
         if(stop==0){
 
 
-
-
-//addonserial.print(9);
 
 //levelanzeigen();
 //block.setcolor(r,g,b);

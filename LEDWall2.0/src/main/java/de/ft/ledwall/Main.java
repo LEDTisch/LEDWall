@@ -9,8 +9,12 @@ import de.ft.ledwall.apps.snake.Snake;
 import de.ft.ledwall.apps.snake.SnakeGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
@@ -18,7 +22,10 @@ public class Main {
     public static SocketController sc = new SocketController();
     public static ApplicationManager am = new ApplicationManager();
 
+
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+
+
 
 
         sc.initSocket();
