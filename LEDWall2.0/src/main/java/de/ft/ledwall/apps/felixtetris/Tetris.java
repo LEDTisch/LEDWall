@@ -38,12 +38,10 @@ public class Tetris implements Application {
     int punktedreireihe=400;
     int punkteevierreihe=600;
 
-    boolean beistartausfuhren=true;
 
     int levelold=0;
 
 
-    int sound_output=1;
     AnimationManager ani_manager = new AnimationManager();
 
 
@@ -74,9 +72,8 @@ public class Tetris implements Application {
 
 
     void neuesspiel(){
-        //sound(sound_gameover);
         ani_manager.addToQueue(AnimationManager.tetrisgameover);
-
+        
 
         block.clearallarray();
         block.clearall();
@@ -285,54 +282,50 @@ public class Tetris implements Application {
 
         block.clearallarray();
 
+        ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
+        art=((int)(Math.random()*6)+1);
+
+    }
+    private void rowcheck(){
+
+        int rk= block.reihenkontrolle();
+        reihen_gesamt=reihen_gesamt+rk;
+        if(rk > 0){
+            block.clearall();
+            block.setcolor(255,0,0);
+            block.drawall();
+        }
+        switch(rk){
+            case 1:
+                punkte=punkte+punkteeinereihe*level;
+                break;
+            case 2:
+                punkte=punkte+punktezewireihe*level;
+                break;
+            case 3:
+                punkte=punkte+punktedreireihe*level;
+                break;
+            case 4:
+                punkte=punkte+punkteevierreihe*level;
+                break;
+        }
+
+        if(reihen_gesamt>level*5){
+            reihen_gesamt=0;
+            level_up();
+        }
+        System.out.println(level);
     }
 
     @Override
     public void onDraw() {
         if(ani_manager.update()) return;
-        if(beistartausfuhren==true){
-            ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
-            beistartausfuhren=false;
-            art=((int)(Math.random()*6)+1);
-        }
+
 
         if(stop==1){
             speed=1000;
-            int rk= block.reihenkontrolle();
-            reihen_gesamt=reihen_gesamt+rk;
-            if(rk > 0){
-                block.clearall();
-                block.setcolor(255,0,0);
-                block.drawall();
-            }
-            switch(rk){
-                case 1:
-                    punkte=punkte+punkteeinereihe*level;
-                    //sound(sound_einereihe);
-                    break;
-                case 2:
-                    punkte=punkte+punktezewireihe*level;
-                    //sound(sound_zweireihen);
-                    break;
-                case 3:
-                    punkte=punkte+punktedreireihe*level;
-                    //sound(sound_dreireihen);
-                    break;
-                case 4:
-                    punkte=punkte+punkteevierreihe*level;
-                    //sound(sound_vierreihen);
-                    break;
-            }
 
-            if(reihen_gesamt>level*5){
-                reihen_gesamt=0;
-                level_up();
-            }
-            System.out.println(level);
-
-
-
-
+            rowcheck();
 
 
             artnext=((int)(Math.random()*6)+1);
@@ -369,23 +362,15 @@ public class Tetris implements Application {
 
                 block.draw();
                 if(block.kontrolle(2)==0 && block.kontrolle(5)==0){
-                    System.out.println("blockdown ");
                     block.down();
                 }else{
                     if(block.writeblocktoall() == 10){
                         GameOver();
                     }else{
                         stop=1;
-                        if(blockschneller){
-                            //sound(sound_harddrop);
-                        }else{
-                            // sound(sound_softdrop);
-                        }
                        // ani_manager.addToQueue(PengAnimation.getAnimation(block.getblockx(),block.getblocky()));
                         punkte=punkte+punkte_fur_block_setzen*level;
                     }
-
-                    m_save=System.currentTimeMillis();
                 }
 
 
@@ -403,21 +388,17 @@ public class Tetris implements Application {
     public void onDataReceive(@NotNull String data, int playerID) {
         if(data.contentEquals("t")){
             if(block.drehen()){
-//sound(sound_rotatefailed);
             }else{
-                // sound(sound_drehen);
             }
 
         }
 
         if(data.contentEquals("r")&&block.kontrolle(1)==0&&block.kontrolle(6)==0){
             block.right();
-//  sound(sound_button);
         }
 
         if(data.contentEquals("l")&&block.kontrolle(3)==0&&block.kontrolle(7)==0){
             block.left();
-            // sound(sound_button);
         }
 
         if(data.contentEquals("d")){
