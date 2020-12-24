@@ -1,27 +1,20 @@
 package de.ft.ledwall.apps.felixtetris;
 
 import de.ft.ledwall.Application;
-import de.ft.ledwall.Main;
 import de.ft.ledwall.SystemInterface;
-import de.ft.ledwall.Var;
 import de.ft.ledwall.animation.AnimationManager;
-import de.ft.ledwall.animation.dynamic.PengAnimation;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.*;
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.FileSystems;
-import java.util.concurrent.TimeUnit;
 
 public class Tetris implements Application {
     public static Clip clip;
     public static AudioInputStream ais;
 
-
+/*
     static {
         try {
             clip = AudioSystem.getClip();
@@ -30,13 +23,13 @@ public class Tetris implements Application {
         }
 
         try {
-            ais = AudioSystem.getAudioInputStream(new File(String.valueOf(FileSystems.getDefault().getPath("src", "tetris.wav"))));
+            ais = AudioSystem.getAudioInputStream(new File(String.valueOf(FileSystems.getDefault().getPath("src","main","resources", "sounds/tetris.wav"))));
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     Block block= new Block();
@@ -300,7 +293,7 @@ public class Tetris implements Application {
 
 
     @Override
-    public void onCreate() {
+    public void onCreate() {/*
         try {
             clip.open(ais);
         } catch (LineUnavailableException e) {
@@ -309,7 +302,7 @@ public class Tetris implements Application {
             e.printStackTrace();
         }
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-
+*/
 
         block.init();
         SystemInterface.table.clear();
@@ -319,7 +312,7 @@ public class Tetris implements Application {
         block.clearallarray();
 
         ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
-        art=((int)(Math.random()*6)+1);
+        art=(int)((Math.random()) * 6 + 1);;
 
     }
     private void rowcheck(){
@@ -364,7 +357,7 @@ public class Tetris implements Application {
             rowcheck();
 
 
-            artnext=((int)(Math.random()*6)+1);
+            artnext=(int)((Math.random()) * 6 + 1);;
 
 
             setblockcolor(art,0);
@@ -392,6 +385,7 @@ public class Tetris implements Application {
                 if(blockschneller==true){
                     punkte=punkte+blockschnellerpunkte*level;
                 }
+                System.out.println(art);
 
                 block.draw();
                 if(block.kontrolle(2)==0 && block.kontrolle(5)==0){
