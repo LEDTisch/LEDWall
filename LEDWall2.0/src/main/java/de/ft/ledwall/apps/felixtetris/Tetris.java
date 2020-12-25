@@ -13,9 +13,16 @@ import java.nio.file.FileSystems;
 
 public class Tetris implements Application {
 
-
-
-
+    String Sound_splash="TetrisSounds/1/SFX_Splash.wav";
+    String Sound_startani="TetrisSounds/1/SFX_GameStart.wav";
+    String Sound_start="TetrisSounds/start.wav";
+    String Sound_rotate="TetrisSounds/block-rotate.wav";
+    String Sound_rotatefailed="TetrisSounds/1/SFX_PieceRotateFail.wav";
+    String Sound_slowhit="TetrisSounds/slow-hit.wav";
+    String Sound_forcehit="TetrisSounds/force-hit.wav";
+    String Sound_gameover="TetrisSounds/gameover.wav";
+    String Sound_lineclear="TetrisSounds/line-remove.wav";
+    String Sound_lineclearspecial="TetrisSounds/line-removeal4.wav";
 
     Block block= new Block();
 
@@ -77,7 +84,7 @@ public class Tetris implements Application {
 
     void neuesspiel(){
         ani_manager.addToQueue(AnimationManager.tetrisgameover);
-        
+
 
         block.clearallarray();
         block.clearall();
@@ -91,11 +98,15 @@ public class Tetris implements Application {
         //matrix.lc.clearDisplay(3);
         //matrix.zahl(punkte,0,1);
         stop=1;
+        Sound.play(Sound_start);
+
     }
 
 
     void GameOver(){
+        Sound.play(Sound_gameover);
         neuesspiel();
+
     }
 
 
@@ -277,10 +288,11 @@ public class Tetris implements Application {
 
 
 
+
+
     @Override
     public void onCreate() {
-
-        Sound.TetrisTheme.loop(Clip.LOOP_CONTINUOUSLY);
+        Sound.play(Sound_startani);
 
 
         block.init();
@@ -295,6 +307,7 @@ public class Tetris implements Application {
         art=(int)((Math.random()) * 6 + 1);
         System.out.println("artc: "+art+"  random: "+random);
 
+        Sound.TetrisTheme.loop(Clip.LOOP_CONTINUOUSLY);
 
     }
     private void rowcheck(){
@@ -309,15 +322,19 @@ public class Tetris implements Application {
         switch(rk){
             case 1:
                 punkte=punkte+punkteeinereihe*level;
+                Sound.play(Sound_lineclear);
                 break;
             case 2:
                 punkte=punkte+punktezewireihe*level;
+                Sound.play(Sound_lineclear);
                 break;
             case 3:
                 punkte=punkte+punktedreireihe*level;
+                Sound.play(Sound_lineclearspecial);
                 break;
             case 4:
                 punkte=punkte+punkteevierreihe*level;
+                Sound.play(Sound_lineclearspecial);
                 break;
         }
 
@@ -378,6 +395,11 @@ public class Tetris implements Application {
                         GameOver();
                     }else{
                         stop=1;
+                        if(blockschneller){
+                            Sound.play(Sound_forcehit);
+                        }else{
+                            Sound.play(Sound_slowhit);
+                        }
                        // ani_manager.addToQueue(PengAnimation.getAnimation(block.getblockx(),block.getblocky()));
                         punkte=punkte+punkte_fur_block_setzen*level;
                     }
@@ -398,7 +420,9 @@ public class Tetris implements Application {
     public void onDataReceive(@NotNull String data, int playerID) {
         if(data.contentEquals("t")){
             if(block.drehen()){
+                Sound.play(Sound_rotatefailed);
             }else{
+                Sound.play(Sound_rotate);
             }
 
         }

@@ -11,6 +11,13 @@ public class Sound {
     public static Clip AlleJahreWieder=loadtoClip("allejahrewieder.wav");
 
 
+    public static void play(String pfad)  {
+        Clip clip = loadtoClip(pfad);
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(6);
+
+        clip.start();
+    }
 
     public static Clip loadtoClip(String path){
         AudioInputStream ais=null;
