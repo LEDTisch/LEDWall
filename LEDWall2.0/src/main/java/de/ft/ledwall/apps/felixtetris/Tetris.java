@@ -14,22 +14,7 @@ public class Tetris implements Application {
     public static Clip clip;
     public static AudioInputStream ais;
 
-/*
-    static {
-        try {
-            clip = AudioSystem.getClip();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            ais = AudioSystem.getAudioInputStream(new File(String.valueOf(FileSystems.getDefault().getPath("src","main","resources", "sounds/tetris.wav"))));
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
     Block block= new Block();
@@ -64,7 +49,7 @@ public class Tetris implements Application {
 
     AnimationManager ani_manager = new AnimationManager();
 
-    public Tetris() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public Tetris(){
     }
 
 
@@ -293,7 +278,20 @@ public class Tetris implements Application {
 
 
     @Override
-    public void onCreate() {/*
+    public void onCreate() {
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            ais = AudioSystem.getAudioInputStream(new File(String.valueOf(FileSystems.getDefault().getPath("src","main","resources", "sounds/tetris.wav"))));
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         try {
             clip.open(ais);
         } catch (LineUnavailableException e) {
@@ -302,7 +300,7 @@ public class Tetris implements Application {
             e.printStackTrace();
         }
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-*/
+
 
         block.init();
         SystemInterface.table.clear();
@@ -312,7 +310,10 @@ public class Tetris implements Application {
         block.clearallarray();
 
         ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
-        art=(int)((Math.random()) * 6 + 1);;
+        double random=Math.random();
+        art=(int)((Math.random()) * 6 + 1);
+        System.out.println("artc: "+art+"  random: "+random);
+
 
     }
     private void rowcheck(){
@@ -357,7 +358,9 @@ public class Tetris implements Application {
             rowcheck();
 
 
-            artnext=(int)((Math.random()) * 6 + 1);;
+            double random=Math.random();
+            artnext=(int)((Math.random()) * 6 + 1);
+            System.out.println("artd: "+artnext+"  random: "+random);
 
 
             setblockcolor(art,0);
@@ -385,7 +388,6 @@ public class Tetris implements Application {
                 if(blockschneller==true){
                     punkte=punkte+blockschnellerpunkte*level;
                 }
-                System.out.println(art);
 
                 block.draw();
                 if(block.kontrolle(2)==0 && block.kontrolle(5)==0){
@@ -459,6 +461,6 @@ public class Tetris implements Application {
 
     @Override
     public void onStop() {
-
+        clip.stop();
     }
 }
