@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 
 public class Sound {
-    public static Clip TetrisTheme;
-    public static Clip RacingGameTheme;
-    public static AudioInputStream ais;
+    public static Clip TetrisTheme=loadtoClip("tetris.wav");
+    public static Clip RacingGameTheme=loadtoClip("RacingGameTheme.wav");
+
+
+
     public static Clip loadtoClip(String path){
         AudioInputStream ais=null;
         Clip clip = null;
@@ -35,8 +37,5 @@ public class Sound {
         return clip;
 
     }
-    public static void load(){
-        TetrisTheme=loadtoClip("tetris.wav");
-        RacingGameTheme=loadtoClip("RacingGameTheme.wav");
-    }
+
 }

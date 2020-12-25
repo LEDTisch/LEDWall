@@ -28,7 +28,6 @@ public class Main {
 
 
 
-        Sound.load();
         sc.initSocket();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
