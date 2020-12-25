@@ -1,6 +1,7 @@
 package de.ft.ledwall.apps.felixtetris;
 
 import de.ft.ledwall.Application;
+import de.ft.ledwall.Sound;
 import de.ft.ledwall.SystemInterface;
 import de.ft.ledwall.animation.AnimationManager;
 import org.jetbrains.annotations.NotNull;
@@ -11,8 +12,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 
 public class Tetris implements Application {
-    public static Clip clip;
-    public static AudioInputStream ais;
+
 
 
 
@@ -279,27 +279,8 @@ public class Tetris implements Application {
 
     @Override
     public void onCreate() {
-        try {
-            clip = AudioSystem.getClip();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            ais = AudioSystem.getAudioInputStream(new File(String.valueOf(FileSystems.getDefault().getPath("src","main","resources", "sounds/tetris.wav"))));
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            clip.open(ais);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        Sound.TetrisTheme.loop(Clip.LOOP_CONTINUOUSLY);
 
 
         block.init();
@@ -461,6 +442,6 @@ public class Tetris implements Application {
 
     @Override
     public void onStop() {
-        clip.stop();
+        Sound.TetrisTheme.stop();
     }
 }

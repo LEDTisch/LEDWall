@@ -10,6 +10,7 @@ import de.ft.ledwall.apps.snake.SnakeGame;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
 import javax.sound.sampled.*;
+import javax.xml.transform.Source;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +28,7 @@ public class Main {
 
 
 
-
+        Sound.load();
         sc.initSocket();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
