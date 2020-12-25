@@ -2,8 +2,11 @@ package de.ft.ledwall.apps;
 
 import de.ft.ledwall.Application;
 import de.ft.ledwall.Main;
+import de.ft.ledwall.Sound;
 import de.ft.ledwall.animation.AnimationManager;
 import org.jetbrains.annotations.NotNull;
+
+import javax.sound.sampled.Clip;
 
 public class Standby implements Application {
 
@@ -11,7 +14,7 @@ AnimationManager ani_manager = new AnimationManager();
 
     @Override
     public void onCreate() {
-
+        Sound.AlleJahreWieder.loop(Clip.LOOP_CONTINUOUSLY);
     }
 public Long lastdraw = 0L;
 
@@ -50,6 +53,6 @@ public Long lastdraw = 0L;
 
     @Override
     public void onStop() {
-
+        Sound.AlleJahreWieder.stop();
     }
 }

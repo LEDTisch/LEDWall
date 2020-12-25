@@ -8,6 +8,7 @@ import java.nio.file.FileSystems;
 public class Sound {
     public static Clip TetrisTheme=loadtoClip("tetris.wav");
     public static Clip RacingGameTheme=loadtoClip("RacingGameTheme.wav");
+    public static Clip AlleJahreWieder=loadtoClip("allejahrewieder.wav");
 
 
 
