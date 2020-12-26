@@ -1,11 +1,11 @@
 package de.ft.ledwall.apps.racingGame
 
 import de.ft.ledwall.Application
-import de.ft.ledwall.Main
+import de.ft.ledwall.Sound
 import de.ft.ledwall.SystemInterface
 import de.ft.ledwall.animation.AnimationManager
 import de.ft.ledwall.animation.dynamic.PengAnimation
-import java.util.concurrent.TimeUnit
+import javax.sound.sampled.Clip
 
 
 class RacingGame: Application {
@@ -102,6 +102,7 @@ class RacingGame: Application {
 
 
     override fun onCreate() {
+        Sound.RacingGameTheme.loop(Clip.LOOP_CONTINUOUSLY)
 
         lasttick = System.currentTimeMillis()
         lastfasttick = System.currentTimeMillis()
@@ -170,7 +171,7 @@ class RacingGame: Application {
                  reset()
                 gameend = 0
             }
-        }catch (e:Exception) {
+        }catch (e: Exception) {
             ani_manager.addToQueue(PengAnimation.getAnimation(carposx, carposy));
 
             gameend = 1
@@ -181,7 +182,7 @@ class RacingGame: Application {
     override fun onRun() {
         if(ani_manager.animationsAvailable()) return
         if (gameend == 0) {
-            println("Punkte: "+(100-fasttickdelay))
+            println("Punkte: " + (100 - fasttickdelay))
             if (System.currentTimeMillis() - lastfasttick >= fasttickdelay) {
                 fasttickdelay -= 0.13f
                 tick()
@@ -224,6 +225,7 @@ class RacingGame: Application {
     }
 
     override fun onStop() {
+        Sound.RacingGameTheme.stop();
        
     }
 

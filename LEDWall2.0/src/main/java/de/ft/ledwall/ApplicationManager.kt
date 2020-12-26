@@ -11,6 +11,7 @@ class ApplicationManager() {
     private var timer:Long=0;
     private var currentApp: Application? = null
     private var allowDrawing:Boolean = true
+    private var enableDraw:Boolean=true;
     internal final var systemAnimation:AnimationManager = AnimationManager()
 
     fun init() {
@@ -52,43 +53,45 @@ class ApplicationManager() {
 
     fun setApplication(app: Application)  {
         println(app.getName())
+        enableDraw=false;
         if(this.currentApp!=null) this.currentApp!!.onStop()
         this.currentApp = app
         if(this.currentApp!=null) app.onCreate()
+        enableDraw=true;
     }
 
 
     private fun runningThread() {
         while(true) {
-            if(systemAnimation.animationsAvailable()&&systemAnimation.animationQueue[0].getName().contains("error")) {
+                if (systemAnimation.animationsAvailable() && systemAnimation.animationQueue[0].getName().contains("error")) {
+                    TimeUnit.MILLISECONDS.sleep(7)
+                    continue
+                }
+                try {
+                    if (this.currentApp != null && enableDraw) this.currentApp!!.onRun()
+                } catch (e: Exception) {
+                    error(e);
+                }
                 TimeUnit.MILLISECONDS.sleep(7)
-                continue
-            }
-            try {
-                if (this.currentApp != null) this.currentApp!!.onRun()
-            }catch (e:Exception) {
-                error(e);
-            }
-            TimeUnit.MILLISECONDS.sleep(7)
+
         }
     }
 
     private fun drawingThread() {
         while(true) {
-            timer= System.currentTimeMillis()
-            if(!allowDrawing) continue
-            if(this.currentApp!=null)
-                try {
-                    this.currentApp!!.onDraw();
-                }catch (e:Exception) {
-                    error(e);
-                }
+                timer = System.currentTimeMillis()
+                if (!allowDrawing) continue
+                if (this.currentApp != null && enableDraw)
+                    try {
+                        this.currentApp!!.onDraw();
+                    } catch (e: Exception) {
+                        error(e);
+                    }
 
-            systemAnimation.update()
-            SystemInterface.table.show()
+                systemAnimation.update()
+                SystemInterface.table.show()
 
-            TimeUnit.MILLISECONDS.sleep(50-(System.currentTimeMillis()-timer))
-
+                TimeUnit.MILLISECONDS.sleep(50 - (System.currentTimeMillis() - timer))
         }
 
     }

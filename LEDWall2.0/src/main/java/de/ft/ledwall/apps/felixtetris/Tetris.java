@@ -1,16 +1,28 @@
 package de.ft.ledwall.apps.felixtetris;
 
 import de.ft.ledwall.Application;
+import de.ft.ledwall.Sound;
 import de.ft.ledwall.SystemInterface;
-import de.ft.ledwall.Var;
 import de.ft.ledwall.animation.AnimationManager;
-import de.ft.ledwall.animation.dynamic.PengAnimation;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.TimeUnit;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
 
 public class Tetris implements Application {
 
+    String Sound_splash="TetrisSounds/1/SFX_Splash.wav";
+    String Sound_startani="TetrisSounds/1/SFX_GameStart.wav";
+    String Sound_start="TetrisSounds/start.wav";
+    String Sound_rotate="TetrisSounds/block-rotate.wav";
+    String Sound_rotatefailed="TetrisSounds/1/SFX_PieceRotateFail.wav";
+    String Sound_slowhit="TetrisSounds/slow-hit.wav";
+    String Sound_forcehit="TetrisSounds/force-hit.wav";
+    String Sound_gameover="TetrisSounds/gameover.wav";
+    String Sound_lineclear="TetrisSounds/line-remove.wav";
+    String Sound_lineclearspecial="TetrisSounds/line-removeal4.wav";
 
     Block block= new Block();
 
@@ -38,19 +50,16 @@ public class Tetris implements Application {
     int punktedreireihe=400;
     int punkteevierreihe=600;
 
-    boolean beistartausfuhren=true;
 
     int levelold=0;
 
 
-    int sound_output=1;
     AnimationManager ani_manager = new AnimationManager();
 
+    public Tetris(){
+    }
 
 
-
-    
-   
     void levelanzeigen(){
         //TODO HARDWARE  this.systeminterface.ledFeld.setRotation(0);
         //led.clear();
@@ -74,7 +83,6 @@ public class Tetris implements Application {
 
 
     void neuesspiel(){
-        //sound(sound_gameover);
         ani_manager.addToQueue(AnimationManager.tetrisgameover);
 
 
@@ -90,11 +98,15 @@ public class Tetris implements Application {
         //matrix.lc.clearDisplay(3);
         //matrix.zahl(punkte,0,1);
         stop=1;
+        Sound.play(Sound_start);
+
     }
 
 
     void GameOver(){
+        Sound.play(Sound_gameover);
         neuesspiel();
+
     }
 
 
@@ -276,8 +288,13 @@ public class Tetris implements Application {
 
 
 
+
+
     @Override
     public void onCreate() {
+        Sound.play(Sound_startani);
+
+
         block.init();
         SystemInterface.table.clear();
 
@@ -285,57 +302,63 @@ public class Tetris implements Application {
 
         block.clearallarray();
 
+        ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
+        double random=Math.random();
+        art=(int)((Math.random()) * 6 + 1);
+        System.out.println("artc: "+art+"  random: "+random);
+
+        Sound.TetrisTheme.loop(Clip.LOOP_CONTINUOUSLY);
+
+    }
+    private void rowcheck(){
+
+        int rk= block.reihenkontrolle();
+        reihen_gesamt=reihen_gesamt+rk;
+        if(rk > 0){
+            block.clearall();
+            block.setcolor(255,0,0);
+            block.drawall();
+        }
+        switch(rk){
+            case 1:
+                punkte=punkte+punkteeinereihe*level;
+                Sound.play(Sound_lineclear);
+                break;
+            case 2:
+                punkte=punkte+punktezewireihe*level;
+                Sound.play(Sound_lineclear);
+                break;
+            case 3:
+                punkte=punkte+punktedreireihe*level;
+                Sound.play(Sound_lineclearspecial);
+                break;
+            case 4:
+                punkte=punkte+punkteevierreihe*level;
+                Sound.play(Sound_lineclearspecial);
+                break;
+        }
+
+        if(reihen_gesamt>level*5){
+            reihen_gesamt=0;
+            level_up();
+        }
+        System.out.println(level);
     }
 
     @Override
     public void onDraw() {
         if(ani_manager.update()) return;
-        if(beistartausfuhren==true){
-            ani_manager.addToQueue(AnimationManager.rainbowInAndOut);
-            beistartausfuhren=false;
-            art=((int)(Math.random()*6)+1);
-        }
+
 
         if(stop==1){
             speed=1000;
-            int rk= block.reihenkontrolle();
-            reihen_gesamt=reihen_gesamt+rk;
-            if(rk > 0){
-                block.clearall();
-                block.setcolor(255,0,0);
-                block.drawall();
-            }
-            switch(rk){
-                case 1:
-                    punkte=punkte+punkteeinereihe*level;
-                    //sound(sound_einereihe);
-                    break;
-                case 2:
-                    punkte=punkte+punktezewireihe*level;
-                    //sound(sound_zweireihen);
-                    break;
-                case 3:
-                    punkte=punkte+punktedreireihe*level;
-                    //sound(sound_dreireihen);
-                    break;
-                case 4:
-                    punkte=punkte+punkteevierreihe*level;
-                    //sound(sound_vierreihen);
-                    break;
-            }
 
-            if(reihen_gesamt>level*5){
-                reihen_gesamt=0;
-                level_up();
-            }
-            System.out.println(level);
+            rowcheck();
 
 
-
-
-
-
-            artnext=((int)(Math.random()*6)+1);
+            double random=Math.random();
+            artnext=(int)((Math.random()) * 6 + 1);
+            System.out.println("artd: "+artnext+"  random: "+random);
 
 
             setblockcolor(art,0);
@@ -353,9 +376,6 @@ public class Tetris implements Application {
 
 
 
-
-//addonserial.print(9);
-
 //levelanzeigen();
 //block.setcolor(r,g,b);
             //y   x    in dem all array//
@@ -369,7 +389,6 @@ public class Tetris implements Application {
 
                 block.draw();
                 if(block.kontrolle(2)==0 && block.kontrolle(5)==0){
-                    System.out.println("blockdown ");
                     block.down();
                 }else{
                     if(block.writeblocktoall() == 10){
@@ -377,15 +396,13 @@ public class Tetris implements Application {
                     }else{
                         stop=1;
                         if(blockschneller){
-                            //sound(sound_harddrop);
+                            Sound.play(Sound_forcehit);
                         }else{
-                            // sound(sound_softdrop);
+                            Sound.play(Sound_slowhit);
                         }
                        // ani_manager.addToQueue(PengAnimation.getAnimation(block.getblockx(),block.getblocky()));
                         punkte=punkte+punkte_fur_block_setzen*level;
                     }
-
-                    m_save=System.currentTimeMillis();
                 }
 
 
@@ -403,21 +420,19 @@ public class Tetris implements Application {
     public void onDataReceive(@NotNull String data, int playerID) {
         if(data.contentEquals("t")){
             if(block.drehen()){
-//sound(sound_rotatefailed);
+                Sound.play(Sound_rotatefailed);
             }else{
-                // sound(sound_drehen);
+                Sound.play(Sound_rotate);
             }
 
         }
 
         if(data.contentEquals("r")&&block.kontrolle(1)==0&&block.kontrolle(6)==0){
             block.right();
-//  sound(sound_button);
         }
 
         if(data.contentEquals("l")&&block.kontrolle(3)==0&&block.kontrolle(7)==0){
             block.left();
-            // sound(sound_button);
         }
 
         if(data.contentEquals("d")){
@@ -451,6 +466,6 @@ public class Tetris implements Application {
 
     @Override
     public void onStop() {
-
+        Sound.TetrisTheme.stop();
     }
 }
