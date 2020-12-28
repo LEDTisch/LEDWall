@@ -22,7 +22,7 @@ public class Tetris implements Application {
     String Sound_forcehit="TetrisSounds/force-hit.wav";
     String Sound_gameover="TetrisSounds/gameover.wav";
     String Sound_lineclear="TetrisSounds/line-remove.wav";
-    String Sound_lineclearspecial="TetrisSounds/line-removeal4.wav";
+    String Sound_lineclearspecial="TetrisSounds/line-removal4.wav";
 
     Block block= new Block();
 
