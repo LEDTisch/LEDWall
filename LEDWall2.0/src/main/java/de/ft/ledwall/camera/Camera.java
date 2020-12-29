@@ -7,12 +7,12 @@ public class Camera {
     private double merk=0;
     private int zulansamcounter=0;
     private int fps=20;
-    int brighttest=0;
+    int counter =0;
     int brighttestpointx =0;
     int brighttestpointy =0;
     int Xpositionfromzero=0;
     int Ypositionfromzero=0;
-    int virtualLEDTischinPXwidth=100;
+    int virtualLEDTischinPXwidth=150;
     int virtualLedTischinPXheight=(int)(virtualLEDTischinPXwidth*1.5f);
     int Xoffset=0;
     int Yoffset=-50;
@@ -33,7 +33,7 @@ public class Camera {
     private void process(){
         merk=System.currentTimeMillis();
         imageProcess.readImagefromURL("http://192.168.137.175/stream/cam.jpg");
-        brighttest=0;
+        counter =0;
         brighttestpointx =0;
         brighttestpointy =0;
         for(int x=0;x<imageProcess.input.getWidth();x=x+1){
@@ -41,13 +41,13 @@ public class Camera {
                 if(imageProcess.getBlue(x,y)>200) {
                     brighttestpointx+=x;
                     brighttestpointy+=y;
-                    brighttest++;
+                    counter++;
                 }
             }
         }
-        if(brighttest>0) {
-            brighttestpointx = brighttestpointx / brighttest;
-            brighttestpointy = brighttestpointy / brighttest;
+        if(counter >0) {
+            brighttestpointx = brighttestpointx / counter;
+            brighttestpointy = brighttestpointy / counter;
         }
 
         Xpositionfromzero=brighttestpointx-imageProcess.input.getWidth()/2+Xoffset;

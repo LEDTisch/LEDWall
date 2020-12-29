@@ -14,6 +14,7 @@ class ApplicationManager() {
     private var allowDrawing:Boolean = true
     private var enableDraw:Boolean=true;
     internal final var systemAnimation:AnimationManager = AnimationManager()
+    var fps:Int=20;
 
     fun init() {
         Thread { drawingThread() }.start()
@@ -96,7 +97,7 @@ class ApplicationManager() {
                 systemAnimation.update()
                 SystemInterface.table.show()
 
-                TimeUnit.MILLISECONDS.sleep(50 - (System.currentTimeMillis() - timer))
+                TimeUnit.MILLISECONDS.sleep(1000/fps - (System.currentTimeMillis() - timer))
         }
 
     }

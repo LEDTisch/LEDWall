@@ -21,6 +21,7 @@ class RacingGame: Application {
     var lastfasttick:Long=0
     var firstone:Boolean = true
     var keepstate:Int = 2 //Keep State meens a natural street
+    var provisorischeSteuerungswechsler:Boolean=true;
 
 
     var ani_manager:AnimationManager = AnimationManager()
@@ -206,17 +207,22 @@ class RacingGame: Application {
                 lastfasttick = System.currentTimeMillis()
             }
         }
+        if(provisorischeSteuerungswechsler){
+            if(SystemInterface.camera.xposition>carposx) carposx++
+            if(SystemInterface.camera.xposition<carposx) carposx--
+        }
     }
 
     override fun onDataReceive(data: String, playerID: Int) {
+
         if(data.contentEquals("n")) reset()
         if(gameend==1) return
         if(ani_manager.animationsAvailable()) return
-        if(data.contentEquals("h")) carposy++
-        if(data.contentEquals("r")) carposx++
-        if(data.contentEquals("l")) carposx--
-        if(data.contentEquals("d")) carposy--
 
+        if(!provisorischeSteuerungswechsler) {
+            if (data.contentEquals("r")) carposx++
+            if (data.contentEquals("l")) carposx--
+        }
 
     }
 
