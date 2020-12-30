@@ -7,4 +7,5 @@ class Platform {
     constructor(Xposition:Int){
         this.Xposition=Xposition;
     }
+
 }

@@ -90,4 +90,12 @@ public class Camera {
     public int getYposition() {
         return yposition;
     }
+
+    public int getXpositionfromzero() {
+        return Xpositionfromzero;
+    }
+
+    public int getYpositionfromzero() {
+        return Ypositionfromzero;
+    }
 }
