@@ -2,6 +2,7 @@ package de.ft.ledwall;
 
 import de.ft.ledwall.apps.Standby;
 import de.ft.ledwall.apps.doodlejump.DoodleJump;
+import de.ft.ledwall.apps.licht.Licht;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
 import java.awt.*;
@@ -26,9 +27,8 @@ public class Main {
 
 
         am.init();
-        am.setApplication(new DoodleJump());
-
-
+        am.setApplication(new Standby());
+        SystemInterface.camera.stop();
 
     }
 }

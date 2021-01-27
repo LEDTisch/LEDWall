@@ -21,7 +21,7 @@ class RacingGame: Application {
     var lastfasttick:Long=0
     var firstone:Boolean = true
     var keepstate:Int = 2 //Keep State meens a natural street
-    var provisorischeSteuerungswechsler:Boolean=true;
+    var provisorischeSteuerungswechsler:Boolean=false;
 
 
     var ani_manager:AnimationManager = AnimationManager()
