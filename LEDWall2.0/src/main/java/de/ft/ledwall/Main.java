@@ -3,10 +3,12 @@ package de.ft.ledwall;
 import de.ft.ledwall.apps.Standby;
 import de.ft.ledwall.apps.doodlejump.DoodleJump;
 import de.ft.ledwall.apps.licht.Licht;
+import de.ft.ledwall.apps.pacman.Pacman;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     private static Neopixel neo = new Neopixel(150);
@@ -15,7 +17,6 @@ public class Main {
 
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-
 
 
         sc.initSocket();
@@ -27,7 +28,9 @@ public class Main {
 
 
         am.init();
-        am.setApplication(new Standby());
+
+        TimeUnit.MILLISECONDS.sleep(8000);
+        am.setApplication(new Pacman());
         SystemInterface.camera.stop();
 
     }

@@ -3,6 +3,7 @@ package de.ft.ledwall
 import de.ft.ledwall.animation.AnimationManager
 import de.ft.ledwall.animation.system.ErrorAnimation
 import de.ft.ledwall.apps.licht.Licht
+import de.ft.ledwall.apps.pacman.Pacman
 import de.ft.ledwall.apps.racingGame.RacingGame
 import de.ft.ledwall.apps.snake.SnakeGame
 import de.ft.ledwall.apps.tetris.Tetris
@@ -42,6 +43,10 @@ class ApplicationManager() {
             }
             if(command.contentEquals("switchTo:Licht#")) {
                 Main.am.setApplication(Licht())
+                return true
+            }
+            if(command.contentEquals("switchTo:PacMan#")) {
+                Main.am.setApplication(Pacman())
                 return true
             }
 
