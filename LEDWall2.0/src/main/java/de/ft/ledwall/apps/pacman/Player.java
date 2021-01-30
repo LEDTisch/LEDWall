@@ -1,13 +1,17 @@
 package de.ft.ledwall.apps.pacman;
 
+import de.ft.ledwall.Sound;
 import de.ft.ledwall.SystemInterface;
 
 public class Player {
+    private String munch1="PacManSounds/munch_1.wav";
+    private String munch2="PacManSounds/munch_2.wav";
     private int x=5;
     private int y=6;
     private Direction nextDirection=Direction.NONE;
     private Direction acDirection=Direction.NONE;
     private Level myLevel;
+    boolean munch=false;
     public Player(){
 
     }
@@ -55,6 +59,13 @@ public class Player {
     public void draw(){
         if((this.myLevel.level[y][x]&0x02)==0x02){
             this.myLevel.level[y][x]&=0xFD;
+            if(munch){
+                Sound.play(munch2);
+                munch=false;
+            }else{
+                Sound.play(munch1);
+                munch=true;
+            }
         }
         SystemInterface.table.setColor(255,255,0);
         SystemInterface.table.drawPixel(this.x,this.y);

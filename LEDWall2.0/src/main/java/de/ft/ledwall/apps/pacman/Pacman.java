@@ -5,7 +5,10 @@ import de.ft.ledwall.Sound;
 import de.ft.ledwall.SystemInterface;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.TimeUnit;
+
 public class Pacman implements Application {
+    String Sound_intro="PacManSounds/game_start.wav";
     Level level=new Level();
     Player player=new Player();
     int drawcounter=0;
@@ -28,10 +31,14 @@ public class Pacman implements Application {
     };
     @Override
     public void onCreate() {
+        newGame();
+    }
+
+    void newGame(){
         level.setLevel(level1);
         this.player.setMyLevel(level);
-        player.setNextDirection(Direction.RIGHT);
-
+        this.player.setNextDirection(Direction.NONE);
+        Sound.play(this.Sound_intro);
     }
 
     @Override
@@ -39,7 +46,7 @@ public class Pacman implements Application {
         SystemInterface.table.clear();
         level.draw();
         player.draw();
-        if(drawcounter>10){
+        if(drawcounter>3){
             player.move();
             drawcounter=0;
         }
