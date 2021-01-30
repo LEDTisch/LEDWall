@@ -53,6 +53,9 @@ public class Player {
         }
     }
     public void draw(){
+        if((this.myLevel.level[y][x]&0x02)==0x02){
+            this.myLevel.level[y][x]&=0xFD;
+        }
         SystemInterface.table.setColor(255,255,0);
         SystemInterface.table.drawPixel(this.x,this.y);
     }

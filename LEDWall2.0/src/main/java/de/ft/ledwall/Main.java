@@ -29,7 +29,6 @@ public class Main {
 
         am.init();
 
-        TimeUnit.MILLISECONDS.sleep(8000);
         am.setApplication(new Pacman());
         SystemInterface.camera.stop();
 
