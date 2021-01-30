@@ -10,7 +10,7 @@ public class Level {
     public void draw(){
         for(int x=0;x<10;x++){
             for(int y=0;y<15;y++){
-                if((this.level[y][x] & 0x01)==1){
+                if(this.level[y][x]==0xff){
                     SystemInterface.table.setColor(255,0,0);
                     SystemInterface.table.drawPixel(x,y);
                 }

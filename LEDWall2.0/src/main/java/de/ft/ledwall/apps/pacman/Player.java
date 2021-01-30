@@ -17,37 +17,37 @@ public class Player {
     public void move(){
         switch(this.nextDirection){
             case UP:{
-                if((this.myLevel.level[this.y+1][this.x] & 0x01)==1)this.acDirection=nextDirection;
+                if(this.myLevel.level[this.y+1][this.x]!=0xFF)this.acDirection=nextDirection;
                 break;
             }
             case DOWN:{
-                if((this.myLevel.level[this.y-1][this.x] & 0x01)==1)this.acDirection=nextDirection;
+                if(this.myLevel.level[this.y-1][this.x]!=0xFF)this.acDirection=nextDirection;
                 break;
             }
             case RIGHT:{
-                if((this.myLevel.level[this.y][this.x+1] & 0x01)==1)this.acDirection=nextDirection;
+                if(this.myLevel.level[this.y][this.x+1]!=0xFF)this.acDirection=nextDirection;
                 break;
             }
             case LEFT:{
-                if((this.myLevel.level[this.y][this.x-1] & 0x01)==1)this.acDirection=nextDirection;
+                if(this.myLevel.level[this.y][this.x-1]!=0xFF)this.acDirection=nextDirection;
                 break;
             }
         }
         switch(this.acDirection){
             case UP:{
-                if(y<14)if((myLevel.level[y+1][x] & 0x01)==1)y++;
+                if(y<14)if(myLevel.level[y+1][x]!=0xFF)y++;
                 break;
             }
             case DOWN:{
-                if(y>0)if((myLevel.level[y-1][x] & 0x01)==1)y--;
+                if(y>0)if(myLevel.level[y-1][x]!=0xFF)y--;
                 break;
             }
             case RIGHT:{
-                if(x<9)if((myLevel.level[y][x+1] & 0x01)==1)x++;
+                if(x<9)if(myLevel.level[y][x+1]!=0xFF)x++;
                 break;
             }
             case LEFT:{
-                if(x>0)if((myLevel.level[y][x-1] & 0x01)==1)x--;
+                if(x>0)if(myLevel.level[y][x-1]!=0xFF)x--;
                 break;
             }
         }
