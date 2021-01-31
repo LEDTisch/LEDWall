@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 public class Pacman implements Application {
     String Sound_intro="PacManSounds/game_start.wav";
     Level level=new Level();
-    Player player=new Player();
     int drawcounter=0;
     int level1[][]={
             {0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02},
@@ -37,8 +36,8 @@ public class Pacman implements Application {
 
     void newGame(){
         level.setLevel(level1);
-        this.player.setMyLevel(level);
-        this.player.setNextDirection(Direction.NONE);
+        level.player.setMyLevel(level);
+        level.player.setNextDirection(Direction.NONE);
         Sound.play(this.Sound_intro);
     }
 
@@ -46,12 +45,12 @@ public class Pacman implements Application {
     public void onDraw() {
         SystemInterface.table.clear();
         level.draw();
-        player.draw();
+        level.player.draw();
         for(int i=0;i<level.ghosts.size();i++){
             level.ghosts.get(i).draw();
         }
         if(drawcounter>3){
-            player.move();
+            level.player.move();
             for(int i=0;i<level.ghosts.size();i++){
                 level.ghosts.get(i).move();
             }
@@ -69,16 +68,16 @@ public class Pacman implements Application {
     public void onDataReceive(@NotNull String data, int playerID) {
 
         if(data.contentEquals("d")){
-            this.player.setNextDirection(Direction.DOWN);
+            level.player.setNextDirection(Direction.DOWN);
         }
         if(data.contentEquals("u")){
-            this.player.setNextDirection(Direction.UP);
+            level.player.setNextDirection(Direction.UP);
         }
         if(data.contentEquals("r")){
-            this.player.setNextDirection(Direction.RIGHT);
+            level.player.setNextDirection(Direction.RIGHT);
         }
         if(data.contentEquals("l")){
-            this.player.setNextDirection(Direction.LEFT);
+            level.player.setNextDirection(Direction.LEFT);
         }
     }
 

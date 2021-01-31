@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Level {
     ArrayList<Ghost> ghosts=new ArrayList<>();
+    Player player=new Player();
     public int level[][];
     public Level(){
 
