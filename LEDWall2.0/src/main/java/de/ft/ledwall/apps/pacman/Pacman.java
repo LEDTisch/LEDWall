@@ -5,6 +5,7 @@ import de.ft.ledwall.Sound;
 import de.ft.ledwall.SystemInterface;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Pacman implements Application {
@@ -27,7 +28,7 @@ public class Pacman implements Application {
             {0x02,0x01,0x01,0x01,0x01,0x02,0x01,0x01,0x01,0x02},
             {0x02,0x02,0x02,0x02,0x01,0x02,0x01,0x02,0x02,0x02},
             {0x01,0x01,0x01,0x02,0x01,0x02,0x01,0x02,0x01,0x02},
-            {0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02}
+            {0x04,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02,0x02}
     };
     @Override
     public void onCreate() {
@@ -46,8 +47,14 @@ public class Pacman implements Application {
         SystemInterface.table.clear();
         level.draw();
         player.draw();
+        for(int i=0;i<level.ghosts.size();i++){
+            level.ghosts.get(i).draw();
+        }
         if(drawcounter>3){
             player.move();
+            for(int i=0;i<level.ghosts.size();i++){
+                level.ghosts.get(i).move();
+            }
             drawcounter=0;
         }
         drawcounter++;
