@@ -58,21 +58,40 @@ public class Ghost {
         }
         Direction xdir=Direction.NONE;
         Direction ydir=Direction.NONE;
-        if(myLevel.player.getY()>y){
-            ydir=Direction.UP;
-        }else if(myLevel.player.getY()<y){
-            ydir=Direction.DOWN;
+
+        if(Math.random()>0.5f) {
+            if (myLevel.player.getY() > y) {
+                ydir = Direction.UP;
+            } else{
+                ydir = Direction.DOWN;
+            }
+
+            if (myLevel.player.getX() > x) {
+                xdir = Direction.RIGHT;
+            } else{
+                xdir = Direction.LEFT;
+            }
+        }else{
+            if (myLevel.player.getY() < y) {
+                ydir = Direction.DOWN;
+            } else{
+                ydir = Direction.UP;
+            }
+
+            if (myLevel.player.getX() < x) {
+                xdir = Direction.LEFT;
+            } else{
+                xdir = Direction.RIGHT;
+            }
         }
-        
-        if(myLevel.player.getX()>x){
-            xdir=Direction.RIGHT;
-        }else if(myLevel.player.getX()<x){
-            xdir=Direction.LEFT;
-        }
-        if(Math.random()>0.5f){
+
+
+
+
+        if(Math.random()>0.8f){
             ydir=invert(ydir);
         }
-        if(Math.random()>0.5f){
+        if(Math.random()>0.8f){
             xdir=invert(xdir);
         }
 
