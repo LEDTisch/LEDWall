@@ -98,22 +98,7 @@ public class Ghost {
         if(this.nextDirection==Direction.NONE){
             switch (this.acDirection){
                 case RIGHT:{
-                    if(ydir==Direction.UP){
-                        if(y>0)if((myLevel.level[y-1][x]&0x01)==0x00) {
-                            nextDirection=Direction.DOWN;
-                        }
-                        if(y<14)if((myLevel.level[y+1][x]&0x01)==0x00){
-                            nextDirection=Direction.UP;
-                        }
-                    }else if(ydir==Direction.DOWN){
-                        if(y<14)if((myLevel.level[y+1][x]&0x01)==0x00){
-                            nextDirection=Direction.UP;
-                        }
-                        if(y>0)if((myLevel.level[y-1][x]&0x01)==0x00) {
-                            nextDirection=Direction.DOWN;
-                        }
-                    }
-                    break;
+
                 }
                 case LEFT:{
                     if(ydir==Direction.UP){
@@ -134,22 +119,6 @@ public class Ghost {
                     break;
                 }
                 case UP:{
-                    if(xdir==Direction.RIGHT) {
-                        if (x > 0) if ((myLevel.level[y][x - 1] & 0x01) == 0x00) {
-                            nextDirection = Direction.LEFT;
-                        }
-                        if (x < 9) if ((myLevel.level[y][x + 1] & 0x01) == 0x00) {
-                            nextDirection = Direction.RIGHT;
-                        }
-                    }else if(xdir==Direction.LEFT){
-                        if (x < 9) if ((myLevel.level[y][x + 1] & 0x01) == 0x00) {
-                            nextDirection = Direction.RIGHT;
-                        }
-                        if (x > 0) if ((myLevel.level[y][x - 1] & 0x01) == 0x00) {
-                            nextDirection = Direction.LEFT;
-                        }
-                    }
-                    break;
                 }
                 case DOWN:{
                     if(xdir==Direction.RIGHT) {
