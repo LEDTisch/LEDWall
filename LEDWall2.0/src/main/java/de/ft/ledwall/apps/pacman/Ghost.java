@@ -63,6 +63,12 @@ public class Ghost {
         }else if(myLevel.player.getY()<y){
             ydir=Direction.DOWN;
         }
+        
+        if(myLevel.player.getX()>x){
+            xdir=Direction.RIGHT;
+        }else if(myLevel.player.getX()<x){
+            xdir=Direction.LEFT;
+        }
         if(Math.random()>0.5f){
             ydir=invert(ydir);
         }
@@ -109,20 +115,38 @@ public class Ghost {
                     break;
                 }
                 case UP:{
-                    if(x>0)if((myLevel.level[y][x-1]&0x01)==0x00) {
-                        nextDirection=Direction.LEFT;
-                    }
-                    if(x<9)if((myLevel.level[y][x+1]&0x01)==0x00){
-                        nextDirection=Direction.RIGHT;
+                    if(xdir==Direction.RIGHT) {
+                        if (x > 0) if ((myLevel.level[y][x - 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.LEFT;
+                        }
+                        if (x < 9) if ((myLevel.level[y][x + 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.RIGHT;
+                        }
+                    }else if(xdir==Direction.LEFT){
+                        if (x < 9) if ((myLevel.level[y][x + 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.RIGHT;
+                        }
+                        if (x > 0) if ((myLevel.level[y][x - 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.LEFT;
+                        }
                     }
                     break;
                 }
                 case DOWN:{
-                    if(x>0)if((myLevel.level[y][x-1]&0x01)==0x00) {
-                        nextDirection=Direction.LEFT;
-                    }
-                    if(x<9)if((myLevel.level[y][x+1]&0x01)==0x00){
-                        nextDirection=Direction.RIGHT;
+                    if(xdir==Direction.RIGHT) {
+                        if (x > 0) if ((myLevel.level[y][x - 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.LEFT;
+                        }
+                        if (x < 9) if ((myLevel.level[y][x + 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.RIGHT;
+                        }
+                    }else if(xdir==Direction.LEFT){
+                        if (x < 9) if ((myLevel.level[y][x + 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.RIGHT;
+                        }
+                        if (x > 0) if ((myLevel.level[y][x - 1] & 0x01) == 0x00) {
+                            nextDirection = Direction.LEFT;
+                        }
                     }
                     break;
                 }
