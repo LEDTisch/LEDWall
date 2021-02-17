@@ -9,7 +9,12 @@ public class Sound {
     public static Clip TetrisTheme=loadtoClip("tetris.wav");
     public static Clip RacingGameTheme=loadtoClip("RacingGameTheme.wav");
     public static Clip AlleJahreWieder=loadtoClip("allejahrewieder.wav");
-
+    public static Clip PacmanSiren_1=loadtoClip("PacManSounds/siren_1.wav");
+    public static Clip PacmanSiren_2=loadtoClip("PacManSounds/siren_2.wav");
+    public static Clip PacmanSiren_3=loadtoClip("PacManSounds/siren_3.wav");
+    public static Clip PacmanSiren_4=loadtoClip("PacManSounds/siren_4.wav");
+    public static Clip PacmanSiren_5=loadtoClip("PacManSounds/siren_5.wav");
+    public static Clip Pacman_power_pellet=loadtoClip("PacManSounds/power_pellet.wav");
 
     public static void play(String pfad)  {
         Clip clip = loadtoClip(pfad);
@@ -17,6 +22,7 @@ public class Sound {
         gainControl.setValue(6);
 
         clip.start();
+        while(clip.isActive());
     }
 
     public static Clip loadtoClip(String path){

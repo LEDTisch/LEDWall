@@ -130,4 +130,11 @@ class DoodleJump : Application {
     }
 
     override fun onStop() {}
+    override fun getVersion(): Int {
+        return 2;
+    }
+
+    override fun getUUID(): String {
+        return "34a0136b-7056-11eb-8638-0242ac110002";
+    }
 }

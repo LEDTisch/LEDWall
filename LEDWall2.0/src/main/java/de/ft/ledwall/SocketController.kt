@@ -1,9 +1,6 @@
 package de.ft.ledwall
 
 import de.ft.ledwall.animation.system.ConnectAnimation
-import de.ft.ledwall.apps.Standby
-import de.ft.ledwall.apps.racingGame.RacingGame
-import de.ft.ledwall.apps.snake.SnakeGame
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
@@ -43,12 +40,7 @@ class SocketController {
         }
         sockets.remove(socket)
 
-        //TEMP
 
-        if(Main.am.getCurrentApplication() !is Standby) {
-            Main.am.setApplication(Standby())
-            (Main.am.getCurrentApplication() as Standby).lastdraw = System.currentTimeMillis() - 13500
-        }
 
     }
 

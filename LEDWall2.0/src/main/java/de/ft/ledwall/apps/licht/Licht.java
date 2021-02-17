@@ -37,4 +37,15 @@ public class Licht implements Application {
     public void onStop() {
 
     }
+
+    @Override
+    public int getVersion() {
+        return 0;
+    }
+
+    @NotNull
+    @Override
+    public String getUUID() {
+        return "ad86fc0a-7056-11eb-8638-0242ac110002";
+    }
 }

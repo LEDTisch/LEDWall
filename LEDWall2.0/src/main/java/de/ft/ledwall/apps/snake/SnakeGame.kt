@@ -79,4 +79,12 @@ class SnakeGame:Application {
 
     override fun onStop() {
     }
+
+    override fun getVersion(): Int {
+        return 0;
+    }
+
+    override fun getUUID(): String {
+        return "79bcd736-7056-11eb-8638-0242ac110002";
+    }
 }

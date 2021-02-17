@@ -98,7 +98,6 @@ public class Ghost {
         if(this.nextDirection==Direction.NONE){
             switch (this.acDirection){
                 case RIGHT:{
-
                 }
                 case LEFT:{
                     if(ydir==Direction.UP){

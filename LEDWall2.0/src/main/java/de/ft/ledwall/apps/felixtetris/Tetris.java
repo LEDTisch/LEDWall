@@ -468,4 +468,15 @@ public class Tetris implements Application {
     public void onStop() {
         Sound.TetrisTheme.stop();
     }
+
+    @Override
+    public int getVersion() {
+        return 9999;
+    }
+
+    @NotNull
+    @Override
+    public String getUUID() {
+        return "8f8188a7-6691-11eb-a9b2-b827ebba2f99";
+    }
 }
