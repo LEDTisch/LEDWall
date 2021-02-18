@@ -1,5 +1,9 @@
 package de.ft.ledwall.api;
 
+import de.ft.ledwall.ApplicationManager;
+import de.ft.ledwall.Main;
+import de.ft.ledwall.nativeapps.registration.Registration;
+
 import java.io.*;
 import java.net.*;
 import java.util.HashMap;
@@ -70,6 +74,11 @@ public class ServerConnection {
         }
     }
     public static void registrate(String device) throws Exception {
-      System.out.println(getHTML("http://"+server+"/device/getRegistrationCode"));
+        Main.applicationManager.setApplication(new Registration());
+
+        int registrationcode = Integer.parseInt(getHTML("http://"+server+"/device/getRegistrationCode"));
+        Main.applicationManager.getCurrentApplication().onDataReceive(Integer.toString(registrationcode),-1);
+        System.out.println("Registrationcode: "+registrationcode);
+        System.out.println("die kuh macht mä: "+getHTML("http://"+server+"/device/waitForRegistration?regCode="+registrationcode+"&deviceUUID="+ Main.LedWalluuid+"&deviceName="+"Felixledwall"));
     }
 }

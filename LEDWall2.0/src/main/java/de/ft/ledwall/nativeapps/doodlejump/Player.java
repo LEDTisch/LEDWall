@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.doodlejump;
+package de.ft.ledwall.nativeapps.doodlejump;
 
 class Player {
     int Xposition = 0;

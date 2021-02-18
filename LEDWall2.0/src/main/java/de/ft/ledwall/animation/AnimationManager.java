@@ -30,7 +30,7 @@ public class AnimationManager {
             }else{
                 currentStep=0;
                 if(!animationQueue.get(0).isLoop()) {
-                    if(this== Main.am.getSysAnimation()) {
+                    if(this== Main.applicationManager.getSysAnimation()) {
 
                         SystemInterface.table.clear();
                     }

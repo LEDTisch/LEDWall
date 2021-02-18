@@ -21,7 +21,7 @@ class SocketController {
                     return
                 }
                 println("Player ${sockets.indexOf(socket)+1}: $text")
-               if(sockets.indexOf(socket)+1!=1||!Main.am.checkSystemCommand(text))  Main.am.getCurrentApplication()!!.onDataReceive(text,sockets.indexOf(socket)+1)
+               if(sockets.indexOf(socket)+1!=1||!Main.applicationManager.checkSystemCommand(text))  Main.applicationManager.getCurrentApplication()!!.onDataReceive(text,sockets.indexOf(socket)+1)
 
             }
         }catch (e:Exception) {
@@ -48,7 +48,7 @@ class SocketController {
         while (true) {
             sockets.add(socketServer.accept())
             Thread { readSocket(sockets[sockets.size - 1]) }.start()
-            Main.am.systemAnimation.addToQueue(ConnectAnimation.animation)
+            Main.applicationManager.systemAnimation.addToQueue(ConnectAnimation.animation)
 
 
 

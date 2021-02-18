@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.felixtetris;
+package de.ft.ledwall.nativeapps.felixtetris;
 
 import de.ft.ledwall.SystemInterface;
 

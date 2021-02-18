@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.licht;
+package de.ft.ledwall.nativeapps.licht;
 
 import de.ft.ledwall.Application;
 import de.ft.ledwall.SystemInterface;

@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.snake
+package de.ft.ledwall.nativeapps.snake
 
 import de.ft.ledwall.Application
 import de.ft.ledwall.SystemInterface

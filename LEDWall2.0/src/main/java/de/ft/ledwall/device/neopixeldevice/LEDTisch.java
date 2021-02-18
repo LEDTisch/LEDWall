@@ -94,6 +94,14 @@ public class LEDTisch {
         return PO;
     }
 
+    public void fillRect(int x, int y, int w, int h){
+        for(int xx=x;xx<x+w;xx++){
+            for(int yy=y;yy<y+h;yy++){
+                drawPixel(xx,yy);
+            }
+        }
+    }
+
 
     public void copyFrameToPixelBuffer(int[] frame,boolean skipOff) {
 

@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.tetris;
+package de.ft.ledwall.nativeapps.tetris;
 
 import de.ft.ledwall.SystemInterface;
 

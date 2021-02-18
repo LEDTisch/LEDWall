@@ -1,9 +1,7 @@
-package de.ft.ledwall.apps.doodlejump
+package de.ft.ledwall.nativeapps.doodlejump
 
 
 import de.ft.ledwall.Application
-import de.ft.ledwall.apps.doodlejump.Player
-import de.ft.ledwall.apps.doodlejump.GameState
 import de.ft.ledwall.SystemInterface
 import java.util.ArrayList
 

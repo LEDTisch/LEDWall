@@ -2,9 +2,9 @@ package de.ft.ledwall
 
 import de.ft.ledwall.animation.AnimationManager
 import de.ft.ledwall.animation.system.ErrorAnimation
-import de.ft.ledwall.apps.licht.Licht
-import de.ft.ledwall.apps.pacman.Pacman
-import de.ft.ledwall.apps.snake.SnakeGame
+import de.ft.ledwall.nativeapps.licht.Licht
+import de.ft.ledwall.nativeapps.pacman.Pacman
+import de.ft.ledwall.nativeapps.snake.SnakeGame
 import java.util.concurrent.TimeUnit
 
 class ApplicationManager() {
@@ -27,7 +27,7 @@ class ApplicationManager() {
     //TODO kompletter mist das muss komplett neu gemacht werden!!! Aus dem Grund da das Backend jetzt auf einem Server läuft und dadruch der Command des Wechselns der Applications durch einen WebSocket vom Backend kommt durch eine anfoiderung der Forntends was entweder die App oder einen Website sein kann. Wir werden hier auch keine Performancen probleme haben, da wir die Anforderung nur ganz selten kommen.
 
             if(command.contentEquals("switchTo:Tetris#")) {
-                Main.am.setApplication(de.ft.ledwall.apps.felixtetris.Tetris())
+                Main.applicationManager.setApplication(de.ft.ledwall.nativeapps.felixtetris.Tetris())
                 return true
             }
             if(command.contentEquals("switchTo:Racing Game#")) {
@@ -36,15 +36,15 @@ class ApplicationManager() {
             }
 
             if(command.contentEquals("switchTo:Snake#")) {
-                Main.am.setApplication(SnakeGame())
+                Main.applicationManager.setApplication(SnakeGame())
                 return true
             }
             if(command.contentEquals("switchTo:Licht#")) {
-                Main.am.setApplication(Licht())
+                Main.applicationManager.setApplication(Licht())
                 return true
             }
             if(command.contentEquals("switchTo:PacMan#")) {
-                Main.am.setApplication(Pacman())
+                Main.applicationManager.setApplication(Pacman())
                 return true
             }
 

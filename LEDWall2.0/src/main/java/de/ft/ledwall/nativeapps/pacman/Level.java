@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.pacman;
+package de.ft.ledwall.nativeapps.pacman;
 
 import de.ft.ledwall.SystemInterface;
 

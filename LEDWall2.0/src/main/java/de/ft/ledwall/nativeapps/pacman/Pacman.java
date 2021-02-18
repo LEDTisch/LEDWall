@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.pacman;
+package de.ft.ledwall.nativeapps.pacman;
 
 import de.ft.ledwall.Application;
 import de.ft.ledwall.Sound;
@@ -6,8 +6,6 @@ import de.ft.ledwall.SystemInterface;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.Clip;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Pacman implements Application {
     String Sound_intro="PacManSounds/game_start.wav";

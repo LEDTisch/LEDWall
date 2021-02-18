@@ -1,4 +1,4 @@
-package de.ft.ledwall.apps.felixtetris;
+package de.ft.ledwall.nativeapps.felixtetris;
 
 import de.ft.ledwall.Application;
 import de.ft.ledwall.Sound;
@@ -7,9 +7,6 @@ import de.ft.ledwall.animation.AnimationManager;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileSystems;
 
 public class Tetris implements Application {
 
