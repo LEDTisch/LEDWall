@@ -1,6 +1,7 @@
 package de.ft.ledwall;
 
 import de.ft.ledwall.api.ServerConnection;
+import de.ft.ledwall.data.DataManager;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
 import de.ft.ledwall.plugins.PluginManager;
 
@@ -14,6 +15,7 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
+        DataManager.init();
         PluginManager.loadplugins();
         sc.initSocket();
         //SystemInterface.camera.start();

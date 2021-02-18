@@ -13,7 +13,7 @@ public class PluginManager {
         if (!new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").exists()) {
             new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").mkdir();
             if (!new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").exists()){
-                System.out.println("Failed to create directory: "+ System.getProperty("user.home") + "\\" + ".LEDWall" + "\\plugins");
+                System.out.println("Failed to create directory: "+ System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps");
                 return false;
             }
         }
