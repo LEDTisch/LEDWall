@@ -1,8 +1,16 @@
 package de.ft.ledwall.data;
 
-import java.io.File;
-import java.io.IOException;
+import de.ft.ledwall.Main;
+import de.ft.ledwall.api.ServerConnection;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
 
 public class DataManager {
     public static String programfolder=System.getProperty("user.home") + "\\" + ".LEDWall";
@@ -29,7 +37,7 @@ public class DataManager {
             }
         }
     }
-    public static boolean init(){
+    public static String init() throws Exception {
         folder_main = new File(programfolder);
 
         folder_apps = new File(programfolder+"\\apps");
@@ -45,21 +53,63 @@ public class DataManager {
             System.out.println("Mainfolder existiert nicht beginne erstellung");
             folder_main.mkdir();
         }
-        try {
+        if(!folder_main.exists()){
+            return "Main Folder kann nicht erstellt werden!";
+        }
+
+            try {
             checkinnerFolders();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        if (!new File(programfolder + "\\data").exists()) {
-            new File(programfolder + "\\data").mkdir();
-            if (!new File(programfolder + "\\data").exists()){
-                System.out.println("Failed to create directory: "+ programfolder + "\\data");
-                return false;
-            }
-        }*/
+
+
+
+        return "success";
+    }
+
+    public static boolean save_APIKey() throws IOException {
+        String content = new String(Files.readAllBytes(Paths.get(file_apiconf.getAbsolutePath())));
+        if(content==null){
+            return false;
+        }
+        if(content==""){
+            return false;
+        }
+        JSONObject obj = new JSONObject(content);
+
+        obj.put("apikey", Main.serverConnection.getApiKey());
+
+        try {
+            FileWriter fw = new FileWriter(file_apiconf.getAbsolutePath());
+            fw.write(new JSONObject().put("apikey",Main.serverConnection.getApiKey()).toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
         return true;
+    }
+    public static String load_APIkey() throws IOException, ParseException {
+        String content = new String(Files.readAllBytes(Paths.get(file_apiconf.getAbsolutePath())));
+        if(content==null){
+            return "-1";
+        }
+        if(content==""){
+            return "-1";
+
+        }
+        JSONObject obj = new JSONObject(content);
+
+        if(!obj.isNull("apikey")){
+            return obj.getString("apikey");
+        }else{
+            return "-1";
+        }
+
+
     }
 
 }

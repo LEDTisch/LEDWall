@@ -3,6 +3,7 @@ package de.ft.ledwall;
 import de.ft.ledwall.api.ServerConnection;
 import de.ft.ledwall.data.DataManager;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
+import de.ft.ledwall.nativeapps.licht.Licht;
 import de.ft.ledwall.plugins.PluginManager;
 
 import java.awt.*;
@@ -12,6 +13,8 @@ public class Main {
     private static Neopixel neo = new Neopixel(150);
     public static SocketController sc = new SocketController();
     public static ApplicationManager applicationManager = new ApplicationManager();
+
+    public static ServerConnection serverConnection=new ServerConnection();
 
 
     public static void main(String[] args) throws Exception {
@@ -28,9 +31,15 @@ public class Main {
 
         applicationManager.init();
 
-        ServerConnection.registrate(LedWalluuid);
+        Main.serverConnection.setApiKey(DataManager.load_APIkey());
+       /* if(!Main.serverConnection.checkAPIKey()) {
+            Main.serverConnection.registrate(LedWalluuid);
+        }*/
+        Main.serverConnection.startpollconnection();
 
-        applicationManager.setApplication(PluginManager.apps.get(0));
+        //serverConnection.getWebSocketifconnected().send("Hallo Server");
+
+        applicationManager.setApplication(new Licht());
         //SystemInterface.camera.stop();
 
     }
