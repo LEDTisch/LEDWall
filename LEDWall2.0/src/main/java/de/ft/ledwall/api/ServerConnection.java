@@ -29,8 +29,9 @@ public class ServerConnection {
             try {
                 if(!Main.serverConnection.checkAPIKey()) {
                     Main.serverConnection.registrate(LedWalluuid);
-                    Main.applicationManager.setApplication(new Licht());
-                    System.out.println("hör auf");
+
+                        //Check for current running app
+                    //Main.applicationManager.setApplication(new Licht());
                 }
                 startSocketConnection();
                 pollConnection.stop();

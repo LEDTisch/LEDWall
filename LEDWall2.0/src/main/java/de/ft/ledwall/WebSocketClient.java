@@ -3,8 +3,10 @@ package de.ft.ledwall;
 import de.ft.ledwall.api.ServerConnection;
 import de.ft.ledwall.data.DataManager;
 import de.ft.ledwall.nativeapps.licht.Licht;
+import de.ft.ledwall.plugins.PluginManager;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,6 +37,8 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
     @Override
     public void onMessage(String message) {
         System.out.println("received: " + message);
+       analyseMessage(message);
+
     }
 
     @Override
@@ -53,6 +57,41 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         System.out.println("Error");
         ex.printStackTrace();
         // if the error is fatal then onClose will be called additionally
+    }
+
+    public static void analyseMessage(String message) {
+
+        JSONObject receivedobject=new JSONObject(message);
+
+        if(!receivedobject.has("message") || !receivedobject.has("content"))return;
+        JSONObject content=receivedobject.getJSONObject("content");
+
+        switch (receivedobject.getString("message")){
+            case "configChange":
+                if(content.has("runningapp")) {
+                    if(PluginManager.apps.containsKey(content.getString("runningapp")))
+                        Main.applicationManager.setApplication(PluginManager.apps.get(content.getString("runningapp")));
+                    System.out.println(content.getString("runningapp"));
+                }
+                break;
+            case "deviceuuid":
+                Main.deviceuuid = content.getString("deviceuuid");
+                try {
+                    JSONObject jsonCurrentData = new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server+"/device/getDeviceConfig?session="+Main.serverConnection.apiKey+"&device="+Main.deviceuuid));
+                    jsonCurrentData.put("message","configChange");
+                    jsonCurrentData.put("content",new JSONObject(jsonCurrentData.getString("data")));
+                    jsonCurrentData.remove("data");
+                    System.out.println(jsonCurrentData.toString());
+                    analyseMessage(jsonCurrentData.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            default:
+                break;
+        }
+
     }
 
 }

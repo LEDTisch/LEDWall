@@ -1,12 +1,14 @@
 package de.ft.ledwall.plugins;
 
 import de.ft.ledwall.Application;
+import de.ft.ledwall.ApplicationManager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PluginManager {
-    public static final ArrayList<Application>apps=new ArrayList<>();
+    public static final HashMap<String, Application> apps = new HashMap<>();
 
     public static boolean loadplugins() {
 

@@ -78,7 +78,7 @@ public class PluginLoader {
                 return false;
             }
             System.out.println("Loaded " + filetest.getName());
-            PluginManager.apps.add(plugin);
+            PluginManager.apps.put(plugin.getUUID(),plugin);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
