@@ -10,6 +10,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -40,7 +41,11 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
     @Override
     public void onMessage(String message) {
         System.out.println("received: " + message);
-       analyseMessage(message);
+        try {
+            analyseMessage(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -62,7 +67,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         // if the error is fatal then onClose will be called additionally
     }
 
-    public static void analyseMessage(String message) {
+    public static void analyseMessage(String message) throws IOException {
 
         JSONObject receivedobject=new JSONObject(message);
 
@@ -117,48 +122,60 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
 
 
                 listdata.forEach(s -> {
-                   if(!installedApps.contains(s)) {
-                        System.out.println(s);
 
-                       String repoString = null;
+                    String repoString = null;
+                    try {
+                        repoString = Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getInstallURL?session=" + Main.serverConnection.apiKey + "&appuuid=" + s);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    repoString = new JSONObject(repoString).getJSONObject("success").getString("url");
+
+                    String releases = "";
+                    System.out.println(repoString);
+
+                    try {
+                        releases = DownloadFile.downloadFile("https://api.github.com/repos" + repoString+"/releases");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println("https://api.github.com/repos" + repoString+"/releases");
+
+                    JSONArray ReleasesJson = new JSONArray(releases);
+
+                    JSONObject newestRelease = null;
+
+                    newestRelease = ReleasesJson.getJSONObject(0);
+
+                    if(!installedApps.contains(s)) {
                        try {
-                           repoString = Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getInstallURL?session=" + Main.serverConnection.apiKey + "&appuuid=" + s);
-                       } catch (Exception e) {
-                           e.printStackTrace();
-                       }
-
-                       repoString = new JSONObject(repoString).getJSONObject("success").getString("url");
-
-                       String releases = "";
-                       System.out.println(repoString);
-
-                       try {
-                           releases = DownloadFile.downloadFile("https://api.github.com/repos" + repoString+"/releases");
-                       } catch (Exception e) {
-                           e.printStackTrace();
-                       }
-
-
-                        System.out.println("https://api.github.com/repos" + repoString+"/releases");
-
-                       JSONArray jsonArray = new JSONArray(releases);
-                       JSONObject jsonObject = null;
-
-
-                       jsonObject = jsonArray.getJSONObject(0);
-                       try {
-                           PluginDownloader.downloadPlugin("https://github.com"+repoString+"/releases/download/" + jsonObject.getString("tag_name") + "/app.lwa",s);
+                           PluginDownloader.downloadPlugin("https://github.com"+repoString+"/releases/download/" + newestRelease.getString("tag_name") + "/app.lwa",s);
                        } catch (IOException e) {
                            e.printStackTrace();
                        }
-
                    }
+
+                    //Check for outdated versions
+                    if(newestRelease.getFloat("tag_name") > DataManager.getVersionOf(s)){
+                        //Do update
+                        System.out.println("Doing Update");
+                        try {
+                            PluginDownloader.downloadPlugin("https://github.com"+repoString+"/releases/download/" + newestRelease.getString("tag_name") + "/app.lwa",s);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
 
                 });
 
 
+                //Laden der plugins
                 PluginManager.loadplugins();
-
+               // Datamanger verisonen aufschreiben
+                DataManager.saveAppVersions();
                 break;
             default:
                 break;
