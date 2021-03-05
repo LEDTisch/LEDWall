@@ -74,8 +74,8 @@ public class Registration implements Application {
     }
 
     @Override
-    public int getVersion() {
-        return -1;
+    public String getVersion() {
+        return "-1";
     }
 
     @NotNull

@@ -2,18 +2,21 @@ package de.ft.ledwall;
 
 import de.ft.ledwall.api.ServerConnection;
 import de.ft.ledwall.data.DataManager;
-import de.ft.ledwall.nativeapps.licht.Licht;
+import de.ft.ledwall.plugins.PluginDownloader;
 import de.ft.ledwall.plugins.PluginManager;
+import de.ft.ledwall.utils.DownloadFile;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import static de.ft.ledwall.Main.LedWalluuid;
 
 public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
 
@@ -86,6 +89,75 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                break;
+            case "syncApps":
+                System.out.println("syncapps: ");
+                    JSONArray apps = content.getJSONArray("apps");
+                System.out.println(apps.toString());
+
+                ArrayList<String> listdata = new ArrayList<String>();
+                if (apps != null) {
+                    for (int i=0;i<apps.length();i++){
+                        listdata.add(apps.getString(i));
+                    }
+                }
+
+
+              File[] files =  DataManager.folder_apps.listFiles();
+
+                ArrayList<String> installedApps = new ArrayList<>();
+                for (File file : files) {
+                    installedApps.add(file.getName().split("\\.")[0]);
+                    if(!listdata.contains(file.getName().split("\\.")[0])) {
+                        file.delete();
+                        System.out.println("uninstalled app: "+file.getName());
+                    }
+                }
+
+
+                listdata.forEach(s -> {
+                   if(!installedApps.contains(s)) {
+                        System.out.println(s);
+
+                       String repoString = null;
+                       try {
+                           repoString = Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getInstallURL?session=" + Main.serverConnection.apiKey + "&appuuid=" + s);
+                       } catch (Exception e) {
+                           e.printStackTrace();
+                       }
+
+                       repoString = new JSONObject(repoString).getJSONObject("success").getString("url");
+
+                       String releases = "";
+                       System.out.println(repoString);
+
+                       try {
+                           releases = DownloadFile.downloadFile("https://api.github.com/repos" + repoString+"/releases");
+                       } catch (Exception e) {
+                           e.printStackTrace();
+                       }
+
+
+                        System.out.println("https://api.github.com/repos" + repoString+"/releases");
+
+                       JSONArray jsonArray = new JSONArray(releases);
+                       JSONObject jsonObject = null;
+
+
+                       jsonObject = jsonArray.getJSONObject(0);
+                       try {
+                           PluginDownloader.downloadPlugin("https://github.com"+repoString+"/releases/download/" + jsonObject.getString("tag_name") + "/app.lwa",s);
+                       } catch (IOException e) {
+                           e.printStackTrace();
+                       }
+
+                   }
+
+                });
+
+
+                PluginManager.loadplugins();
 
                 break;
             default:

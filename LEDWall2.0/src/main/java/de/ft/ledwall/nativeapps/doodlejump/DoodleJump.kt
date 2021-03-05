@@ -128,8 +128,8 @@ class DoodleJump : Application {
     }
 
     override fun onStop() {}
-    override fun getVersion(): Int {
-        return 2;
+    override fun getVersion(): String {
+        return "-1";
     }
 
     override fun getUUID(): String {

@@ -20,19 +20,16 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         DataManager.init();
-        PluginManager.loadplugins();
         sc.initSocket();
         //SystemInterface.camera.start();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
         SystemInterface.table.show();
 
-        System.out.println(new Color(255, 0, 0).getRGB());
-
 
         applicationManager.init();
 
-        Main.serverConnection.setApiKey(DataManager.load_APIkey());
+
        /* if(!Main.serverConnection.checkAPIKey()) {
             Main.serverConnection.registrate(LedWalluuid);
         }*/

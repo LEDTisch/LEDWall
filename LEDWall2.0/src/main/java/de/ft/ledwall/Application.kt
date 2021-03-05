@@ -8,7 +8,7 @@ interface Application {
     fun onDataReceive(data:String,playerID:Int)
     fun getName():String
     fun onStop()
-    fun getVersion():Int
+    fun getVersion():String
     fun getUUID():String
 
 

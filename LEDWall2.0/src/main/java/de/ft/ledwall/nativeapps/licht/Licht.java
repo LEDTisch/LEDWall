@@ -39,8 +39,8 @@ public class Licht implements Application {
     }
 
     @Override
-    public int getVersion() {
-        return 0;
+    public String getVersion() {
+        return "-1";
     }
 
     @NotNull

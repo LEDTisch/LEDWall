@@ -27,6 +27,7 @@ public class ServerConnection {
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             try {
+                Main.serverConnection.setApiKey(DataManager.load_APIkey());
                 if(!Main.serverConnection.checkAPIKey()) {
                     Main.serverConnection.registrate(LedWalluuid);
 
@@ -37,8 +38,7 @@ public class ServerConnection {
                 pollConnection.stop();
 
             } catch (Exception e) {
-                System.out.println("failed to check APIKey that means, that the server connection is not possible");
-                e.printStackTrace();
+                System.out.println("failed to check APIKey that means, that the server connection is not possible (Server down?)");
             }
             try {
                 TimeUnit.MILLISECONDS.sleep(5000);

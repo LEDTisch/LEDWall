@@ -80,8 +80,8 @@ class SnakeGame:Application {
     override fun onStop() {
     }
 
-    override fun getVersion(): Int {
-        return 0;
+    override fun getVersion(): String {
+        return "-1";
     }
 
     override fun getUUID(): String {
