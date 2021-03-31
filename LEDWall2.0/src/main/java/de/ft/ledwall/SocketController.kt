@@ -5,11 +5,11 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.ServerSocket
 import java.net.Socket
-
+@Deprecated("Use WebSocket instead")
 class SocketController {
 
     private val socketServer = ServerSocket(8888)
-    internal val sockets = ArrayList<Socket>()
+    private val sockets = ArrayList<Socket>()
 
     private fun readSocket( socket: Socket) {
         try {
