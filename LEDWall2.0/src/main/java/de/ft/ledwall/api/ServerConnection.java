@@ -20,14 +20,18 @@ import java.util.concurrent.TimeUnit;
 import static de.ft.ledwall.Main.LedWalluuid;
 
 public class ServerConnection {
-    public String server="217.160.175.116:8146";
+    public String server="api.arnold-tim.de";
     public String apiKey;
 
     private WebSocketClient webSocketClient;
     ActionListener taskPerformer = new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
             try {
-                Main.serverConnection.setApiKey(DataManager.load_APIkey());
+                try {
+                    Main.serverConnection.setApiKey(DataManager.load_APIkey());
+                }catch (Exception e) {
+                    //Folder does not exist
+                }
                 if(!Main.serverConnection.checkAPIKey()) {
                     Main.serverConnection.registrate(LedWalluuid);
 
@@ -38,6 +42,7 @@ public class ServerConnection {
                 pollConnection.stop();
 
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("failed to check APIKey that means, that the server connection is not possible (Server down?)");
             }
             try {
@@ -183,8 +188,8 @@ public class ServerConnection {
         }
     }
     public boolean checkAPIKey() throws Exception {
-        JSONObject obj = new JSONObject(getHTML("http://"+server+"/auth/validateSession?session="+Main.serverConnection.getApiKey()));
-        System.out.println(getHTML("http://"+server+"/auth/validateSession?session="+this.getApiKey()));
+        JSONObject obj = new JSONObject(getHTML("https://"+server+"/auth/validateSession?session="+Main.serverConnection.getApiKey()));
+        System.out.println(getHTML("https://"+server+"/auth/validateSession?session="+this.getApiKey()));
         if(obj.getBoolean("success")){
             return true;
         }else{

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.FileHandler;
 
 public class DataManager {
-    public static String programfolder=System.getProperty("user.home") + "\\" + ".LEDWall";
+    public static String programfolder=System.getProperty("user.home") + "/" + ".LEDWall";
 
     public static File folder_main;
     public static File folder_apps;
@@ -43,10 +43,10 @@ public class DataManager {
     public static String init() throws Exception {
         folder_main = new File(programfolder);
 
-        folder_apps = new File(programfolder+"\\apps");
-        folder_ApiData = new File(programfolder+"\\ApiData");
-        file_apiconf = new File(programfolder+"\\ApiData\\APIconf.json");
-        file_AppVersions = new File(programfolder+"\\appversions.json");
+        folder_apps = new File(programfolder+"/apps");
+        folder_ApiData = new File(programfolder+"/ApiData");
+        file_apiconf = new File(programfolder+"/ApiData/APIconf.json");
+        file_AppVersions = new File(programfolder+"/appversions.json");
 
 
         foldersshouldexist.add(folder_apps);
@@ -108,7 +108,13 @@ public class DataManager {
         if(content==""){
             return false;
         }
-        JSONObject obj = new JSONObject(content);
+        JSONObject obj = null;
+
+        try {
+            obj=  new JSONObject(content);
+        }catch (Exception e) {
+            obj=  new JSONObject();
+        }
 
         obj.put("apikey", Main.serverConnection.getApiKey());
 

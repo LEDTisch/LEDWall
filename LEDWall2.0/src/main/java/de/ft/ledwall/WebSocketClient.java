@@ -77,6 +77,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         switch (receivedobject.getString("message")){
             case "configChange":
                 if(content.has("runningapp")) {
+
                     if(PluginManager.apps.containsKey(content.getString("runningapp")))
                         Main.applicationManager.setApplication(PluginManager.apps.get(content.getString("runningapp")));
                     System.out.println(content.getString("runningapp"));
@@ -84,16 +85,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
                 break;
             case "deviceuuid":
                 Main.deviceuuid = content.getString("deviceuuid");
-                try {
-                    JSONObject jsonCurrentData = new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server+"/device/getDeviceConfig?session="+Main.serverConnection.apiKey+"&device="+Main.deviceuuid));
-                    jsonCurrentData.put("message","configChange");
-                    jsonCurrentData.put("content",new JSONObject(jsonCurrentData.getString("data")));
-                    jsonCurrentData.remove("data");
-                    System.out.println(jsonCurrentData.toString());
-                    analyseMessage(jsonCurrentData.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
 
                 break;
             case "syncApps":
@@ -176,6 +168,18 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
                 PluginManager.loadplugins();
                // Datamanger verisonen aufschreiben
                 DataManager.saveAppVersions();
+                //Get Current Config
+                try {
+                    JSONObject jsonCurrentData = new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server+"/device/getDeviceConfig?session="+Main.serverConnection.apiKey+"&device="+Main.deviceuuid));
+                    jsonCurrentData.put("message","configChange");
+                    jsonCurrentData.put("content",new JSONObject(jsonCurrentData.getString("data")));
+                    jsonCurrentData.remove("data");
+                    System.out.println(jsonCurrentData.toString());
+                    analyseMessage(jsonCurrentData.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             default:
                 break;
