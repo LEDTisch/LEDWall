@@ -1,7 +1,7 @@
 package de.ft.ledwall;
 
-import de.ft.ledwall.api.ServerConnection;
 import de.ft.ledwall.data.DataManager;
+import de.ft.ledwall.nativeapps.StreamApp;
 import de.ft.ledwall.plugins.PluginDownloader;
 import de.ft.ledwall.plugins.PluginManager;
 import de.ft.ledwall.utils.DownloadFile;
@@ -10,13 +10,10 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
@@ -45,6 +42,8 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
             analyseMessage(message);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -67,7 +66,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         // if the error is fatal then onClose will be called additionally
     }
 
-    public static void analyseMessage(String message) throws IOException {
+    public static void analyseMessage(String message) throws Exception {
 
         JSONObject receivedobject=new JSONObject(message);
 
@@ -77,9 +76,16 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         switch (receivedobject.getString("message")){
             case "configChange":
                 if(content.has("runningapp")) {
-
-                    if(PluginManager.apps.containsKey(content.getString("runningapp")))
+                    JSONObject uppdata=new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getData?session=" + Main.serverConnection.apiKey + "&appuuid=" + content.getString("runningapp")));
+                    if(uppdata.getJSONObject("data").getInt("stream")!=1){
+                    if(PluginManager.apps.containsKey(content.getString("runningapp"))) {
                         Main.applicationManager.setApplication(PluginManager.apps.get(content.getString("runningapp")));
+                    }else{
+                        //Wir haben ein problem something went wrong
+                    }
+                    }else {
+                        Main.applicationManager.setApplication(new StreamApp(content.getString("runningapp")));
+                    }
                     System.out.println(content.getString("runningapp"));
                 }
                 break;
@@ -114,8 +120,17 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
 
 
                 listdata.forEach(s -> {
+                    JSONObject uppdata= null;
+                    try {
+                        uppdata = new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getData?session=" + Main.serverConnection.apiKey + "&appuuid=" + s));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(uppdata.getJSONObject("data").getInt("stream")==1){
+                        return;
+                    }
 
-                    String repoString = null;
+                        String repoString = null;
                     try {
                         repoString = Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getInstallURL?session=" + Main.serverConnection.apiKey + "&appuuid=" + s);
                     } catch (Exception e) {
