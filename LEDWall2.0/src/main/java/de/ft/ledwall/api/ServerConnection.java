@@ -1,10 +1,8 @@
 package de.ft.ledwall.api;
 
-import de.ft.ledwall.ApplicationManager;
 import de.ft.ledwall.Main;
 import de.ft.ledwall.WebSocketClient;
 import de.ft.ledwall.data.DataManager;
-import de.ft.ledwall.nativeapps.licht.Licht;
 import de.ft.ledwall.nativeapps.registration.Registration;
 import org.json.JSONObject;
 
@@ -13,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static de.ft.ledwall.Main.LedWalluuid;
@@ -115,7 +111,7 @@ public class ServerConnection {
         this.webSocketClient.close();
     }
 
-    public String getHTML(String urlToRead) throws Exception {
+    public String HTTPrequest(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -172,12 +168,22 @@ public class ServerConnection {
             }
         }
     }
+
+    public JSONObject getAppData(){
+        try {
+            String data=HTTPrequest("http://"+server+"/app/getConfig?session="+apiKey+"&");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void registrate(String device) throws Exception {
         Main.applicationManager.setApplication(new Registration());
-        int registrationcode = new JSONObject(getHTML("http://"+server+"/device/getRegistrationCode")).getInt("token");
+        int registrationcode = new JSONObject(HTTPrequest("http://"+server+"/device/getRegistrationCode")).getInt("token");
         Main.applicationManager.getCurrentApplication().onDataReceive(Integer.toString(registrationcode),-1);
         System.out.println("Registrationcode: "+registrationcode);
-        String apikey=getHTML("http://"+server+"/device/waitForRegistration?regCode="+registrationcode+"&deviceUUID="+ Main.LedWalluuid+"&deviceName="+"Felixledwall");
+        String apikey= HTTPrequest("http://"+server+"/device/waitForRegistration?regCode="+registrationcode+"&deviceUUID="+ Main.LedWalluuid+"&deviceName="+"Felixledwall");
         if(new JSONObject(apikey).getString("success").contentEquals("true")) {
             apikey=new JSONObject(apikey).getString("APIKey");
             System.out.println("APIKey: " + apikey);
@@ -188,8 +194,8 @@ public class ServerConnection {
         }
     }
     public boolean checkAPIKey() throws Exception {
-        JSONObject obj = new JSONObject(getHTML("https://"+server+"/auth/validateSession?session="+Main.serverConnection.getApiKey()));
-        System.out.println(getHTML("https://"+server+"/auth/validateSession?session="+this.getApiKey()));
+        JSONObject obj = new JSONObject(HTTPrequest("http://"+server+"/auth/validateSession?session="+Main.serverConnection.getApiKey()));
+        System.out.println(HTTPrequest("http://"+server+"/auth/validateSession?session="+this.getApiKey()));
         if(obj.getBoolean("success")){
             return true;
         }else{

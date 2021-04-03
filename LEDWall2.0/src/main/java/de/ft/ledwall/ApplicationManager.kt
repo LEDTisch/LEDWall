@@ -29,6 +29,7 @@ class ApplicationManager() {
 
     fun setApplication(app: Application)  {
         println(app.getName())
+
         enableDraw=false;
         if(this.currentApp!=null) this.currentApp!!.onStop()
         this.currentApp = app

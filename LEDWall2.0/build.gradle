@@ -38,14 +38,14 @@ task buildLEDWALL(type: Jar) {
 }
 
 dependencies {
-    implementation 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
-    compile ("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    api 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
+    api ("org.jetbrains.kotlin:kotlin-stdlib")
+    api "org.jetbrains.kotlin:kotlin-stdlib"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
-    implementation group: 'org.json', name: 'json', version: '20201115'
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation "org.java-websocket:Java-WebSocket:1.5.1"
+    api group: 'org.json', name: 'json', version: '20201115'
+    api 'com.googlecode.json-simple:json-simple:1.1.1'
+    api "org.java-websocket:Java-WebSocket:1.5.1"
 }
 
 test {
