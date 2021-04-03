@@ -1,7 +1,7 @@
 package de.ft.ledwall;
 
 import de.ft.ledwall.data.DataManager;
-import de.ft.ledwall.nativeapps.StreamApp;
+import de.ft.ledwall.nativeapps.streamapp.StreamApp;
 import de.ft.ledwall.plugins.PluginDownloader;
 import de.ft.ledwall.plugins.PluginManager;
 import de.ft.ledwall.utils.DownloadFile;

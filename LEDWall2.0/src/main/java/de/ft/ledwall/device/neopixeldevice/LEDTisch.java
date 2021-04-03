@@ -94,6 +94,7 @@ public class LEDTisch {
         return PO;
     }
 
+
     public void fillRect(int x, int y, int w, int h){
         for(int xx=x;xx<x+w;xx++){
             for(int yy=y;yy<y+h;yy++){
@@ -119,7 +120,12 @@ public class LEDTisch {
 
         }
 
+    }
 
+    public void drawStripBuffer(int[] frame){
+        for (int i = 0; i < frame.length; i++) {
+            strip.setPixelColor(i, frame[i]);
+        }
     }
 
 

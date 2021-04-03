@@ -1,21 +1,39 @@
-package de.ft.ledwall.nativeapps;
+package de.ft.ledwall.nativeapps.streamapp;
 
 import de.ft.ledwall.Application;
+import de.ft.ledwall.Main;
+import de.ft.ledwall.SystemInterface;
 import org.jetbrains.annotations.NotNull;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class StreamApp implements Application {
     final String appuuid;
+    StreamWebSocket socket;
     public StreamApp(String uuid){
         this.appuuid=uuid;
     }
     @Override
     public void onCreate() {
 
+
+        String url = "ws://stream.arnold-tim.de/startLiveApp?appuuid="+this.appuuid+"&session="+Main.serverConnection.apiKey;
+        try {
+            socket = new StreamWebSocket(new URI(url));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        socket.connect();
+
+
     }
 
     @Override
     public void onDraw() {
-System.out.println("streaming");
+        if(this.socket.data!=null) {
+            SystemInterface.table.drawStripBuffer(socket.data);
+        }
     }
 
     @Override
@@ -36,7 +54,7 @@ System.out.println("streaming");
 
     @Override
     public void onStop() {
-
+        this.socket.close();
     }
 
     @NotNull
@@ -48,6 +66,6 @@ System.out.println("streaming");
     @NotNull
     @Override
     public String getUUID() {
-        return null;
+        return "-1";
     }
 }
