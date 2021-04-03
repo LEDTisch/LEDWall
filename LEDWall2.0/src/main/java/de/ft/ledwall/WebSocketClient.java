@@ -131,7 +131,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
                 listdata.forEach(s -> {
                     JSONObject uppdata= null;
                     try {
-                        uppdata = new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getData?session=" + Main.serverConnection.apiKey + "&appuuid=" + s));
+                        uppdata = new JSONObject(Main.serverConnection.HTTPrequest("http://"+Main.serverConnection.server + "/app/getData?session=" + Main.serverConnection.apiKey + "&appuuid=" + s));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
