@@ -76,7 +76,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
         switch (receivedobject.getString("message")){
             case "configChange":
                 if(content.has("runningapp")) {
-                    JSONObject uppdata=new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getData?session=" + Main.serverConnection.apiKey + "&appuuid=" + content.getString("runningapp")));
+                    JSONObject uppdata=new JSONObject(Main.serverConnection.HTTPrequest("http://"+Main.serverConnection.server + "/app/getData?session=" + Main.serverConnection.apiKey + "&appuuid=" + content.getString("runningapp")));
                     if(uppdata.getJSONObject("data").getInt("stream")!=1){
                     if(PluginManager.apps.containsKey(content.getString("runningapp"))) {
                         Main.applicationManager.setApplication(PluginManager.apps.get(content.getString("runningapp")));

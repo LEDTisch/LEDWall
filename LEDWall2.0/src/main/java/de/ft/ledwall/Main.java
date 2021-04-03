@@ -20,6 +20,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         DataManager.init();
         sc.initSocket();
+
         //SystemInterface.camera.start();
         SystemInterface.table.init(neo);
         SystemInterface.table.clear();
