@@ -12,15 +12,15 @@ public class PluginManager {
 
     public static boolean loadplugins() {
 
-        if (!new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").exists()) {
-            new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").mkdir();
-            if (!new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").exists()){
-                System.out.println("Failed to create directory: "+ System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps");
+        if (!new File(System.getProperty("user.home") + "/" + ".LEDWall" + "/apps").exists()) {
+            new File(System.getProperty("user.home") + "/" + ".LEDWall" + "/apps").mkdir();
+            if (!new File(System.getProperty("user.home") + "/" + ".LEDWall" + "/apps").exists()){
+                System.out.println("Failed to create directory: "+ System.getProperty("user.home") + "/" + ".LEDWall" + "/apps");
                 return false;
             }
         }
 
-        File[] files = new File(System.getProperty("user.home") + "\\" + ".LEDWall" + "\\apps").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
+        File[] files = new File(System.getProperty("user.home") + "/" + ".LEDWall" + "/apps").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         assert files != null;
         System.out.println("Found " + files.length + " Plugins in Plugin Folder");
         for (File f : files) {

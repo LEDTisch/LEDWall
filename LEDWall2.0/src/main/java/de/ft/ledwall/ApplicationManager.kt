@@ -11,7 +11,7 @@ class ApplicationManager() {
     private var allowDrawing:Boolean = true
     private var enableDraw:Boolean=true;
     internal final var systemAnimation:AnimationManager = AnimationManager()
-    var fps:Int=18;
+    var fps:Int=15;
 
     fun init() {
         Thread { drawingThread() }.start()
@@ -20,12 +20,6 @@ class ApplicationManager() {
     }
 
     fun checkSystemCommand(command:String):Boolean {
-
-        if(command.contains("switchTo:")) {
-    //TODO kompletter mist das muss komplett neu gemacht werden!!! Aus dem Grund da das Backend jetzt auf einem Server läuft und dadruch der Command des Wechselns der Applications durch einen WebSocket vom Backend kommt durch eine anfoiderung der Forntends was entweder die App oder einen Website sein kann. Wir werden hier auch keine Performancen probleme haben, da wir die Anforderung nur ganz selten kommen.
-
-
-        }
         return false
     }
 
