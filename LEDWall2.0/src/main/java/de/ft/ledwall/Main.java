@@ -3,7 +3,6 @@ package de.ft.ledwall;
 import de.ft.ledwall.api.ServerConnection;
 import de.ft.ledwall.data.DataManager;
 import de.ft.ledwall.device.neopixeldevice.Neopixel;
-import de.ft.ledwall.nativeapps.licht.Licht;
 import de.ft.ledwall.plugins.PluginManager;
 
 import java.awt.*;

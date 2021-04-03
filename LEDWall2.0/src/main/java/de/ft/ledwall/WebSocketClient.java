@@ -1,6 +1,5 @@
 package de.ft.ledwall;
 
-import de.ft.ledwall.api.ServerConnection;
 import de.ft.ledwall.data.DataManager;
 import de.ft.ledwall.plugins.PluginDownloader;
 import de.ft.ledwall.plugins.PluginManager;
@@ -10,13 +9,10 @@ import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
@@ -85,7 +81,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
             case "deviceuuid":
                 Main.deviceuuid = content.getString("deviceuuid");
                 try {
-                    JSONObject jsonCurrentData = new JSONObject(Main.serverConnection.getHTML("http://"+Main.serverConnection.server+"/device/getDeviceConfig?session="+Main.serverConnection.apiKey+"&device="+Main.deviceuuid));
+                    JSONObject jsonCurrentData = new JSONObject(Main.serverConnection.HTTPrequest("http://"+Main.serverConnection.server+"/device/getDeviceConfig?session="+Main.serverConnection.apiKey+"&device="+Main.deviceuuid));
                     jsonCurrentData.put("message","configChange");
                     jsonCurrentData.put("content",new JSONObject(jsonCurrentData.getString("data")));
                     jsonCurrentData.remove("data");
@@ -125,7 +121,7 @@ public class WebSocketClient extends org.java_websocket.client.WebSocketClient {
 
                     String repoString = null;
                     try {
-                        repoString = Main.serverConnection.getHTML("http://"+Main.serverConnection.server + "/app/getInstallURL?session=" + Main.serverConnection.apiKey + "&appuuid=" + s);
+                        repoString = Main.serverConnection.HTTPrequest("http://"+Main.serverConnection.server + "/app/getInstallURL?session=" + Main.serverConnection.apiKey + "&appuuid=" + s);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
