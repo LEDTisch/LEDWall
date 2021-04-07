@@ -11,7 +11,7 @@ class ApplicationManager() {
     private var allowDrawing:Boolean = true
     private var enableDraw:Boolean=true;
     internal final var systemAnimation:AnimationManager = AnimationManager()
-    var fps:Int=15;
+    var fps:Int=13;
 
     fun init() {
         Thread { drawingThread() }.start()

@@ -42,8 +42,6 @@ public class StreamWebSocket extends org.java_websocket.client.WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-        System.out.println("received: " + message);
-
 
         try {
 
